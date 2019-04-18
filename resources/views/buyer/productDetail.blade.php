@@ -381,7 +381,7 @@
 											'</div>'+
 										'</div>'+
 										'<div class="button_container">'+
-											'<button type="button" class="button cart_button">เพิ่มใส่ตะกร้า</button>'+
+											'<button type="button" class="button cart_button" onclick="addCart(\'' + data['data']['name'] + '\','+data['data']['prod_id']+','+data['data']['price']+',\'' + data['data']['Picture']['pic_url1'] + '\')">เพิ่มใส่ตะกร้า</button>'+
 											'<div class="product_fav"><i class="fas fa-heart"></i></div>'+
 										'</div>'+
 									'</form>'+

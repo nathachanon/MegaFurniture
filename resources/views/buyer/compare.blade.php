@@ -18,8 +18,9 @@
 	}
 	tr:nth-child(even){background-color: #f2f2f2}
 	.comparePic {
-		width: 150px;
-		height: 150px;
+		object-fit: contain;
+		width: 200px;
+		height: 200px;
 	}
 	th {
 		background-color: #F59121;
@@ -246,7 +247,7 @@
 
 
 			$('#product_list').append(
-				' <div class="ibox-content product-box" style="display: block; overflow-x:auto;width: 50%;margin: 0 auto;" align="center">'+
+				' <div class="ibox-content product-box" style="display: block; overflow-x:auto;margin: 0 auto;" align="center">'+
 
 				' <table class="table">'+
 				' <thead>'+

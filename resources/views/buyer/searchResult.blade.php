@@ -86,14 +86,14 @@
           <div class="shop_bar clearfix">
             <div class="shop_product_count"><h3 id="p_counts"></h3></div>
             <div class="shop_sorting">
-              <span>Sort by:</span>
+              <span>ค้นหาโดย:</span>
               <ul>
                 <li>
-                  <span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>
+                  <span class="sorting_text">คะแนนสินค้า<i class="fas fa-chevron-down"></span></i>
                   <ul>
-                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li>
-                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
-                    <li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>price</li>
+                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>คะแนนสินค้า</li>
+                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>ชื่อสินค้า</li>
+                    <li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>ราคา</li>
                   </ul>
                 </li>
               </ul>
@@ -121,6 +121,6 @@
       </div>
     </div>
     <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/Scripts/megaindex.js"></script>
+
     <script src="js/Scripts/searchResult.js"></script>
 @endsection
