@@ -1,10 +1,12 @@
 var b_token = localStorage.getItem("b_token");
 var buyer_id = localStorage.getItem("buyer_id");
-
+var compare_count=0;
+var jsonCart = [];
 ThisBuyer();
 
 function getAllProduct(){
   var p_name = getCookie();
+  $('#compare').append(compare_count);
   var p_name2 = '%';
   p_name2 += p_name;
   p_name2 += '%';
@@ -127,10 +129,14 @@ function getAllProduct(){
          rating+
          '</div>'+
          '<div class="inline2"><div class="m-t inline2">'+
-         '<a href="#" onclick="addCart(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\')" class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i> </a>'+
+         '<a onclick="addCart(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\')" class="btn btn-xs btn-outline btn-primary"><i class=" prim fa fa-shopping-cart"></i> </a>'+
          '</div>'+
          '<div class="m-t  inline2">'+
-         '<a href="#"onclick="alert('+data['product'][i]['prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i> </a>'+
+         '<a onclick="alert('+data['product'][i]['prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="prim fa fa-comment"></i> </a>'+
+         '</div>'+
+         '<div class="m-t  inline2">'+
+         '<a onclick="addCompare(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\');"'+
+         ' class="btn btn-xs btn-outline btn-primary"><i class="fa fa-plus-square prim"></i> </a>'+
          '</div></div>'+
          '</div>'+
          '</div>'+
@@ -609,4 +615,44 @@ function ThisBuyer(){
     '</div>');
     getCart();
   }
+}
+
+function addCompare(prod_name,prod_id,prod_price,prod_pic)
+{
+if(compare_count < 3){
+compare_count += 1;
+
+allprice += prod_price;
+
+jsonCart.push({prod_id:prod_id});
+
+$('#compare').empty();
+
+const node = document.querySelector("#icon_compare")
+node.classList.add('rubberBand', 'animated')
+
+function handleAnimationEnd() {
+node.classList.remove('rubberBand', 'animated')
+node.removeEventListener('animationend', handleAnimationEnd)
+
+if (typeof callback === 'function') callback()
+}
+
+node.addEventListener('animationend', handleAnimationEnd)
+
+$('#compare_list').append('<li>'+
+'<div class="dropdown-messages-box">'+
+'<a href="#" class="pull-left">'+
+'<img alt="image" class="img-circle" src="'+prod_pic+'">'+
+'</a>'+
+'<div class="media-body">'+
+'<strong>'+prod_name+'</strong><br>'+prod_price+' บาท'+
+'</div>'+
+'</div>'+
+'</li><br>');
+
+$('#compare').append(compare_count);
+}else{
+alert('สามารถเปรียบเทียบสินค้าได้สูงสุด 3 ชิ้น');
+}
 }

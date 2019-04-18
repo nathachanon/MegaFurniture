@@ -483,13 +483,11 @@
 						$('#product').append('<option value="ค้นหา '+pn+' ร้านค้า">');
 						for(var i=0;i<data['product'].length;i++)
 						{
-							console.log(data['product'][i]['prod_name']);
 							$('#product').append('<option value="'+data['product'][i]['prod_name']+'"></option>');
 						}
 
 					}else{
 						$('#product').empty();
-						console.log("NULL");
 					}
 				}
 			});
