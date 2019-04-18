@@ -257,6 +257,16 @@ class AllDB extends Migration
        $table->timestamps();
      });
 
+     Schema::create('Keywords', function (Blueprint $table) {
+       $table->unsignedInteger('Prod_id');
+
+       $table->increments('keyword_id');
+       $table->string('keyword_value',30);
+
+       $table->foreign('Prod_id')->references('Prod_id')->on('Products')->onDelete('cascade');
+       $table->timestamps();
+     });
+
 
   //insert Data ประเภทห้อง
        DB::table('catagoiesRooms')->insert(array('CatRoom_name' => 'ห้องนอน'));
