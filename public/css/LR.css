@@ -1,0 +1,150 @@
+.container{
+  margin-bottom: 30px;
+}
+
+.btn-success.btn-outline{
+  color: #1c84c6;
+}
+.register-right .btn-primary{
+  border-radius: 1.5rem;
+  border: none;
+  width: 120px;
+  background: #0e8ce4;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 10px;
+  padding: 8px;
+}
+.register-right .btn-primary:hover{
+  background: #024894;
+}
+
+.register-left
+{
+  border: none;
+  background:#f5f5f5;
+  padding: 50px;
+}
+.register-right
+{
+  border: none;
+  background:#f5f5f5;
+  padding: 50px;
+}
+
+
+.regiser-form{
+  padding: 30px;
+}
+
+.register-left .btn-primary{
+  float: right;
+  border-radius: 1.5rem;
+  border: none;
+  width: 120px;
+  background: #0e8ce4;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+.register-right h5{
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+input:hover,
+.btn:hover {
+  opacity: 1;
+  color: #583209;
+}
+
+/* add appropriate colors to fb, twitter and google buttons */
+.fb {
+  background-color: #3B5998;
+  color: white;
+}
+
+.pm {
+
+    background-color: #55ACEE;
+    color: white;
+
+}
+
+
+
+
+
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+label {
+  position: relative;
+  display: inline-block;
+  margin-right: 100px;
+  margin-bottom: 10px;
+
+  padding-right: 10px;
+  line-height: 36px;
+  cursor: pointer;
+}
+ label::before {
+  content: " ";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #543769;
+  border-radius: 4px;
+  z-index: -1;
+}
+input[type="radio"] + label::before {
+  border-radius: 18px;
+}
+/* Checked */
+
+input[type="radio"]:checked + label {
+  padding-left: 10px;
+  color: #fff;
+}
+.center-on-page {
+
+
+  transform: translate(0%,10%);
+}
+input[type="radio"]:checked + label::before {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #543769;
+}
+/* Transition */
+label,
+label ::before {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+.form-group-mg{
+  margin-bottom: 0px;
+}
