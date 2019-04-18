@@ -9,7 +9,7 @@
             <div class="ibox-content">
                 <div class="ibox-title">
                     <span class="pull-right">สินค้าในตะกร้า (<strong id="product_list_count"></strong>) รายการ</span>
-                    
+
                 </div>
                 <div id="product_list">
 
@@ -27,7 +27,7 @@
     </div>
 
 
- 
+
 
 
 
@@ -113,7 +113,7 @@ getAddress();
                                 '</a>'+
                                 ''+
                                 '</h4>'+
-                             
+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ที่อยู่ในการจัดส่ง</label>'+
                                     '<div class="col-sm-8"><select onchange="address_change('+data['ProductInCart'][i]['Prod_id']+')" id="address_list_'+data['ProductInCart'][i]['Prod_id']+'" class="form-control " name="address_list_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="0">เลือกที่อยู่ในการจัดส่ง</option>'+
@@ -262,6 +262,7 @@ getAddress();
                   showConfirmButton: false,
                   timer: 1500
                 });
+                getAddress();
                 getCart();
               }else{
                 swal({
@@ -339,6 +340,7 @@ getAddress();
                 showConfirmButton: false,
                 timer: 1500
               });
+              getAddress();
               getCart();
             }else{
               swal({
@@ -515,7 +517,7 @@ getAddress();
                                 '</a>'+
                                 ''+
                                 '</h4>'+
-                             
+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ที่อยู่ในการจัดส่ง</label>'+
                                     '<div class="col-sm-8"><select onchange="address_change('+data['ProductInCart'][i]['Prod_id']+')" id="address_list_'+data['ProductInCart'][i]['Prod_id']+'" class="form-control " name="address_list_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="0">เลือกที่อยู่ในการจัดส่ง</option>'+
@@ -550,7 +552,7 @@ getAddress();
                         '</tr>'+
                         '</tbody>'+
                     '</table>'+
-                
+
             '</div>');
             }
           }

@@ -82,6 +82,12 @@ $('#login').click(function(){
                 },
                 error: function(data){
                   console.log(data);
+                  Swal.fire({
+                    type: 'error',
+                    title: 'Email หรือ Password ผิดพลาด กรุณาลองใหม่ !',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 }
                 ,
                 failure: function(errMsg) {
