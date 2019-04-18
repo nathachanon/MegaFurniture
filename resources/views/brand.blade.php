@@ -95,7 +95,7 @@
 <script>
   var token = localStorage.getItem("user_token");
   var id= localStorage.getItem("sid");
-
+   $("#brand-nav").addClass("active");
   $("#seller_id").val(id);
   function sbrand(b_id){
     if(b_id !=0)

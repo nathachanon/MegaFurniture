@@ -9,7 +9,7 @@
             <div class="ibox-content">
                 <div class="ibox-title">
                     <span class="pull-right">สินค้าในตะกร้า (<strong id="product_list_count"></strong>) รายการ</span>
-                    
+
                 </div>
                 <div id="product_list">
 
@@ -27,7 +27,7 @@
     </div>
 
 
- 
+
 
 
 
@@ -46,15 +46,15 @@ check_user();
 getAddress();
   $("#nav-buyer").append('<div class="cart-page-logo__page-name">ตะกร้า</div>');
 
-	function check_user(){
+  function check_user(){
 
-		if(b_token == null && buyer_id == null){
-			window.location.replace('/');
-		}else{
+    if(b_token == null && buyer_id == null){
+      window.location.replace('/');
+    }else{
       getCart();
     }
 
-	}
+  }
 
   function getCart(){
     $.ajax({
@@ -113,7 +113,7 @@ getAddress();
                                 '</a>'+
                                 ''+
                                 '</h4>'+
-                             
+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ที่อยู่ในการจัดส่ง</label>'+
                                     '<div class="col-sm-8"><select onchange="address_change('+data['ProductInCart'][i]['Prod_id']+')" id="address_list_'+data['ProductInCart'][i]['Prod_id']+'" class="form-control " name="address_list_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="0">เลือกที่อยู่ในการจัดส่ง</option>'+
@@ -263,6 +263,7 @@ getAddress();
                   timer: 1500
                 });
                 getCart();
+                getAddress();
               }else{
                 swal({
                   title: "Error !",
@@ -340,6 +341,7 @@ getAddress();
                 timer: 1500
               });
               getCart();
+              getAddress();
             }else{
               swal({
                 title: "Error !",
@@ -515,7 +517,7 @@ getAddress();
                                 '</a>'+
                                 ''+
                                 '</h4>'+
-                             
+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ที่อยู่ในการจัดส่ง</label>'+
                                     '<div class="col-sm-8"><select onchange="address_change('+data['ProductInCart'][i]['Prod_id']+')" id="address_list_'+data['ProductInCart'][i]['Prod_id']+'" class="form-control " name="address_list_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="0">เลือกที่อยู่ในการจัดส่ง</option>'+
@@ -550,7 +552,7 @@ getAddress();
                         '</tr>'+
                         '</tbody>'+
                     '</table>'+
-                
+
             '</div>');
             }
           }
