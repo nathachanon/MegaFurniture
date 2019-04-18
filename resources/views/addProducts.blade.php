@@ -25,7 +25,7 @@
     <div class="panel-body">
       <div></div>
         <h3>ดาวน์โหลด Template สินค้า</h3>
-      <p>ทดสอบๆๆๆๆ</p>
+      <p></p>
     </div>
   </div>
 </div>
