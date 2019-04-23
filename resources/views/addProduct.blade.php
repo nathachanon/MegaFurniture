@@ -7,7 +7,7 @@
         <meta name="description" content="Converts HTML input/textarea into Tags component">
         <meta name="author" content="Yair Even-Or">
 
-        <link rel="stylesheet" href="/dist/tagify.css">
+        <link rel="stylesheet" href="dist/tagify.css">
 
         <script src="dist/tagify.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -294,6 +294,7 @@
 <script src="js/Scripts/addproduct.js"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script data-name="basic">
+/*
 (function(){
 
 var input = document.querySelector('input[name=tags]'),
@@ -338,6 +339,7 @@ function onTagClick(e){
 }
 
 })()
+*/
 </script>
 <script>
 function tags(value){

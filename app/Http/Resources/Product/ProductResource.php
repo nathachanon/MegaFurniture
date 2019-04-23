@@ -52,9 +52,10 @@ class ProductResource extends JsonResource
         return [
           'product'=>'IS NULL'
         ];
+      
       }else{
         return ['foot' => $prod_info->SizeProd_foot,
-        'RatingAVG' => $getRating,
+        'RatingAVG2' => $getRating,
         'Comment' => $getReview,
         'CatRoom_name' => $prod_info->CatRoom_Name,
         'CatProd_name' => $prod_info->CatProd_Name,

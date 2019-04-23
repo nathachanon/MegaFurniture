@@ -410,7 +410,7 @@ function getCart(){
                 '</div>'+
                 '<img width="180" alt="image" class="img-circle" src="'+data['ProductInCart'][i]['pic_url1']+'">'+
                 '<div class="chat-message active">'+
-                    '฿'+data['ProductInCart'][i]['prod_price']+' จำนวน '+data['ProductInCart'][i]['count']+' ชิ้น'+
+                    ''+data['ProductInCart'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' ฿ จำนวน '+data['ProductInCart'][i]['count']+' ชิ้น'+
                 '</div>'+
                 '<button type="button" class="btn btn-danger btn-sm btn-block" onclick="deleteProductInCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')"><i class="fa fa-trash"></i> ลบออกจากตะกร้า</button>'+
             '</div>');
@@ -421,7 +421,7 @@ function getCart(){
             '<img alt="image" class="img-circle" src="'+data['ProductInCart'][i]['pic_url1']+'">'+
             '</a>'+
             '<div class="media-body">'+
-            '<strong>'+data['ProductInCart'][i]['prod_name']+'</strong><br>฿'+data['ProductInCart'][i]['prod_price']+' x '+data['ProductInCart'][i]['count']+
+            '<strong>'+data['ProductInCart'][i]['prod_name']+'</strong><br>'+data['ProductInCart'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'฿ x '+data['ProductInCart'][i]['count']+
             '</div>'+
             '</div>'+
             '<a href="#" onclick="deleteProductInCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')">ลบ</a></li><br>');
