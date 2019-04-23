@@ -322,7 +322,7 @@ class OrderController extends Controller
 		$input = $request->all();
 
 		$getOrder = DB::table('orderdetails')
-		->select(DB::raw('DATE_FORMAT(orderdetails.created_at, "%m/%d/%Y %H:%i:%s") as created_at') , 'brands.brand_name' , 'orderdetails.prod_id' , 'orderdetails.order_id', 'orderdetails.order_detail_id' , 'orderdetails.price' , DB::raw('DATE_FORMAT(orderdetails.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at') , 'products.prod_id' , 'orderdetails.status')
+		->select(DB::raw('DATE_FORMAT(orderdetails.created_at, "%m/%d/%Y %H:%i:%s") as created_at') , 'brands.brand_name' , 'brands.brand_id' , 'orderdetails.prod_id' , 'orderdetails.order_id', 'orderdetails.order_detail_id' , 'orderdetails.price' , DB::raw('DATE_FORMAT(orderdetails.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at') , 'products.prod_id' , 'orderdetails.status')
 		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
 		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
@@ -341,7 +341,28 @@ class OrderController extends Controller
 		->where('buyers.id', $input['buyer_id'])
 		->get();
 
-		return response()->json(['success'=>$getOrder,'order_list'=>$getOrderID], $this-> successStatus);
+		$getBrandID = DB::table('orderdetails')
+		->select('orderdetails.status','brands.brand_id','brands.brand_name')->distinct('brands.brand_id')
+		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
+		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
+		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
+		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
+		->join('brands', 'products.brand_id', '=', 'brands.brand_id')
+		->where('buyers.id', $input['buyer_id'])
+		->get();
+
+		$purchases = DB::table('orderdetails')
+		->select(DB::raw('SUM(orderdetails.price) as price'),'brands.brand_id')
+		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
+		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
+		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
+		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
+		->join('brands', 'products.brand_id', '=', 'brands.brand_id')
+		->where('buyers.id', $input['buyer_id'])
+		->groupBy('brands.brand_id')
+		->get();
+
+		return response()->json(['success'=>$getOrder,'order_list'=>$getOrderID,'brand_list'=>$getBrandID,'sum'=>$purchases], $this-> successStatus);
 
 	}
 

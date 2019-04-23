@@ -48,6 +48,9 @@
         <li class='active'>
           <a href="profile"><i class="fa fa-users"></i> <span class="nav-label">Profile</span></a>
         </li>
+         <li id="brand-nav" >
+          <a href="brand"><i class="fa fa-users"></i> <span class="nav-label">Brand</span></a>
+        </li>
       </ul>
 
     </div>

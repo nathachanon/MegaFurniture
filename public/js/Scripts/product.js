@@ -459,15 +459,6 @@ function groupchangeStatus_change(prodlist,status){
 function groupchangeDelete(prodlist,status){
   $('#exampleModal').modal('hide');
   $("#model_body").empty();
-  swal({
-    title: "คุณแน่ใจใช่ไหม ?",
-    text: "คุณต้องการลบสินค้าออกจากร้าน !",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "ใช่, ฉันมั่นใจ!",
-    closeOnConfirm: false
-  }, function () {
     $.ajax({
       url: '/api/changegroup-Delete',
       headers: {
@@ -504,7 +495,7 @@ function groupchangeDelete(prodlist,status){
         }
       }
     });
-  });
+
 }
 
 function selectalls(source){

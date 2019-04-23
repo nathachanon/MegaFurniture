@@ -88,6 +88,9 @@ Route::post('registerBuyer','API\BuyerController@registerBuyer');
 
 
 Route::group(['middleware' => 'multiauth:buyer_api'],function(){
+	Route::post('payment-Add','API\PaymentController@addPayment');
+	Route::post('getBank-id','API\PaymentController@getBank_id');
+	Route::post('getBank-brand','API\PaymentController@getBank_brand');
 	Route::post('getOrder-buyer','API\OrderController@getOrder_buyer');
 	Route::post('updateBuyer','API\BuyerController@updateBuyer');
 	Route::post('createOrder','API\OrderController@createOrder');

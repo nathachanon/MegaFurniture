@@ -218,13 +218,19 @@ class AllDB extends Migration
      });
 
      Schema::create('Payments', function (Blueprint $table) {
+       $table->unsignedInteger('BankAccount_id');
+
        $table->increments('pay_id');
+
        $table->string('order_detail_id',20);
-       $table->string('transfer_slip');
+       $table->string('transfer_slip')->nullable();
+       $table->string('bank_account');
+       $table->string('bank_name');
        $table->DateTime('date_time');
        $table->float('amount');
        $table->integer('pay_status');
 
+       $table->foreign('BankAccount_id')->references('BankAccount_id')->on('bank_accounts')->onDelete('cascade');
        $table->foreign('order_detail_id')->references('order_detail_id')->on('orderDetails')->onDelete('cascade');
        $table->timestamps();
      });
