@@ -439,13 +439,11 @@ $(document).ready(function(){
     var ColorProd_value = $('#ColorProd_value').val();
     var RM_value = $('#RM_value').val();
     var weight = $('#weight').val();
-    var keyword = $('#tags').val();
+    var tags = $('#tags').val().split(",");
+    console.log(tags);
     if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
-     SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '' && keyword != '')
+     SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '')
     {
-
-     var keywords = JSON.parse(keyword);
-
      var formData = new FormData();
 
      formData.append("pic1", document.getElementById("file_pic1").files[0]);
@@ -475,6 +473,7 @@ $(document).ready(function(){
      formData.append("buyer", valueBUYER);
      formData.append("status", 0);
      formData.append("show", 1);
+     formData.append("tags",tags);
 
      $.ajax({
        url: '/api/AddProduct',
@@ -505,7 +504,6 @@ $(document).ready(function(){
  });
 
   $("#publicAdd").click(function(){
-    var keyword = $('#tags').val();
     var CatProd_id = document.getElementById("optionproduct").value;
     var token = localStorage.getItem("user_token");
     var prod_name = $('#prod_name').val();
@@ -520,9 +518,10 @@ $(document).ready(function(){
     var ColorProd_value = $('#ColorProd_value').val();
     var RM_value = $('#RM_value').val();
     var weight = $('#weight').val();
+    var tags = $('#tags').val().split(",");
 
     if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
-     SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '' && keyword != '')
+     SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '')
     {
 
      var formData = new FormData();
@@ -555,6 +554,11 @@ $(document).ready(function(){
      formData.append("status", 0);
      formData.append("show", 0);
 
+
+for (var i = 0; i < tags.length; i++) {
+    formData.append('tags[]', tags[i]);
+}
+
      $.ajax({
        url: '/api/AddProduct',
        headers: {
@@ -564,6 +568,7 @@ $(document).ready(function(){
        data: formData,
        contentType: false,
        processData: false,
+       dataType: 'json',
        success: function(data){
          if(data['success'] != null)
          {

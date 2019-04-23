@@ -6,8 +6,8 @@ use App\Rmproduct;
 use App\Colorproduct;
 use App\Sizeproduct;
 use App\Product;
-use App\Delivery_price;
 use App\Keyword;
+use App\Delivery_price;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Product\ProductCollection;
@@ -288,7 +288,7 @@ function AddProduct(Request $request){
     'SizeProd_foot' => 'required',
     'ColorProd_value' => 'required',
     'weight' => 'required',
-    'pic1' => 'required',
+    'pic1' => 'required'
   ]);
 
   if ($validator->fails()) {
@@ -296,7 +296,6 @@ function AddProduct(Request $request){
  }
 
  $input = $request->all();
-
  $rmCount = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->count();
  $rmData = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->pluck('RM_id');
  if($rmCount != 0)
@@ -354,6 +353,7 @@ if($sizeCount != 0)
 }
 
 
+
   $product = Product::create(
     ['brand_id' => $input['brand_id'],
     'CatProd_id' => $input['CatProd_id'],
@@ -372,6 +372,18 @@ if($sizeCount != 0)
   $PID = $product->Prod_id;
 
   $success['Prod_id'] =  $product->Prod_id;
+
+
+
+
+//addKeyword
+for($x = 0;$x<count($input["tags"]);$x++){
+  $keyword = Keyword::create(
+   ['Prod_id' => $PID,
+    'keyword_value' => $input["tags"][$x]
+  ]);
+}
+
 
 $kerry = Delivery_price::create(
  ['Prod_id' => $PID,
@@ -788,44 +800,43 @@ function compareProduct(Request $request){
 
 //compare_P_1
 $input = $request->all();
-
+$countReviw = DB::table('reviews')->where('Prod_id',$input['compare_P_1'])->count();
 $getProduct_1 = DB::table('products')
-->select('Prod_id','prod_name','prod_desc','prod_price','qty','rmproducts.RM_value','colorproducts.ColorProd_value',
+->select('products.Prod_id','prod_name','prod_desc','prod_price','qty','rmproducts.RM_value','colorproducts.ColorProd_value',
 'sizeproducts.SizeProd_width','sizeproducts.SizeProd_height','sizeproducts.SizeProd_length','sizeproducts.SizeProd_foot',
 'pic_url1')
 ->join('rmproducts', 'products.RM_id', '=', 'rmproducts.RM_id')
 ->join('colorproducts', 'products.ColorProd_id', '=', 'colorproducts.ColorProd_id')
 ->join('sizeproducts', 'products.SizeProd_id', '=', 'sizeproducts.SizeProd_id')
 ->where('status', 0)->where('show', 0)
-
-->where('Prod_id', $input['compare_P_1'])
+->where('products.Prod_id', $input['compare_P_1'])
 ->get();
+
 
 //compare_P_2
 $getProduct_2 = DB::table('products')
-->select('Prod_id','prod_name','prod_desc','prod_price','qty','rmproducts.RM_value','colorproducts.ColorProd_value',
+->select('products.Prod_id','prod_name','prod_desc','prod_price','qty','rmproducts.RM_value','colorproducts.ColorProd_value',
 'sizeproducts.SizeProd_width','sizeproducts.SizeProd_height','sizeproducts.SizeProd_length','sizeproducts.SizeProd_foot',
 'pic_url1')
 ->join('rmproducts', 'products.RM_id', '=', 'rmproducts.RM_id')
 ->join('colorproducts', 'products.ColorProd_id', '=', 'colorproducts.ColorProd_id')
 ->join('sizeproducts', 'products.SizeProd_id', '=', 'sizeproducts.SizeProd_id')
 ->where('status', 0)->where('show', 0)
-
-->where('Prod_id', $input['compare_P_2'])
+->where('products.Prod_id', $input['compare_P_2'])
 ->get();
 
 if($input['compare_P_3'] != null){
   //compare_P_3
   $getProduct_3 = DB::table('products')
-  ->select('Prod_id','prod_name','prod_desc','prod_price','qty','rmproducts.RM_value','colorproducts.ColorProd_value',
+  ->select('products.Prod_id','prod_name','prod_desc','prod_price','qty','rmproducts.RM_value','colorproducts.ColorProd_value',
   'sizeproducts.SizeProd_width','sizeproducts.SizeProd_height','sizeproducts.SizeProd_length','sizeproducts.SizeProd_foot',
-  'pic_url1','pic_url2','pic_url3','pic_url4','pic_url5')
+  'pic_url1')
   ->join('rmproducts', 'products.RM_id', '=', 'rmproducts.RM_id')
   ->join('colorproducts', 'products.ColorProd_id', '=', 'colorproducts.ColorProd_id')
   ->join('sizeproducts', 'products.SizeProd_id', '=', 'sizeproducts.SizeProd_id')
   ->where('status', 0)->where('show', 0)
 
-  ->where('Prod_id', $input['compare_P_3'])
+  ->where('products.Prod_id', $input['compare_P_3'])
   ->get();
 
 }else{

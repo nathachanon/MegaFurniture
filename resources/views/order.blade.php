@@ -306,7 +306,7 @@
             '<td>'+data['success'][i]['order_detail_id']+'</td>'+
             '<td>'+data['success'][i]['name']+' '+data['success'][i]['surname']+'</td>'+
             '<td>'+data['success'][i]['prod_id']+'</td>'+
-            '<td>'+data['success'][i]['price']+'.00</td>'+
+            '<td>'+data['success'][i]['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'.00</td>'+
             '<td>'+data['success'][i]['created_at']+'</td>'+
             '<td>'+data['success'][i]['updated_at']+'</td>'+
             (data['success'][i]['status'] == 0 ? '<td><span class="label label-primary">รอจ่ายเงิน</span></td>':'')+
@@ -358,10 +358,10 @@
                             '<strong>ข้อมูลผู้ซื้อ</strong><br>'+
                             'ชื่อ-สกุล  : '+content[0]['name']+' '+content[0]['surname']+'<br>'+
                             'จัดส่งโดย  : '+content[0]['deliveryname']+'<br>'+
-                            'ราคาสินค้า  : '+content[0]['prod_price']+'<br>'+
+                            'ราคาสินค้า  : '+content[0]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'<br>'+
                             'จำนวน  : '+(content[0]['price']-content[0]['delivery_price'])/content[0]['prod_price']+' ชิ้น<br>'+
                             'ค่าจัดส่ง  : '+content[0]['delivery_price']+'<br>'+
-                            'ราคารวม  : '+content[0]['price']+'<br>'+
+                            'ราคารวม  : '+content[0]['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'<br>'+
                         '</address>'+
                     '</a>'+
                     '<div class="contact-box-footer">'+
