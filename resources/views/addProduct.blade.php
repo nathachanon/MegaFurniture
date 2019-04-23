@@ -1,6 +1,19 @@
 @extends('layouts.layout_brand')
 
 @section('content')
+<head>
+        <meta charset="utf-8">
+        <title>Tagify - demo</title>
+        <meta name="description" content="Converts HTML input/textarea into Tags component">
+        <meta name="author" content="Yair Even-Or">
+
+        <link rel="stylesheet" href="/dist/tagify.css">
+
+        <script src="dist/tagify.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="dist/jQuery.tagify.min.js"></script>
+
+    </head>
 <body >
   <div class="row mt-mt">
     <div class="col-lg-12">
@@ -135,7 +148,12 @@
                     </div>
                   </div>
                 </div>
-
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group"><label class="col-sm-2 control-label">Keyword</label>
+                <div class="col-sm-10">
+                      <input name='tags' class="form-control input-lg" placeholder='กรุณาใส่ keyword ที่ต้องการ ตามด้วย , หรือ enter' value='' autofocus data-blacklist='' id="tags">
+                </div>
               </div>
 
 
@@ -275,4 +293,58 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/Scripts/addproduct.js"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
+<script data-name="basic">
+(function(){
+
+var input = document.querySelector('input[name=tags]'),
+    // init Tagify script on the above inputs
+    tagify = new Tagify(input, {
+        whitelist : ["ห้องนอน", "ห้องนั่งเล่น"],
+        blacklist : [], // <-- passed as an attribute in this demo
+    });
+
+// tag added callback
+function onAddTag(e){
+    console.log("onAddTag: ", e.detail);
+    console.log("original input value: ", input.value)
+    tagify.off('add', onAddTag) // exmaple of removing a custom Tagify event
+}
+
+// tag remvoed callback
+function onRemoveTag(e){
+    console.log(e.detail);
+    console.log("tagify instance value:", tagify.value)
+}
+
+// on character(s) added/removed (user is typing/deleting)
+function onInput(e){
+    console.log(e.detail);
+    console.log("onInput: ", e.detail);
+}
+
+function onTagEdit(e){
+    console.log("onTagEdit: ", e.detail);
+}
+
+// invalid tag added callback
+function onInvalidTag(e){
+    console.log("onInvalidTag: ", e.detail);
+}
+
+// invalid tag added callback
+function onTagClick(e){
+    console.log(e.detail);
+    console.log("onTagClick: ", e.detail);
+}
+
+})()
+</script>
+<script>
+function tags(value){
+  var obj = JSON.parse(value);
+
+  console.log(obj);
+}
+</script>
+
 @endsection

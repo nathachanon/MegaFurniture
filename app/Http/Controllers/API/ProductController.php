@@ -7,6 +7,7 @@ use App\Colorproduct;
 use App\Sizeproduct;
 use App\Product;
 use App\Delivery_price;
+use App\Keyword;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Product\ProductCollection;
@@ -287,7 +288,7 @@ function AddProduct(Request $request){
     'SizeProd_foot' => 'required',
     'ColorProd_value' => 'required',
     'weight' => 'required',
-    'pic1' => 'required'
+    'pic1' => 'required',
   ]);
 
   if ($validator->fails()) {
