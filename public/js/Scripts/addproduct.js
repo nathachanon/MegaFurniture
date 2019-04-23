@@ -439,6 +439,8 @@ $(document).ready(function(){
     var ColorProd_value = $('#ColorProd_value').val();
     var RM_value = $('#RM_value').val();
     var weight = $('#weight').val();
+    var tags = $('#tags').val().split(",");
+    console.log(tags);
     if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
      SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '')
     {
@@ -471,6 +473,7 @@ $(document).ready(function(){
      formData.append("buyer", valueBUYER);
      formData.append("status", 0);
      formData.append("show", 1);
+     formData.append("tags",tags);
 
      $.ajax({
        url: '/api/AddProduct',
@@ -515,6 +518,8 @@ $(document).ready(function(){
     var ColorProd_value = $('#ColorProd_value').val();
     var RM_value = $('#RM_value').val();
     var weight = $('#weight').val();
+    var tags = $('#tags').val().split(",");
+
     if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
      SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '')
     {
@@ -548,6 +553,11 @@ $(document).ready(function(){
      formData.append("buyer", valueBUYER);
      formData.append("status", 0);
      formData.append("show", 0);
+
+
+for (var i = 0; i < tags.length; i++) {
+    formData.append('tags[]', tags[i]);
+}
 
      $.ajax({
        url: '/api/AddProduct',
