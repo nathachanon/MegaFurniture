@@ -180,7 +180,7 @@ function getProduct(){
           '<td>'+
           '0'+
           '</td>'+
-          '<td>'+data['product'][i]['prod_price']+'</td>'+
+          '<td>'+data['product'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</td>'+
           '<td>'+
           status
           +'</td>'+
@@ -256,13 +256,13 @@ function getProduct_BY_ID(Prod_id){
             '</div>'+
             '</td>'+
             '<td>'+sku+'</td>'+
-            '<td>'+data['product'][i]['prod_name']+'</td>'+
+            '<td style="width:290px;>'+data['product'][i]['prod_name']+'</td>'+
             '<td>'+data['product'][i]['ColorProd_value']+'</td>'+
             '<td>'+data['product'][i]['qty']+'</td>'+
             '<td>'+
             '0'+
             '</td>'+
-            '<td>'+data['product'][i]['prod_price']+'</td>'+
+            '<td>'+data['product'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</td>'+
             '<td>'+
             status
             +'</td>'+
@@ -459,15 +459,6 @@ function groupchangeStatus_change(prodlist,status){
 function groupchangeDelete(prodlist,status){
   $('#exampleModal').modal('hide');
   $("#model_body").empty();
-  swal({
-    title: "คุณแน่ใจใช่ไหม ?",
-    text: "คุณต้องการลบสินค้าออกจากร้าน !",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "ใช่, ฉันมั่นใจ!",
-    closeOnConfirm: false
-  }, function () {
     $.ajax({
       url: '/api/changegroup-Delete',
       headers: {
@@ -504,7 +495,7 @@ function groupchangeDelete(prodlist,status){
         }
       }
     });
-  });
+
 }
 
 function selectalls(source){
@@ -734,13 +725,13 @@ function getProduct_FILLTER(status_show){
             '</div>'+
             '</td>'+
             '<td>'+sku+'</td>'+
-            '<td>'+data['product'][i]['prod_name']+'</td>'+
+            '<td style="width:290px;">'+data['product'][i]['prod_name']+'</td>'+
             '<td>'+data['product'][i]['ColorProd_value']+'</td>'+
             '<td>'+data['product'][i]['qty']+'</td>'+
             '<td>'+
             '0'+
             '</td>'+
-            '<td>'+data['product'][i]['prod_price']+'</td>'+
+            '<td>'+data['product'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</td>'+
             '<td>'+
             status
             +'</td>'+

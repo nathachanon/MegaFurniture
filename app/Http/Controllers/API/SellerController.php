@@ -240,7 +240,12 @@ public function deletebankAccount(Request $request){
 
   $input = $request->all();
 
-  DB::table('bank_accounts')->where('BankAccount_id', $input['BankAccount_id'])->delete();
+  DB::table('bank_accounts')
+  ->where('BankAccount_id', $input['BankAccount_id'])
+  ->update([
+              'status' => 2,
+              'updated_at' => date('Y-m-d H:i:s')
+            ]);
 
   return response()->json(['success'=>'Delete bankaccount success !'], $this-> successStatus);
 

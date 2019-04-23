@@ -306,10 +306,11 @@
             '<td>'+data['success'][i]['order_detail_id']+'</td>'+
             '<td>'+data['success'][i]['name']+' '+data['success'][i]['surname']+'</td>'+
             '<td>'+data['success'][i]['prod_id']+'</td>'+
-            '<td>'+data['success'][i]['price']+'.00</td>'+
+            '<td>'+data['success'][i]['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'.00</td>'+
             '<td>'+data['success'][i]['created_at']+'</td>'+
             '<td>'+data['success'][i]['updated_at']+'</td>'+
             (data['success'][i]['status'] == 0 ? '<td><span class="label label-primary">รอจ่ายเงิน</span></td>':'')+
+            (data['success'][i]['status'] == 1 ? '<td><span class="label label-warning">แจ้งโอนเงินแล้ว</span></td>':'')+
             '<td class="text-right">'+
                 '<div class="btn-group">'+
                     '<button class="btn-white btn btn-xs" onclick="show_details('+data['success'][i]['order_id']+','+data['success'][i]['prod_id']+')" >ดูรายละเอียด</button>'+
@@ -346,6 +347,7 @@
       });
       const content = await rawResponse.json();
       if(content[0] != null){
+        console.log(content[0]);
         var swal_html = '<div class="col-lg-12">'+
                 '<strong>หมายเลขคำสั่งซื้อ #'+content[0]['order_detail_id']+'</strong><br>'+
                 '<div class="contact center-version">'+
@@ -356,17 +358,17 @@
                             '<strong>ข้อมูลผู้ซื้อ</strong><br>'+
                             'ชื่อ-สกุล  : '+content[0]['name']+' '+content[0]['surname']+'<br>'+
                             'จัดส่งโดย  : '+content[0]['deliveryname']+'<br>'+
-                            'ราคาสินค้า  : '+content[0]['prod_price']+'<br>'+
+                            'ราคาสินค้า  : '+content[0]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'<br>'+
                             'จำนวน  : '+(content[0]['price']-content[0]['delivery_price'])/content[0]['prod_price']+' ชิ้น<br>'+
                             'ค่าจัดส่ง  : '+content[0]['delivery_price']+'<br>'+
-                            'ราคารวม  : '+content[0]['price']+'<br>'+
+                            'ราคารวม  : '+content[0]['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'<br>'+
                         '</address>'+
                     '</a>'+
                     '<div class="contact-box-footer">'+
                         '<div class="m-t-xs btn-group">'+
                             'วันเวลาที่สั่งซื้อ : '+content[0]['created_at']+' น. <br>'+
                             'อัพเดทสถานะล่าสุด : '+content[0]['updated_at']+' น. <br><br>'+
-                            'สถานะการสั่งซื้อ : <td><span class="label label-primary">รอจ่ายเงิน</span></td>'+
+                            'สถานะการสั่งซื้อ : '+(content[0]['status'] == 0 ? '<td><span class="label label-primary">รอจ่ายเงิน</span></td>':'')+(content[0]['status'] == 1 ? '<td><span class="label label-warning">มีการแจ้งโอนเงิน</span></td>':'')+''+
                         '</div>'+
                     '</div>'+
                 '</div>'+

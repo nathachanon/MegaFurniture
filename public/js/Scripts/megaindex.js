@@ -182,112 +182,116 @@ for(var i = 0 ; i < product_count ; i++){
 
   if(0 < rating_point && rating_point <= 0.5)
   {
-    rating =
-    '<span class="fa fa-star-half-full"></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>';
-  }else if(0.5 < rating_point && rating_point <= 1){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>';
-  }else if(1 < rating_point && rating_point <= 1.5){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star-half-full"></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>';
-  }else if(1.5 < rating_point && rating_point <= 2){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>';
-  }else if(2 < rating_point && rating_point <= 2.5){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star-half-full"></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>';
-  }else if(2.5 < rating_point && rating_point <= 3){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>';
-  }else if(3 < rating_point && rating_point <= 3.5){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star-half-full"></span>'+
-    '<span class="fa fa-star "></span>';
-  }else if(3.5 < rating_point && rating_point <= 4){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star "></span>';
-  }else if(4 < rating_point  && rating_point <= 4.5){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star-half-full"></span>';
-  }else if(4.5 < rating_point  && rating_point <= 5){
-    rating =
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>'+
-    '<span class="fa fa-star checked"></span>';
-  }else{
-    rating =
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>'+
-    '<span class="fa fa-star "></span>';
+     rating =
+          '<span class="fa fa-star-half-full"></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>';
+        }else if(0.5 < rating_point && rating_point <= 1){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>';
+        }else if(1 < rating_point && rating_point <= 1.5){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star-half-full"></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>';
+        }else if(1.5 < rating_point && rating_point <= 2){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>';
+        }else if(2 < rating_point && rating_point <= 2.5){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star-half-full"></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>';
+        }else if(2.5 < rating_point && rating_point <= 3){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>';
+        }else if(3 < rating_point && rating_point <= 3.5){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star-half-full"></span>'+
+          '<span class="fa  fa-grey fa-star "></span>';
+        }else if(3.5 < rating_point && rating_point <= 4){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-grey fa-star "></span>';
+        }else if(4 < rating_point  && rating_point <= 4.5){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star-half-full"></span>';
+        }else if(4.5 < rating_point  && rating_point <= 5){
+          rating =
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>'+
+          '<span class="fa fa-star checked"></span>';
+        }else{
+          rating =
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>'+
+          '<span class="fa  fa-grey fa-star "></span>';
   }
   $('#product_list').append('<div class="col-md-3">'+
-   '<div class="ibox">'+
-   '<div class="ibox-content product-box" >'+
-   '<div class="product-imitation-prod" onclick="productDetail('+data['product'][i]['prod_id']+')">'+
-   '<img src="'+data['product'][i]['Pic']+'" alt="">'+
-   '</div>'+
-   '<div class="product-desc">'+
-   '<span class="product-price">'+
-   data['product'][i]['Price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'฿'+
-   '</span>'+
-   '<div class="shop_bar"></div><a href="#"> <div class="product-name-a" onclick="productDetail('+data['product'][i]['prod_id']+')">'+
-   data['product'][i]['Name']+'</div></a>'+
-   '<small class="text-muted">#'+data['product'][i]['Room']+'</small>'+
-   '<div class="text-muted m-t-xs cut-str">'+
-   data['product'][i]['Description']+
-   '</div>'+
-   '<div class="fr">'+
-   rating+
-   '</div>'+
-   '<div class="inline2"><div class="m-t inline2">'+
-   '<a href="#" onclick="addCart(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\')" class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i> </a>'+
-   '</div>'+
-   '<div class="m-t  inline2">'+
-   '<a href="#"onclick="alert('+data['product'][i]['prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i> </a>'+
-   '</div></div>'+
-   '</div>'+
-   '</div>'+
-   '</div>'+
-   '</div>');
+         '<div class="ibox">'+
+         '<div class="ibox-content product-box" >'+
+         '<div class="product-imitation-prod" onclick="productDetail('+data['product'][i]['prod_id']+')">'+
+         '<img src="'+data['product'][i]['Pic']+'" alt="">'+
+         '</div>'+
+         '<div class="product-desc">'+
+         '<span class="product-price">'+
+         data['product'][i]['Price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'฿'+
+         '</span>'+
+         '<div class="shop_bar"></div><a href="#"> <div class="product-name-a" onclick="productDetail('+data['product'][i]['prod_id']+')">'+
+         data['product'][i]['Name']+'</div></a>'+
+         '<small class="text-muted">#'+data['product'][i]['Room']+'</small>'+
+         '<div class="text-muted m-t-xs cut-str">'+
+         data['product'][i]['Description']+
+         '</div>'+
+         '<div class="fr">'+
+         rating+
+         '</div>'+
+         '<div class="inline2"><div class="m-t inline2">'+
+         '<a onclick="addCart(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\')" class="btn btn-xs btn-outline btn-primary"><i class=" prim fa fa-shopping-cart"></i> </a>'+
+         '</div>'+
+         '<div class="m-t  inline2">'+
+         '<a onclick="alert('+data['product'][i]['prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="prim fa fa-comment"></i> </a>'+
+         '</div>'+
+         '<div class="m-t  inline2">'+
+         '<a onclick="addCompare(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\');"'+
+         ' class="btn btn-xs btn-outline btn-primary"><i class="fa fa-plus-square prim"></i> </a>'+
+         '</div></div>'+
+         '</div>'+
+         '</div>'+
+         '</div>'+
+         '</div>');
 }
 },
 failure: function(errMsg) {
@@ -406,7 +410,7 @@ function getCart(){
                 '</div>'+
                 '<img width="180" alt="image" class="img-circle" src="'+data['ProductInCart'][i]['pic_url1']+'">'+
                 '<div class="chat-message active">'+
-                    '฿'+data['ProductInCart'][i]['prod_price']+' จำนวน '+data['ProductInCart'][i]['count']+' ชิ้น'+
+                    ''+data['ProductInCart'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' ฿ จำนวน '+data['ProductInCart'][i]['count']+' ชิ้น'+
                 '</div>'+
                 '<button type="button" class="btn btn-danger btn-sm btn-block" onclick="deleteProductInCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')"><i class="fa fa-trash"></i> ลบออกจากตะกร้า</button>'+
             '</div>');
@@ -417,7 +421,7 @@ function getCart(){
             '<img alt="image" class="img-circle" src="'+data['ProductInCart'][i]['pic_url1']+'">'+
             '</a>'+
             '<div class="media-body">'+
-            '<strong>'+data['ProductInCart'][i]['prod_name']+'</strong><br>฿'+data['ProductInCart'][i]['prod_price']+' x '+data['ProductInCart'][i]['count']+
+            '<strong>'+data['ProductInCart'][i]['prod_name']+'</strong><br>'+data['ProductInCart'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'฿ x '+data['ProductInCart'][i]['count']+
             '</div>'+
             '</div>'+
             '<a href="#" onclick="deleteProductInCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')">ลบ</a></li><br>');

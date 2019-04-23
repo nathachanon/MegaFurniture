@@ -46,15 +46,15 @@ check_user();
 getAddress();
   $("#nav-buyer").append('<div class="cart-page-logo__page-name">ตะกร้า</div>');
 
-	function check_user(){
+  function check_user(){
 
-		if(b_token == null && buyer_id == null){
-			window.location.replace('/');
-		}else{
+    if(b_token == null && buyer_id == null){
+      window.location.replace('/');
+    }else{
       getCart();
     }
 
-	}
+  }
 
   function getCart(){
     $.ajax({
@@ -133,7 +133,7 @@ getAddress();
                                 '</div>'+
                             '</td>'+
                             '<td>'+
-                                'ราคาต่อชิ้น '+data['ProductInCart'][i]['prod_price']+' บาท'+
+                                'ราคาต่อชิ้น '+data['ProductInCart'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' บาท'+
                             '</td>'+
                             '<td width="100">'+
                                 '<a onclick="addCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')"><i class="fa fa-plus"></i></a>'+
@@ -142,7 +142,7 @@ getAddress();
                             '</td>'+
                             '<td>'+
                                 '<h4>'+
-                                    '฿'+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+
+                                    '฿'+[data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+
                                 '</h4>'+
                             '</td>'+
                         '</tr>'+
@@ -382,7 +382,7 @@ getAddress();
       }
       Swal.fire({
         title: 'ยืนยันการสั่งซื้อ',
-        html: "กรุณาตรวจสอบรายการสินค้าทั้งหมด ก่อนกดสั่งซื้อ<br />ราคาสินค้าทั้งหมด รวมค่าจัดส่ง : "+swalPrice+" บาท",
+        html: "กรุณาตรวจสอบรายการสินค้าทั้งหมด ก่อนกดสั่งซื้อ<br />ราคาสินค้าทั้งหมด รวมค่าจัดส่ง : "+swalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" บาท",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -450,7 +450,7 @@ getAddress();
       del_price = parseInt(del_price, 10)
       var allprice = prod_price+del_price;
       $('#delivery_detail_'+prod_id+'').empty();
-      $('#delivery_detail_'+prod_id+'').append('ราคาสินค้า : '+prod_price+' จัดส่งโดย : '+del_name+ ' ค่าจัดส่ง : '+del_price +' รวมราคา : '+ allprice +' บาท');
+      $('#delivery_detail_'+prod_id+'').append('ราคาสินค้า : '+prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' จัดส่งโดย : '+del_name.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ ' ค่าจัดส่ง : '+del_price +' รวมราคา : '+ allprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' บาท');
 
         orderList = {}
         orderList ["prod_id"] = prod_id;
@@ -537,7 +537,7 @@ getAddress();
                                 '</div>'+
                             '</td>'+
                             '<td>'+
-                                'ราคาต่อชิ้น '+data['ProductInCart'][i]['prod_price']+' บาท'+
+                                'ราคาต่อชิ้น '+data['ProductInCart'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' บาท'+
                             '</td>'+
                             '<td width="100">'+
                                 '<a onclick="addCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')"><i class="fa fa-plus"></i></a>'+
@@ -546,7 +546,7 @@ getAddress();
                             '</td>'+
                             '<td>'+
                                 '<h4>'+
-                                    '฿'+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+
+                                    '฿'+[data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+
                                 '</h4>'+
                             '</td>'+
                         '</tr>'+
