@@ -252,6 +252,10 @@ $(document).ready(function(){
     }
   });
 
+  $("#optionroom_1").click(function(){   $("#tags").val($("#tags").val()+"ห้องนอน,")     });
+  $("#optionroom_2").click(function(){   $("#tags").val($("#tags").val()+"ห้องนั่งเล่น,")      });
+  $("#optionroom_3").click(function(){   $("#tags").val($("#tags").val()+"ห้องทำงาน,")     });
+
   $("#confirmBUYER").click(function(){
     valueBUYER = $('#BUYER_input').val();
     $('#BUYER_d').modal('hide');

@@ -150,6 +150,13 @@
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
+              <div class="form-group"><label class="col-sm-2 control-label">เลือกห้องที่สามารถจัดวางสินค้าได้เพิ่มเติม</label>
+                <div class="col-sm-10">
+                    <button  type="button" class="btn btn-primary btn-rounded" id="optionroom_1" >ห้องนอน</button>
+                    <button type="button" class="btn btn-primary btn-rounded" id="optionroom_2" href="#">ห้องนั่งเล่น</button>
+                    <button type="button" class="btn btn-primary btn-rounded" id="optionroom_3" href="#">ห้องทำงาน</button>
+                </div>
+              </div>
               <div class="form-group"><label class="col-sm-2 control-label">Keyword</label>
                 <div class="col-sm-10">
                       <input name='tags' class="form-control input-lg" placeholder='กรุณาใส่ keyword ที่ต้องการ ตามด้วย , หรือ enter' value='' autofocus data-blacklist='' id="tags">

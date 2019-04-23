@@ -1077,4 +1077,33 @@ function change_sku(Request $request){
   return response()->json(['success'=>'change Success'], $this-> successStatus);
 }
 
+function recommend(Request $request){
+  $prod_id = $request['prod_id'];
+  $countTag = $getTag = DB::table('keywords')
+  ->select('keyword_value')
+  ->where('Prod_id', $prod_id)
+  ->count();
+
+  $getTag = DB::table('keywords')
+  ->select('keyword_value')
+  ->where('Prod_id', $prod_id)
+  ->first();
+
+
+  for($x = 0 ;$x<$countTag;$x++){}
+    $getTag_rec = DB::table('keywords')
+    ->select('Prod_id')
+    ->where('keyword_value', $getTag->keyword_value)
+    ->whereNotIn('Prod_id',[$prod_id])
+    ->get();
+
+
+
+
+
+
+  return response()->json(['rec_id'=>$getTag_rec], $this-> successStatus);
+}
+
+
 }

@@ -22,8 +22,8 @@ Route::post('excelUpload','API\ProductController@excelUpload');
 Route::post('AddBrand','API\BrandController@AddBrand');
 Route::post('editupload','API\ProductController@picedit');
 Route::post('upload','API\ProductController@picedit');
-
-
+//public
+Route::post('recommend','API\ProductController@recommend');
 
 
 
