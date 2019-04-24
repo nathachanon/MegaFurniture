@@ -2,6 +2,8 @@
 
 
 @section('content')
+<link rel="stylesheet" type="text/css" href="layout/styles/product_styles.css">
+<link rel="stylesheet" type="text/css" href="layout/styles/product_responsive.css">
 <style>
 	td,th{
 		text-align: center;
@@ -253,73 +255,79 @@
 				' <thead>'+
 				' <tr>'+
 				' <th></th>'+
-				'  <th>สินค้าที่ 1</th>'+
-				' <th>สินค้าที่ 2</th>'+
-				' <th class="compare_P_3">สินค้าที่ 3</th>'+
+				' <th><h4>สินค้าที่ 1</h4></th>'+
+				' <th><h4>สินค้าที่ 2</h4></th>'+
+				' <th class="compare_P_3"><h4>สินค้าที่ 3</h4></th>'+
 				' </thead>'+
 				'<tbody>'+
 				'<tr>'+
-				'<td>รูปสินค้า</th>'+
+				'<td><h4>รูปสินค้า</h4></th>'+
 				'<td ><img class="comparePic" src="'+data['product1'][0]['pic_url1']+'"></img></td>'+
 				'<td ><img class="comparePic" src="'+data['product2'][0]['pic_url1']+'"></img></td>'+
 				'<td class="compare_P_3"><img class="comparePic" src="'+product_3_pic+'"></img></td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td>ชื่อสินค้า</th>'+
-				'<td >'+data['product1'][0]['prod_name']+'</td>'+
-				'<td >'+data['product2'][0]['prod_name']+'</td>'+
-				'<td class="compare_P_3">'+product_3_name+'</td>'+
+				'<td><h4>ชื่อสินค้า</h4></th>'+
+				'<td ><h5>'+data['product1'][0]['prod_name']+'</h5></td>'+
+				'<td ><h5>'+data['product2'][0]['prod_name']+'</h5></td>'+
+				'<td class="compare_P_3"><h5>'+product_3_name+'</h5></td>'+
 				'</tr>'+
-				'<td>รายละเอียดสินค้า</th>'+
+				'<td><h4>รายละเอียดสินค้า</h4></th>'+
 				'<td >'+data['product1'][0]['prod_desc']+'</td>'+
 				'<td >'+data['product2'][0]['prod_desc']+'</td>'+
 				'<td class="compare_P_3">'+prod_3_desc+'</td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td style="width:auto;">ขนาด(กว้าง x ยาว x สูง) เซนติเมตร</th>'+
-				'<td >'+data['product1'][0]['SizeProd_width']+' x  '+data['product1'][0]['SizeProd_length']+' x  '+data['product1'][0]['SizeProd_height']+'</td>'+
-				'<td >'+data['product2'][0]['SizeProd_width']+' x  '+data['product2'][0]['SizeProd_length']+' x  '+data['product2'][0]['SizeProd_height']+'</td>'+
-				'<td class="compare_P_3">'+product_3_width+' x  '+product_3_length+' x  '+product_3_height+'</td>'+
+				'<td style="width:auto;"><h4>ขนาด(กว้าง x ยาว x สูง) เซนติเมตร</h4></th>'+
+				'<td ><h5>'+data['product1'][0]['SizeProd_width']+' x  '+data['product1'][0]['SizeProd_length']+' x  '+data['product1'][0]['SizeProd_height']+'</h5></td>'+
+				'<td ><h5>'+data['product2'][0]['SizeProd_width']+' x  '+data['product2'][0]['SizeProd_length']+' x  '+data['product2'][0]['SizeProd_height']+'</h5></td>'+
+				'<td class="compare_P_3"><h5>'+product_3_width+' x  '+product_3_length+' x  '+product_3_height+'</h5></td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td>ขนาด(ฟุต)</th>'+
-				'<td >'+data['product1'][0]['SizeProd_foot']+'</td>'+
-				'<td >'+data['product2'][0]['SizeProd_foot']+'</td>'+
-				'<td class="compare_P_3">'+product_3_foot+'</td>'+
+				'<td><h4>ขนาด(ฟุต)</h4></th>'+
+				'<td ><h5>'+data['product1'][0]['SizeProd_foot']+'</h5></td>'+
+				'<td ><h5>'+data['product2'][0]['SizeProd_foot']+'</h5></td>'+
+				'<td class="compare_P_3"><h5>'+product_3_foot+'</h5></td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td>วัสดุ</th>'+
-				'<td >'+data['product1'][0]['RM_value']+'</td>'+
-				'<td >'+data['product2'][0]['RM_value']+'</td>'+
-				'<td class="compare_P_3">'+product_3_rm+'</td>'+
+				'<td><h4>วัสด</h4>ุ</th>'+
+				'<td ><h5>'+data['product1'][0]['RM_value']+'</h5></td>'+
+				'<td ><h5>'+data['product2'][0]['RM_value']+'</h5></td>'+
+				'<td class="compare_P_3"><h5>'+product_3_rm+'</h5></td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td>สี</th>'+
-				'<td >'+data['product1'][0]['ColorProd_value']+'</td>'+
-				'<td >'+data['product2'][0]['ColorProd_value']+'</td>'+
-				'<td class="compare_P_3">'+product_3_color+'</td>'+
+				'<td><h4>สี</h4></th>'+
+				'<td ><h5>'+data['product1'][0]['ColorProd_value']+'</h5></td>'+
+				'<td ><h5>'+data['product2'][0]['ColorProd_value']+'</h5></td>'+
+				'<td class="compare_P_3"><h5>'+product_3_color+'</h5></td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td>ราคา</th>'+
-				'<td >'+data['product1'][0]['prod_price']+'</td>'+
-				'<td >'+data['product2'][0]['prod_price']+'</td>'+
-				'<td class="compare_P_3">'+product_3_price+'</td>'+
+				'<td><h4>ราคา</h4></th>'+
+				'<td ><h5>'+data['product1'][0]['prod_price']+'</h5></td>'+
+				'<td ><h5>'+data['product2'][0]['prod_price']+'</h5></td>'+
+				'<td class="compare_P_3"><h5>'+product_3_price+'</h5></td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td>คะแนน</th>'+
-				'<td >'+'5.0'+'</td>'+
-				'<td >'+'5.0'+'</td>'+
-				'<td class="compare_P_3">'+'5.0'+'</td>'+
+				'<td><h4>คะแนน</h4></th>'+
+				'<td >'+
+				'<div id="Rating_AVG_1"></div>'+
+				'</td>'+
+				'<td >'+
+				'<div id="Rating_AVG_2"></div>'+
+				'</td>'+
+				'<td class="compare_P_3">'+
+				'<div id="Rating_AVG_3"></div>'+
+				'</td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td>ใส่ตะกร้า</th>'+
+				'<td><h4>ใส่ตะกร้า</h4></th>'+
 
 				'<td ><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i></a></td>'+
 				'<td ><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i></a></td>'+
 				'<td class="compare_P_3"><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i></a></td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td>ความคิดเห็น</th>'+
+				'<td><h4>ความคิดเห็น</h4></th>'+
 
 				'<td ><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i></a></td>'+
 				'<td ><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i></a></td>'+
@@ -344,7 +352,130 @@
 	});
 }
 
+function getRating(Compare_id,Prod_id){
+
+
+	$("input[name='rating']").attr("checked", false);
+
+			$('#comment').empty();
+			$('#Rating_AVG').empty();
+		$.ajax({
+		type: "GET",
+		url: "/api/products/"+Prod_id,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		success: function(data){
+
+			var div_rating = "";
+			if(Compare_id == 1){div_rating = '#Rating_AVG_1';}
+			else if(Compare_id == 2){div_rating = '#Rating_AVG_2';}
+			else if(Compare_id == 3){div_rating = '#Rating_AVG_3';}
+
+
+			console.log(data['data']);
+			if(data['data'] != ''){
+
+
+				 var rating_point = data['data']['RatingAVG'][0]['RatingAVG'];
+				 if(0 < rating_point && rating_point <= 0.5)
+				 {
+					 rating =
+					 '<span class="fa fa-star-half-full"></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>';
+				 }else if(0.5 < rating_point && rating_point <= 1){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>';
+				 }else if(1 < rating_point && rating_point <= 1.5){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star-half-full"></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>';
+				 }else if(1.5 < rating_point && rating_point <= 2){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>';
+				 }else if(2 < rating_point && rating_point <= 2.5){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star-half-full"></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>';
+				 }else if(2.5 < rating_point && rating_point <= 3){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>';
+				 }else if(3 < rating_point && rating_point <= 3.5){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star-half-full"></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>';
+				 }else if(3.5 < rating_point && rating_point <= 4){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-grey fa-star "></span>';
+				 }else if(4 < rating_point  && rating_point <= 4.5){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star-half-full"></span>';
+				 }else if(4.5 < rating_point  && rating_point <= 5){
+					 rating =
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>'+
+					 '<span class="fa fa-star checked"></span>';
+				 }else{
+					 rating =
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>'+
+					 '<span class="fa  fa-grey fa-star "></span>';
+				 }
+				 $(div_rating).append('<h5 class="viewed_title">'+(data['data']['RatingAVG'][0]['RatingAVG'] != null ? data['data']['RatingAVG'][0]['RatingAVG']:0)+'  เต็ม  5</h5>'+
+				'<fieldset class="rating ct">'+
+				rating+
+				'</fieldset>');
+			}
+		},
+		failure: function(errMsg) {
+			alert(errMsg);
+		}
+});
+
+}
+
 aa();
+getRating(1,p1);
+getRating(2,p2	);
+if(p3!=0){
+getRating(3,p3);
+}
+
 }
 
 </script>
