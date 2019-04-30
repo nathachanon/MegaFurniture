@@ -1077,4 +1077,33 @@ function change_sku(Request $request){
   return response()->json(['success'=>'change Success'], $this-> successStatus);
 }
 
+function product_recommend(Request $request){
+  $validator = Validator::make($request->all(), [
+    'prod_id' => 'required'
+  ]);
+
+  if ($validator->fails()) {
+   return response()->json(['error'=>$validator->errors()], 401);
+ }
+
+ $input = $request->all();
+
+ $getCatProd_id = DB::table('products')
+ ->where('prod_id', $input['prod_id'])->value('CatProd_id');
+
+ $myproduct = DB::table('products')
+ ->select('prod_id','prod_name','prod_price')
+ ->where('prod_id', $input['prod_id'])
+ ->get();
+
+ $recommendProduct = DB::table('products')
+ ->select('prod_id','prod_name','prod_price')
+ ->where('CatProd_id', $getCatProd_id)
+ ->where('prod_id', "!=" , $input['prod_id'])
+ ->limit(5)
+ ->get();
+
+ return response()->json(['myproduct'=>$myproduct,'recommend'=>$recommendProduct], $this-> successStatus);
+}
+
 }
