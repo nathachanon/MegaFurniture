@@ -352,14 +352,14 @@ class OrderController extends Controller
 		->get();
 
 		$purchases = DB::table('orderdetails')
-		->select(DB::raw('SUM(orderdetails.price) as price'),'brands.brand_id')
+		->select(DB::raw('SUM(orderdetails.price) as price'),'orders.order_id')
 		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
 		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
 		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
 		->join('brands', 'products.brand_id', '=', 'brands.brand_id')
 		->where('buyers.id', $input['buyer_id'])
-		->groupBy('brands.brand_id')
+		->groupBy('orders.order_id')
 		->get();
 
 		return response()->json(['success'=>$getOrder,'order_list'=>$getOrderID,'brand_list'=>$getBrandID,'sum'=>$purchases], $this-> successStatus);

@@ -310,7 +310,7 @@
             '<td>'+data['success'][i]['created_at']+'</td>'+
             '<td>'+data['success'][i]['updated_at']+'</td>'+
             (data['success'][i]['status'] == 0 ? '<td><span class="label label-primary">รอจ่ายเงิน</span></td>':'')+
-            (data['success'][i]['status'] == 1 ? '<td><span class="label label-warning">แจ้งโอนเงินแล้ว</span></td>':'')+
+            (data['success'][i]['status'] == 1 ? '<td><span class="label label-warning">แจ้งโอนเงินแล้ว</span><button class="btn-white btn btn-xs" onclick="showPayment('+data['success'][i]['prod_id']+')">หลักฐานการโอน</button></td>':'')+
             '<td class="text-right">'+
                 '<div class="btn-group">'+
                     '<button class="btn-white btn btn-xs" onclick="show_details('+data['success'][i]['order_id']+','+data['success'][i]['prod_id']+')" >ดูรายละเอียด</button>'+
@@ -382,5 +382,10 @@
 
     })();
   }
+
+  function showPayment(order_detail_id){
+    alert(order_detail_id);
+  }
+
 </script>
 @endsection

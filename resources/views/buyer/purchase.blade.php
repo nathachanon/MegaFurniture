@@ -95,7 +95,6 @@
       });
       const content = await rawResponse.json();
       if(content['success'] != ''){
-        console.log(content);
         $("#order_list").empty();
         for(i = 0 ; i<content['order_list'].length ; i++){
           $("#order_list").append('<div id="div_order_'+content['order_list'][i]['order_id']+'">'+
@@ -106,7 +105,7 @@
           for(j = 0 ; j<content['brand_list'].length ; j++){
             $("#order_brand_"+content['order_list'][i]['order_id']).append('<div id="div_order_'+content['order_list'][i]['order_id']+'_brand_'+content['brand_list'][j]['brand_id']+'">'+
               'Brand_'+content['brand_list'][j]['brand_id']+
-              (content['brand_list'][j]['status'] == 0 ? '<button type="button" onclick="payment('+content['order_list'][i]['order_id']+','+content['brand_list'][j]['brand_id']+','+content['sum'][j]['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+')" class="btn btn-w-m btn-info text-left">OrderID: #'+content['order_list'][i]['order_id']+'B'+content['brand_list'][j]['brand_id']+'&nbsp แจ้งโอนเงิน ที่นี่ จำนวนเงินที่ต้องโอน: '+content['sum'][j]['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' &nbsp&nbsp&nbsp&nbsp&nbsp สถานะ : รอการจ่ายเงิน</button>':'')+
+              (content['brand_list'][j]['status'] == 0 ? '<button type="button" onclick="payment('+content['order_list'][i]['order_id']+','+content['brand_list'][j]['brand_id']+','+content['sum'][j]['price']+')" class="btn btn-w-m btn-info text-left">OrderID: #'+content['order_list'][i]['order_id']+'B'+content['brand_list'][j]['brand_id']+'&nbsp แจ้งโอนเงิน ที่นี่ จำนวนเงินที่ต้องโอน: '+content['sum'][j]['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' &nbsp&nbsp&nbsp&nbsp&nbsp สถานะ : รอการจ่ายเงิน</button>':'')+
               '</div>');
           }
         }
@@ -140,7 +139,6 @@
       });
       const content = await rawResponse.json();
       if(content['success'] != ''){
-        console.log(content);
         Swal.fire({
           title: '<strong>แจ้งโอนเงิน <u>OrderID#'+order_id+' ร้าน: '+brand_id+'</u></strong>',
           html:
@@ -178,14 +176,13 @@
       });
       const content = await rawResponse.json();
       if(content['success'] != ''){
-        console.log(content);
         $('#content_'+order_id+'_'+brand_id).empty();
         $('#content_'+order_id+'_'+brand_id).append('<h4 class="text-left">ธนาคาร : '+content['success'][0]['bank_name']+'</h4></br>'+
           '<h4 class="text-left">ชื่อบัญชี : '+content['success'][0]['account_name']+'</h4></br>'+
           '<h4 class="text-left">เลขบัญชี : '+content['success'][0]['bank_account']+'</h4></br>'+
           '<div class="form-group">'+
           '<div class="col-sm-6">'+
-          '<h5 class="text-left">จำนวนเงินที่โอน (บาท)</h5><input value="'+price+'" disabled id="pay_amount_'+order_id+'_'+brand_id+'" type="text" class="form-control" placeholder="จำนวนเงินที่โอน" onkeydown="return ( event.ctrlKey || event.altKey || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) || (95<event.keyCode && event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 && event.keyCode<40) || (event.keyCode==46) )">'+
+          '<h5 class="text-left">จำนวนเงินที่โอน (บาท)</h5><input value="'+price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'" disabled id="pay_amount_'+order_id+'_'+brand_id+'" type="text" class="form-control" placeholder="จำนวนเงินที่โอน">'+
           '</div>'+
           '<div class="col-sm-6">'+
           '<h5 class="text-left">เลขบัญชีที่ใช้โอน (ของผู้ซื้อ)</h5><input id="pay_bankaccount_'+order_id+'_'+brand_id+'" type="text" class="form-control" placeholder="เลขบัญชีที่ใช้โอน" onkeydown="return ( event.ctrlKey || event.altKey || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) || (95<event.keyCode && event.keyCode<106) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode>34 && event.keyCode<40) || (event.keyCode==46) )">'+
@@ -215,10 +212,6 @@
     var pay_bankname = $('#pay_bankname_'+order_id+'_'+brand_id).val();
     var pay_datetime = $('#pay_datetime_'+order_id+'_'+brand_id).val();
     if(pay_amount != '' && pay_bankaccount != '' && pay_bankname != '' && pay_datetime != ''){
-      console.log("Amount: "+pay_amount);
-      console.log("BankAccount: "+pay_bankaccount);
-      console.log("BankName: "+pay_bankname);
-      console.log("Datetime: "+pay_datetime);
       (async () => {
         const rawResponse = await fetch('/api/payment-Add', {
           method: 'POST',

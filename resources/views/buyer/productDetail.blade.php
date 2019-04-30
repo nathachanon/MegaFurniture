@@ -327,7 +327,7 @@
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>';
 					}
-					$('#Rating_AVG').append('<h4 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != 'null' ? data['data']['RatingAVG2'][0]['RatingAVG']:0)+'  เต็ม  5</h4>'+
+					$('#Rating_AVG').append('<h4 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != null ? data['data']['RatingAVG2'][0]['RatingAVG']:0)+'  เต็ม  5</h4>'+
 						'<fieldset class="rating ct">'+
 						rating+
 						'</fieldset>');
@@ -596,7 +596,7 @@ function getProduct(){
 					'<span class="fa  fa-grey fa-star "></span>';
 				}
 
-				$('#Rating_AVG').append('<h4 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != 'null' ? data['data']['RatingAVG2'][0]['RatingAVG']:"0")+'  เต็ม  5</h4>'+
+				$('#Rating_AVG').append('<h4 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != null ? data['data']['RatingAVG2'][0]['RatingAVG']:0)+'  เต็ม  5</h4>'+
 						'<fieldset class="rating ct">'+
 						rating+
 						'</fieldset>');
