@@ -20,6 +20,12 @@
 		</div>
 	</div>
 </div>
+<div class="wrapper wrapper-content animated fadeInRight">
+	<h4 class="viewed_title">สินค้าแนะนำ</h4>
+            <div class="row" id="recommend-list">
+					</div>
+		</div>
+
 
 <div class="viewed">
 	<div class="container">
@@ -600,7 +606,7 @@ function getProduct(){
 						'<fieldset class="rating ct">'+
 						rating+
 						'</fieldset>');
-				
+
 				}
 			},
 			failure: function(errMsg) {
@@ -609,5 +615,52 @@ function getProduct(){
 		});
 }
 
+function getRecommend(){
+	var prod_id = getCookie();
+	(async () => {
+		const rawResponse = await fetch('/api/recommend-product', {
+			method: 'POST',
+			headers: {
+				'Authorization':'Bearer '+b_token,
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({"prod_id":prod_id})
+		});
+		const content = await rawResponse.json();
+		if(content['recommend'] != ''){
+			console.log(content['recommend']);
+			for(i=0;i<content['recommend'].length;i++){
+				$('#recommend-list').append('<div class="col-md-2">'+
+				 '<div class="ibox">'+
+				 '<div class="ibox-content product-box" >'+
+				 '<div class="product-imitation-prod" onclick="productDetail('+content['recommend'][i]['prod_id']+')">'+
+				 '<img src="'+content['recommend'][i]['pic_url1']+'" alt="">'+
+				 '</div>'+
+				 '<div class="product-desc">'+
+				 '<span class="product-price">'+
+				 content['recommend'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'฿'+
+				 '</span>'+
+				 '<div class="shop_bar"></div><a> <div class="product-name-a" onclick="productDetail('+content['recommend'][i]['prod_id']+')">'+
+				 content['recommend'][i]['prod_name']+'</div></a>'+
+				 '<div class="text-muted m-t-xs cut-str">'+
+				 content['recommend'][i]['prod_desc']+
+				 '</div>'+
+				 '</div>'+
+				 '</div>'+
+				 '</div>'+
+				 '</div>');
+			}
+		}else{
+			Swal.fire({
+				title: '<strong>เกิดข้อผิดพลาด</strong>',
+				type:'error',
+				showConfirmButton: true,
+			});
+		}
+
+	})();
+}
+getRecommend();
 </script>
 @endsection

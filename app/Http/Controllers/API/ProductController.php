@@ -1097,10 +1097,10 @@ function product_recommend(Request $request){
  ->get();
 
  $recommendProduct = DB::table('products')
- ->select('prod_id','prod_name','prod_price')
+ ->select('prod_id','prod_name','prod_price','pic_url1','prod_desc')
  ->where('CatProd_id', $getCatProd_id)
  ->where('prod_id', "!=" , $input['prod_id'])
- ->limit(5)
+ ->limit(6)
  ->get();
 
  return response()->json(['myproduct'=>$myproduct,'recommend'=>$recommendProduct], $this-> successStatus);
