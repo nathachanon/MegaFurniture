@@ -26,7 +26,7 @@
 1. Fonts
 ***********/
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Prompt:300,400');
 
 /*********************************
 2. Body and some general stuff
@@ -327,7 +327,7 @@ display: inline-table;
 	color: rgba(0,0,0,0.5);
 }
 .product_name
-{
+{	 font-family: 'Prompt', sans-serif;
 	font-size: 30px;
 	font-weight: 500;
 	margin-top: 11px;
@@ -369,6 +369,7 @@ display: inline-table;
 }
 .product_quantity span
 {
+	font-family: 'Prompt', sans-serif;
 	display: block;
 	height: 50px;
 	font-size: 16px;
@@ -379,6 +380,7 @@ display: inline-table;
 }
 .product_quantity input
 {
+	font-family: 'Prompt', sans-serif;
 	display: block;
 	width: 30px;
 	height: 50px;
@@ -417,6 +419,7 @@ display: inline-table;
 }
 .quantity_control i
 {
+	
 	font-size: 11px;
 	color: rgba(0,0,0,0.3);
 	pointer-events: none;
