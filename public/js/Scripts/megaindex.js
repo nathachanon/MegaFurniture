@@ -554,7 +554,7 @@ function ThisBuyer(){
     '<div id="small-chat">'+
         '<span class="badge badge-warning pull-right" id="small_cart_count">0</span>'+
         '<a class="open-small-chat">'+
-            '<i class="fa fa-shopping-cart"></i>'+
+            '<i class="wh fa fa-shopping-cart"></i>'+
         '</a>'+
     '</div>');
     getCart();
