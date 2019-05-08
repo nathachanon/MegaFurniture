@@ -90,14 +90,20 @@ getAddress();
           }
           $("#product_list_count").append(cart_count);
           if(cart_count > 0){
+            for(var i = 0 ; i < data['Shop'].length ; i++){
+              $("#product_list").append('<div id="div_'+data['Shop'][i]['id']+'">'+
+                '<hr><button type="button" class="btn btn-w-m btn-block btn-danger">'+
+                  'สินค้าจากร้าน : '+data['Shop'][i]['name']+" "+data['Shop'][i]['surname']+
+            '</button></div>');
+            }
             for(var i = 0 ; i < data['Brand'].length ; i++){
-              $("#product_list").append('<div id="div_'+data['Brand'][i]['brand_name']+'"><a href="#"><p class="small">'+
-                  'สินค้าจากร้าน : '+data['Brand'][i]['brand_name']+
-            '</p></a></div>');
+              $('#div_'+data['Brand'][i]['id']+'').append('<div id="brand_'+data['Brand'][i]['brand_name']+'"><hr><p>'+
+                  'แบรนด์ : '+data['Brand'][i]['brand_name']+
+            '</p></div>');
             }
             for(var i = 0 ; i < cart_count ; i++){
               prod_id_list.push(data['ProductInCart'][i]['Prod_id']);
-            $('#div_'+data['ProductInCart'][i]['brand_name']+'').append('<div class="ibox-content-cart" id="ibox_'+data['ProductInCart'][i]['Prod_id']+'">'+
+            $('#brand_'+data['ProductInCart'][i]['brand_name']+'').append('<div class="ibox-content-cart" id="ibox_'+data['ProductInCart'][i]['Prod_id']+'">'+
                 '<div class="table-responsive">'+
                     '<table class="table shoping-cart-table">'+
                         '<tbody>'+
@@ -115,19 +121,20 @@ getAddress();
                                 '</h4>'+
 
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ที่อยู่ในการจัดส่ง</label>'+
-                                    '<div class="col-sm-8"><select onchange="address_change('+data['ProductInCart'][i]['Prod_id']+')" id="address_list_'+data['ProductInCart'][i]['Prod_id']+'" class="form-control " name="address_list_'+data['ProductInCart'][i]['Prod_id']+'">'+
+                                    '<div class="col-sm-12"><select onchange="address_change('+data['ProductInCart'][i]['Prod_id']+')" id="address_list_'+data['ProductInCart'][i]['Prod_id']+'" class="form-control " name="address_list_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="0">เลือกที่อยู่ในการจัดส่ง</option>'+
                                       '</select>'+
                                     '</div>'+
                                   '</div>'+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ส่งโดย</label>'+
-                                    '<div class="col-sm-8"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
+                                    '<div class="col-sm-12"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="999">เลือกประเภทการจัดส่ง</option>'+
                                       '</select>'+
                                     '</div>'+
                                   '</div>'+
-                                  '<h4 id="delivery_detail_'+data['ProductInCart'][i]['Prod_id']+'">'+
-                                  '</h4>'+
+                                  '<br><h5 id="prod_price_'+data['ProductInCart'][i]['Prod_id']+'"></h5>'+
+                                  '<h5 id="delivery_price_'+data['ProductInCart'][i]['Prod_id']+'"></h5>'+
+                                  '<h5 id="price_total_'+data['ProductInCart'][i]['Prod_id']+'"></h5>'+
                                 '<div class="m-t-sm">'+
                                     '<a href="#" onclick="deleteProductInCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')" class="text-muted"><i class="fa fa-trash"></i> ลบสินค้า</a>'+
                                 '</div>'+
@@ -449,8 +456,12 @@ getAddress();
       del_price_id = parseInt(del_price_id, 10)
       del_price = parseInt(del_price, 10)
       var allprice = prod_price+del_price;
-      $('#delivery_detail_'+prod_id+'').empty();
-      $('#delivery_detail_'+prod_id+'').append('ราคาสินค้า : '+prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' จัดส่งโดย : '+del_name.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ ' ค่าจัดส่ง : '+del_price +' รวมราคา : '+ allprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' บาท');
+      $('#prod_price_'+prod_id+'').empty();
+      $('#delivery_price_'+prod_id+'').empty();
+      $('#price_total_'+prod_id+'').empty();
+      $('#prod_price_'+prod_id+'').append('ราคาสินค้า : '+prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+      $('#delivery_price_'+prod_id+'').append(' จัดส่งโดย : '+del_name.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ ' ค่าจัดส่ง : '+del_price );
+       $('#price_total_'+prod_id+'').append(' รวมราคา : '+ allprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' บาท');
 
         orderList = {}
         orderList ["prod_id"] = prod_id;
@@ -462,7 +473,9 @@ getAddress();
 
         jsonOrder.push(orderList);
     }else{
-      $('#delivery_detail_'+prod_id+'').empty();
+      $('#prod_price_'+prod_id+'').empty();
+      $('#delivery_price_'+prod_id+'').empty();
+      $('#price_total_'+prod_id+'').empty();
     }
   }
 
@@ -530,8 +543,9 @@ getAddress();
                                       '</select>'+
                                     '</div>'+
                                   '</div>'+
-                                  '<h4 id="delivery_detail_'+data['ProductInCart'][i]['Prod_id']+'">'+
-                                  '</h4>'+
+                                  '<br><h5 id="prod_price_'+data['ProductInCart'][i]['Prod_id']+'"></h5>'+
+                                  '<h5 id="delivery_price_'+data['ProductInCart'][i]['Prod_id']+'"></h5>'+
+                                  '<h5 id="price_total_'+data['ProductInCart'][i]['Prod_id']+'"></h5>'+
                                 '<div class="m-t-sm">'+
                                     '<a href="#" onclick="deleteProductInCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')" class="text-muted"><i class="fa fa-trash"></i> ลบสินค้า</a>'+
                                 '</div>'+
@@ -593,7 +607,7 @@ getAddress();
         $("#address_list_"+prod_id_list[a]).empty();
         $("#address_list_"+prod_id_list[a]).append('<option value="0">เลือกที่อยู่ในการจัดส่ง</option>');
         for(i = 0; i<content['success'].length ; i++){
-          $("#address_list_"+prod_id_list[a]).append('<option value="'+content['success'][i]['Add_id']+'">'+content['success'][i]['province']+' '+content['success'][i]['district']+' '+content['success'][i]['zipcode']+' '+content['success'][i]['area']+'</option>');
+          $("#address_list_"+prod_id_list[a]).append('<option value="'+content['success'][i]['Add_id']+'">'+content['success'][i]['area']+' '+content['success'][i]['district']+' '+content['success'][i]['province']+' '+content['success'][i]['zipcode']+'</option>');
         }
     }
     }else{

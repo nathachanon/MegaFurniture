@@ -134,9 +134,6 @@ function getAllProduct(){
          '<a onclick="addCart(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\')" class="btn btn-xs btn-outline btn-primary"><i class=" prim fa fa-shopping-cart"></i> </a>'+
          '</div>'+
          '<div class="m-t  inline2">'+
-         '<a onclick="alert('+data['product'][i]['prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="prim fa fa-comment"></i> </a>'+
-         '</div>'+
-         '<div class="m-t  inline2">'+
          '<a onclick="addCompare(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\');"'+
          ' class="btn btn-xs btn-outline btn-primary"><i class="fa fa-plus-square prim"></i> </a>'+
          '</div></div>'+
@@ -280,9 +277,6 @@ for(var i = 0 ; i < product_count ; i++){
          '</div>'+
          '<div class="inline2"><div class="m-t inline2">'+
          '<a onclick="addCart(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\')" class="btn btn-xs btn-outline btn-primary"><i class=" prim fa fa-shopping-cart"></i> </a>'+
-         '</div>'+
-         '<div class="m-t  inline2">'+
-         '<a onclick="alert('+data['product'][i]['prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="prim fa fa-comment"></i> </a>'+
          '</div>'+
          '<div class="m-t  inline2">'+
          '<a onclick="addCompare(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\');"'+
@@ -562,5 +556,5 @@ function ThisBuyer(){
 }
 
 $("#carts_2").click(function(){
-	window.location.href = "/cart";
+  window.location.href = "/cart";
 });

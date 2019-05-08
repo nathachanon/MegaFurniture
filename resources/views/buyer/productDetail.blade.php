@@ -390,11 +390,19 @@ function getProduct(){
 					'<div class="button_container">'+
 					'<button type="button" class="button cart_button" onclick="addCart(\'' + data['data']['name'] + '\','+data['data']['prod_id']+','+data['data']['price']+',\'' + data['data']['Picture']['pic_url1'] + '\')">เพิ่มใส่ตะกร้า</button>'+
 					'<div class="product_fav"><i class="fas fa-heart"></i></div>'+
+					'<h4>สินค้าจากร้าน : '+data['data']['ShopName']+' '+data['data']['ShopSurname']+'</h4>'+
+					'<p>แบรนด์ : '+data['data']['BrandName']+'</p>'+
 					'</div>'+
 					'</form>'+
 					'</div>'+
 					'</div>'+
 					'</div>');
+				var prod_foots = '';
+				if(data['data']['foot'] == null){
+					prod_foots = "-";
+				}else{
+					prod_foots = data['data']['foot'];
+				}
 				$('#desc').append('<h4>รายละเอียดสินค้า</h4>'+
 					'<div class=" text-muted des-bt" id="prod_desc">'+
 					'</div>'+
@@ -410,7 +418,7 @@ function getProduct(){
 					'<dd id="prod_mat">'+data['data']['Material']+'</dd>'+
 					'<dd id="prod_color">'+data['data']['Color']+'</dd>'+
 					'<dd id="prod_size">'+data['data']['Size']+'</dd>'+
-					'<dd id="prod_foot">'+data['data']['foot']+'</dd>'+
+					'<dd id="prod_foot">'+prod_foots+'</dd>'+
 					'<dd id="prod_qty">'+data['data']['stock']+'</dd>'+
 					'</div>'+
 					'</div>'+

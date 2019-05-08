@@ -112,20 +112,7 @@
 
 
 <!-- Modal SKU -->
-<div class="modal fade" id="skuModal" tabindex="-1" role="dialog" aria-labelledby="skuModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="modal_header_title">แก้ไข SKU</h4>
-      </div>
-      <div class="modal-body" id="model_body">
-        <div class="form-group"><label>รหัสสินค้าที่ต้องการ (SKU)</label> <input maxlength="20" onkeypress="return (event.charCode != 32 ) && (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 45" type="text" placeholder="Enter product sku" id="prod_sku" class="form-control" name="prod_sku" autocomplete="off"></div>
-        <div><button id="btn_sku_save" class="btn btn-sm btn-primary m-t-n-xs" type="button"><strong>บันทึก</strong></button></div>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="ModelSKU"></div>
 
 </body>
 <script src="js/jquery-2.1.1.js"></script>
