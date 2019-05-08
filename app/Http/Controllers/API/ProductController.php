@@ -76,6 +76,11 @@ function EditProduct(Request $request){
 
  $input = $request->all();
 
+ $skuCheck = DB::table('products')->where('sku', $request['sku'])->count();
+ if($skuCheck == 1){
+  return response()->json(['sku_error'=>'SKU Is Used !'], $this-> successStatus);
+ }
+
  $rmCount = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->count();
  $rmData = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->pluck('RM_id');
  if($rmCount != 0)
@@ -285,7 +290,6 @@ function AddProduct(Request $request){
     'SizeProd_width' => 'required',
     'SizeProd_length' => 'required',
     'SizeProd_height' => 'required',
-    'SizeProd_foot' => 'required',
     'ColorProd_value' => 'required',
     'weight' => 'required',
     'pic1' => 'required'
@@ -296,6 +300,11 @@ function AddProduct(Request $request){
  }
 
  $input = $request->all();
+ $skuCheck = DB::table('products')->where('sku', $request['sku'])->count();
+ if($skuCheck == 1){
+  return response()->json(['sku_error'=>'SKU Is Used !'], $this-> successStatus);
+ }
+
  $rmCount = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->count();
  $rmData = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->pluck('RM_id');
  if($rmCount != 0)
@@ -1070,6 +1079,10 @@ function change_sku(Request $request){
   $prod_id = $request['prod_id'];
   $sku = $request['prod_sku'];
 
+  $skuCheck = DB::table('products')->where('sku', $sku)->count();
+   if($skuCheck == 1){
+    return response()->json(['sku_error'=>'SKU Is Used !'], $this-> successStatus);
+   }
     $updateSKU = DB::table('products')
     ->where('Prod_id', $prod_id)
     ->update(['sku' => $sku]);

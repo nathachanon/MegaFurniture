@@ -152,7 +152,9 @@ function prodSelect() {
   var catProd_id = $('#optionproduct').val();
   if(catProd_id != 0)
   {
-    $("#inputs_wlhf").empty();
+    if(catProd_id == 1){
+      $("#inputs_wlhf").empty();
+      $("#inputs_cr").empty();
     $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
       '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
       '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
@@ -163,6 +165,20 @@ function prodSelect() {
       '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
       '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg" onkeypress="return (event.charCode != 32 && event.charCode >= 161) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)"></div></div>'+
       '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
+  }else{
+      $("#inputs_wlhf").empty();
+      $("#inputs_cr").empty();
+    $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
+      '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ยาว (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_length" type="text" placeholder="Enter Product Length" class="form-control input-lg"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สูง (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_height" type="text" placeholder="Enter Product Height" class="form-control input-lg"></div></div>');
+    $("#inputs_cr").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>สีและวัสดุ</h3></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
+      '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg" onkeypress="return (event.charCode != 32 && event.charCode >= 161) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
+  }
+
   }else{
     $("#inputs_wlhf").empty();
     $("#inputs_cr").empty();
@@ -440,9 +456,12 @@ $(document).ready(function(){
     var RM_value = $('#RM_value').val();
     var weight = $('#weight').val();
     var tags = $('#tags').val().split(",");
-    console.log(tags);
+    if($('#SizeProd_foot').val() == undefined){
+      SizeProd_foot = '';
+    }
+
     if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
-     SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '')
+     SizeProd_length != '' && SizeProd_height != '' && ColorProd_value != '' && RM_value != '' && weight != '')
     {
      var formData = new FormData();
 
@@ -490,9 +509,9 @@ $(document).ready(function(){
          {
            alert('เพิ่มสินค้าสำเร็จ !');
            window.location.replace('/product');
-         }else{
-           alert('ชื่อสินค้าซ้ำ !');
-           $('#prod_name').val('');
+         }else if(data['sku_error'] != null){
+           alert('SKU นี้ถูกใช้งานแล้ว กรุณาเปลี่ยนใหม่!');
+           $('#prod_sku').val('');
          }
        }
      });
@@ -519,9 +538,12 @@ $(document).ready(function(){
     var RM_value = $('#RM_value').val();
     var weight = $('#weight').val();
     var tags = $('#tags').val().split(",");
+    if($('#SizeProd_foot').val() == undefined){
+      SizeProd_foot = '';
+    }
 
     if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
-     SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '')
+     SizeProd_length != '' && SizeProd_height != '' && ColorProd_value != '' && RM_value != '' && weight != '')
     {
 
      var formData = new FormData();
@@ -574,9 +596,9 @@ for (var i = 0; i < tags.length; i++) {
          {
            alert('เพิ่มสินค้าสำเร็จ !');
            window.location.replace('/product');
-         }else{
-           alert('ชื่อสินค้าซ้ำ !');
-           $('#prod_name').val('');
+         }else if(data['sku_error'] != null){
+           alert('SKU นี้ถูกใช้งานแล้ว กรุณาเปลี่ยนใหม่!');
+           $('#prod_sku').val('');
          }
        }
      });
