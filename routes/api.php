@@ -87,6 +87,9 @@ Route::post('loginBuyer','API\BuyerController@loginBuyer');
 Route::post('registerBuyer','API\BuyerController@registerBuyer');
 
 
+
+Route::post('saveHistoryview','API\LogController@saveHistoryview');
+
 Route::group(['middleware' => 'multiauth:buyer_api'],function(){
 	Route::post('payment-Add','API\PaymentController@addPayment');
 	Route::post('getBank-id','API\PaymentController@getBank_id');

@@ -670,6 +670,43 @@ function getRecommend(){
 
 	})();
 }
+
+function saveHistoryview(){
+	console.log('function_Historyview');
+    var buyer_id = localStorage.getItem("buyer_id");
+	  var b_token = localStorage.getItem("b_token");
+		var prod_id = getCookie();
+		
+		$.ajax({
+			type: "POST",
+			url: "/api/saveHistoryview",
+			headers: {
+				'Authorization':'Bearer '+ b_token,
+				'Content-Type':'application/json'
+			},
+			data: JSON.stringify({
+				"buyer_id": buyer_id,
+				"prod_id": prod_id
+			}),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(data){
+				var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
+				if(s == "1")
+				{
+					console.log("saveHistoryview : success");
+
+				}else{
+					console.log("saveHistoryview : fail");
+
+				}
+			},
+			failure: function(errMsg) {
+				alert(errMsg);
+			}
+		});
+}
 getRecommend();
+saveHistoryview();
 </script>
 @endsection
