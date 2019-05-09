@@ -234,15 +234,13 @@ class AllDB extends Migration
      });
 
      Schema::create('Trackings', function (Blueprint $table) {
-       $table->unsignedInteger('Buyer_id');
-       $table->unsignedInteger('Brand_id');
 
        $table->increments('Track_id');
        $table->string('Track_number',100);
        $table->integer('status');
 
-       $table->foreign('Buyer_id')->references('id')->on('Buyers')->onDelete('cascade');
-       $table->foreign('Brand_id')->references('Brand_id')->on('Brands')->onDelete('cascade');
+       $table->string('order_detail_id')->references('orderDetails')->on('order_detail_id')->onDelete('cascade');
+
        $table->timestamps();
      });
 

@@ -9,6 +9,7 @@ use App\Cart;
 use App\Product_in_cart;
 use App\Order;
 use App\Orderdetail;
+use App\Tracking;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -318,7 +319,8 @@ class OrderController extends Controller
 		$input = $request->all();
 
 		$getOrder = DB::table('orders')
-		->select(DB::raw('DATE_FORMAT(orders.created_at, "%m/%d/%Y %H:%i:%s") as created_at') , 'brands.brand_name' , 'buyers.name' , 'buyers.surname' , 'orders.order_id' , 'orders.total_price' , DB::raw('DATE_FORMAT(orders.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at') , 'orders.status')->distinct('orders.order_id')
+		->select(DB::raw('DATE_FORMAT(orders.created_at, "%m/%d/%Y %H:%i:%s") as created_at') , 'buyers.name' , 'buyers.surname' , 'orders.order_id' , 'orders.total_price' , DB::raw('DATE_FORMAT(orders.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at') , 'orders.status')
+		->distinct('orders.order_id')
 		->join('orderdetails', 'orders.order_id', '=', 'orderdetails.order_id')
 		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
@@ -400,6 +402,12 @@ class OrderController extends Controller
 		->where('orderdetails.order_id', $input['order_id'])
 		->get();
 
+		$getOrderTracking = DB::table('orderdetails')
+		->select('orderdetails.order_detail_id','trackings.track_number')
+		->leftjoin('trackings', 'orderdetails.order_detail_id', '=', 'trackings.order_detail_id')
+		->where('orderdetails.order_id', $input['order_id'])
+		->get();
+
 		$getOrderDetail = DB::table('orders')
 		->select('products.sku','orderdetails.order_detail_id' ,'orderdetails.price','orderdetails.Add_id','deliverys.deliveryname','products.prod_price','delivery_prices.price as del_price','addresses.area','addresses.district','addresses.province','addresses.zipcode')
 		->join('orderdetails', 'orders.order_id', '=', 'orderdetails.order_id')
@@ -412,7 +420,68 @@ class OrderController extends Controller
 		->where('orderdetails.order_id', $input['order_id'])
 		->get();
 
-		return response()->json(['order'=>$getOrder,'orderDetail'=>$getOrderDetail], $this-> successStatus);
+		return response()->json(['order'=>$getOrder,'orderDetail'=>$getOrderDetail,'tracking'=>$getOrderTracking], $this-> successStatus);
+	}
+
+	function orderbuyer(Request $request){
+
+		$validator = Validator::make($request->all(), [
+			'order_id' => 'required'
+		]);
+
+    if ($validator->fails()) {
+			return response()->json(['error'=>$validator->errors()], 201);
+		}
+		$input = $request->all();
+
+		$getOrderDetail = DB::table('orders')
+		->select('products.sku','orderdetails.price','orderdetails.order_detail_id','deliverys.deliveryname','products.prod_price','delivery_prices.price as del_price')
+		->join('orderdetails', 'orders.order_id', '=', 'orderdetails.order_id')
+		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
+		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
+		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
+		->join('delivery_prices', 'orderdetails.del_price_id', '=', 'delivery_prices.del_price_id')
+		->join('deliverys', 'delivery_prices.delivery_id', '=', 'deliverys.delivery_id')
+		->join('addresses', 'orderdetails.Add_id', '=', 'addresses.Add_id')
+		->where('orderdetails.order_id', $input['order_id'])
+		->get();
+
+		$getOrderTracking = DB::table('orderdetails')
+		->select('orderdetails.order_detail_id','trackings.track_number')
+		->leftjoin('trackings', 'orderdetails.order_detail_id', '=', 'trackings.order_detail_id')
+		->where('orderdetails.order_id', $input['order_id'])
+		->get();
+
+		$getOrder = DB::table('orders')
+		->select('buyers.name' , 'buyers.surname','buyers.tel' , 'orders.order_id' ,'orders.total_price' , 'orders.status' ,DB::raw('DATE_FORMAT(orders.created_at, "%m/%d/%Y %H:%i:%s") as created_at'),DB::raw('DATE_FORMAT(orders.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at'))->distinct('orders.order_id')
+		->join('orderdetails', 'orders.order_id', '=', 'orderdetails.order_id')
+		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
+		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
+		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
+		->join('delivery_prices', 'orderdetails.del_price_id', '=', 'delivery_prices.del_price_id')
+		->join('deliverys', 'delivery_prices.delivery_id', '=', 'deliverys.delivery_id')
+		->where('orderdetails.order_id', $input['order_id'])
+		->get();
+
+		return response()->json(['orderDetail'=>$getOrderDetail,'order'=>$getOrder,'tracking'=>$getOrderTracking], $this-> successStatus);
+	}
+
+	public function addTracking(Request $request){
+		$validator = Validator::make($request->all(), [
+			'order_detail_id' => 'required',
+			'track_number' => 'required',
+			'status' => 'required'
+		]);
+
+    if ($validator->fails()) {
+			return response()->json(['error'=>$validator->errors()], 201);
+		}
+		$input = $request->all();
+
+		$createdTracking = Tracking::create($input);
+
+		return response()->json(['success'=>'success'], $this-> successStatus);
+
 	}
 
 }
