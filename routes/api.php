@@ -15,7 +15,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Seller
-
+Route::post('recommend-product','API\ProductController@product_recommend');
 Route::post('registerSell','API\SellerController@registerSell');
 Route::post('loginSell','API\SellerController@loginSell');
 Route::post('excelUpload','API\ProductController@excelUpload');
@@ -65,7 +65,7 @@ Route::group(['middleware' => 'multiauth:seller_api'],function(){
 });
 Route::apiResource('/products','API\ProductController');
 Route::group(['prefix'=>'products'],function(){
-  Route::apiResource('/{products}/reviews','API\ReviewsController');
+Route::apiResource('/{products}/reviews','API\ReviewsController');
 
 });
 

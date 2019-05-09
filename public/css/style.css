@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
+
+@import url("https://fonts.googleapis.com/css?family=Prompt:300,400");
+
 /*
  *
  *   INSPINIA - Responsive Admin Theme
@@ -18,6 +19,9 @@
  }
 .prim{
   color: #1ab394;
+}
+.wh{
+  color: white;
 }
  .ibox-m{
   margin-left: 30px;
@@ -202,6 +206,7 @@ input:checked + .slider:before {
   margin-bottom: 35px;
 }
 .text-title{
+  font-family: 'Prompt', sans-serif;
   font-size: 18px;
   color: #666;
   margin-top: 35px;
@@ -213,6 +218,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: 'Prompt', sans-serif;
   font-weight: 100;
 }
 h1 {
@@ -241,7 +247,7 @@ h5 {
 }
 .nav > li > a {
   color: #a7b1c2;
-  font-weight: 600;
+  font-weight: 400;
   padding: 14px 20px 14px 25px;
 }
 .nav.navbar-right > li > a {
@@ -267,7 +273,9 @@ h5 {
 .nav > li > a i {
 
 }
-
+body{
+  font-family: 'Prompt', sans-serif;
+}
 .i-prod{
   font-size: 17px;
   margin-right: 7px;
@@ -1276,7 +1284,7 @@ button.dim:active:before {
 .label {
   background-color: #d1dade;
   color: #5e5e5e;
-  font-family: 'Open Sans';
+  font-family: 'Prompt', sans-serif;
   font-size: 10px;
   font-weight: 600;
   padding: 3px 8px;
@@ -3225,7 +3233,7 @@ a.forum-item-title:hover {
   border-radius: 3px;
   background: #292929;
   color: white;
-  font-family: sans-serif, Verdana;
+  font-family: 'Prompt', sans-serif;
   font-size: smaller;
   padding: 5px;
 }
@@ -3548,7 +3556,7 @@ body.tour-open .animated {
   border-bottom: 1px solid #e7eaec;
 }
 body {
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Prompt', sans-serif;
   background-color: #2f4050;
   font-size: 13px;
   color: #676a6c;
@@ -3696,6 +3704,10 @@ video {
 }
 .wrapper-content {
   padding: 20px 10px 40px;
+}
+
+.wrapper-content2 {
+  padding: 20px 50px 40px;
 }
 #page-wrapper {
   padding: 0 15px;

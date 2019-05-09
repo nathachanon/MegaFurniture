@@ -202,17 +202,27 @@ class OrderController extends Controller
 			->where('Buyer_id', $input['buyer_id'])
 			->get();
 
-			$getBrandInCart = DB::table('Product_in_carts')
-			->select( 'brands.brand_name')
+			$getShopInCart = DB::table('Product_in_carts')
+			->select('sellers.name','sellers.surname','sellers.id')
 			->join('products', 'Product_in_carts.Prod_id', '=', 'products.Prod_id')
 			->join('brands', 'products.brand_id', '=', 'brands.brand_id')
+			->join('sellers', 'brands.seller_id', '=', 'sellers.id')
+			->where('Cart_id', $cartID)
+			->distinct()->get();
+
+			$getBrandInCart = DB::table('Product_in_carts')
+			->select( 'brands.brand_name','sellers.id')
+			->join('products', 'Product_in_carts.Prod_id', '=', 'products.Prod_id')
+			->join('brands', 'products.brand_id', '=', 'brands.brand_id')
+			->join('sellers', 'brands.seller_id', '=', 'sellers.id')
 			->where('Cart_id', $cartID)
 			->distinct()->get();
 
 			$getProductInCart = DB::table('Product_in_carts')
-			->select( 'brands.brand_name','products.prod_name','products.prod_price','products.prod_desc','products.pic_url1','products.Prod_id','Product_in_carts.count')
+			->select( 'brands.brand_name','products.prod_name','products.prod_price','products.prod_desc','products.pic_url1','products.Prod_id','Product_in_carts.count','sellers.id')
 			->join('products', 'Product_in_carts.Prod_id', '=', 'products.Prod_id')
 			->join('brands', 'products.brand_id', '=', 'brands.brand_id')
+			->join('sellers', 'brands.seller_id', '=', 'sellers.id')
 			->where('Cart_id', $cartID)
 			->orderBy('products.Prod_id', 'asc')
 			->get();
@@ -229,7 +239,7 @@ class OrderController extends Controller
 		}else{
 			return response()->json(['error'=>'This is error'], $this-> successStatus);
 		}
-			return response()->json(['success'=>$getCart,'ProductInCart'=>$getProductInCart,'Delivery'=>$getProductDelivery,'Brand'=>$getBrandInCart], $this-> successStatus);
+			return response()->json(['success'=>$getCart,'ProductInCart'=>$getProductInCart,'Delivery'=>$getProductDelivery,'Brand'=>$getBrandInCart,'Shop'=>$getShopInCart], $this-> successStatus);
   }
 
 
@@ -352,14 +362,14 @@ class OrderController extends Controller
 		->get();
 
 		$purchases = DB::table('orderdetails')
-		->select(DB::raw('SUM(orderdetails.price) as price'),'brands.brand_id')
+		->select(DB::raw('SUM(orderdetails.price) as price'),'orders.order_id')
 		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
 		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
 		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
 		->join('brands', 'products.brand_id', '=', 'brands.brand_id')
 		->where('buyers.id', $input['buyer_id'])
-		->groupBy('brands.brand_id')
+		->groupBy('orders.order_id')
 		->get();
 
 		return response()->json(['success'=>$getOrder,'order_list'=>$getOrderID,'brand_list'=>$getBrandID,'sum'=>$purchases], $this-> successStatus);

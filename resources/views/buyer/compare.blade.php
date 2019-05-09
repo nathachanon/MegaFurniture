@@ -108,113 +108,7 @@
 							dataType: 'json',
 							success: function(data){
 								console.log(data);
-        /*
-				$('#product_list').append('<div class="col-md-4">'+
-					 '<div class="ibox">'+
-							 '<div class="ibox-content product-box">'+
-									 '<div class="product-imitation-prod">'+
-											 '<img src="'+data['product1'][0]['pic_url1']+'" alt="">'+
-									 '</div>'+
-									'<div class="product-desc">'+
-											 '<span class="product-price">'+
-													data['product1'][0]['prod_price']+'฿'+
-											 '</span>'+
-												'<div class="shop_bar"></div><br>'+
-												'<a href="#" class="product-name">'+data['product1'][0]['prod_name']+'</a>'+
-											 '<div class="text-muted m-t-xs">'+
-													 data['product1'][0]['prod_desc']+
-											 '</div>'+
-											 '<div class="text-muted m-t-xs">'+
-													 'วัสดุ : '+data['product1'][0]['RM_value']+
-											 '</div>'+
-											 '<div class="text-muted m-t-xs">'+
-													 'ขนาด(กว้างxยาวxสูง) เซ็นติเมตร : '+data['product1'][0]['SizeProd_width']+' x '+data['product1'][0]['SizeProd_length']+' x ' +data['product1'][0]['SizeProd_height']+
-											 '</div>'+
-											 '<div class="text-muted m-t-xs">'+
-													 'ขนาด (ฟุต) : '+data['product1'][0]['SizeProd_foot']+
-											 '</div>'+
-											 '<div class="text-muted m-t-xs">'+
-													 'ราคา (บาท) : '+data['product1'][0]['prod_price']+
-											 '</div>'+
-											 '<div class="m-t text-righ">'+
-													 '<a href="#" onclick="alert('+data['product1'][0]['Prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i> </a>'+
-											 '</div>'+
-									 '</div>'+
-							 '</div>'+
-					 '</div>'+
-			 '</div>');
-			 $('#product_list').append('<div class="col-md-4">'+
-					'<div class="ibox">'+
-							'<div class="ibox-content product-box">'+
-									'<div class="product-imitation-prod">'+
-											'<img src="'+data['product2'][0]['pic_url1']+'" alt="">'+
-									'</div>'+
-								 '<div class="product-desc">'+
-											'<span class="product-price">'+
-												 data['product2'][0]['prod_price']+'฿'+
-											'</span>'+
-											 '<div class="shop_bar"></div><br>'+
-											 '<a href="#" class="product-name">'+data['product2'][0]['prod_name']+'</a>'+
-											'<div class="text-muted m-t-xs">'+
-													data['product2'][0]['prod_desc']+
-											'</div>'+
-											'<div class="text-muted m-t-xs">'+
-													'วัสดุ : '+data['product2'][0]['RM_value']+
-											'</div>'+
-											'<div class="text-muted m-t-xs">'+
-													'ขนาด(กว้างxยาวxสูง) เซ็นติเมตร : '+data['product2'][0]['SizeProd_width']+' x '+data['product2'][0]['SizeProd_length']+' x ' +data['product2'][0]['SizeProd_height']+
-											'</div>'+
-											'<div class="text-muted m-t-xs">'+
-													'ขนาด (ฟุต) : '+data['product2'][0]['SizeProd_foot']+
-											'</div>'+
-											'<div class="text-muted m-t-xs">'+
-													'ราคา (บาท) : '+data['product2'][0]['prod_price']+
-											'</div>'+
-											'<div class="m-t text-righ">'+
-													'<a href="#" onclick="alert('+data['product2'][0]['Prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i> </a>'+
-											'</div>'+
-									'</div>'+
-							'</div>'+
-					'</div>'+
-			'</div>');
-			if(data['product3'] != null)
-			{
-				$('#product_list').append('<div class="col-md-4">'+
- 					'<div class="ibox">'+
- 							'<div class="ibox-content product-box">'+
- 									'<div class="product-imitation-prod">'+
- 											'<img src="'+data['product3'][0]['pic_url1']+'" alt="">'+
- 									'</div>'+
- 								 '<div class="product-desc">'+
- 											'<span class="product-price">'+
- 												 data['product3'][0]['prod_price']+'฿'+
- 											'</span>'+
- 											 '<div class="shop_bar"></div><br>'+
- 											 '<a href="#" class="product-name">'+data['product3'][0]['prod_name']+'</a>'+
- 											'<div class="text-muted m-t-xs">'+
- 													data['product3'][0]['prod_desc']+
- 											'</div>'+
-											'<div class="text-muted m-t-xs">'+
-													'วัสดุ : '+data['product3'][0]['RM_value']+
-											'</div>'+
-											'<div class="text-muted m-t-xs">'+
-													'ขนาด(กว้างxยาวxสูง) เซ็นติเมตร : '+data['product3'][0]['SizeProd_width']+' x '+data['product3'][0]['SizeProd_length']+' x ' +data['product3'][0]['SizeProd_height']+
-											'</div>'+
-											'<div class="text-muted m-t-xs">'+
-													'ขนาด (ฟุต) : '+data['product3'][0]['SizeProd_foot']+
-											'</div>'+
-											'<div class="text-muted m-t-xs">'+
-													'ราคา (บาท) : '+data['product3'][0]['prod_price']+
-											'</div>'+
- 											'<div class="m-t text-righ">'+
- 													'<a href="#" onclick="alert('+data['product3'][0]['Prod_id']+');" class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i> </a>'+
- 											'</div>'+
- 									'</div>'+
- 							'</div>'+
- 					'</div>'+
- 			'</div>');
-			}
-			*/
+       
 			if(data['product3'] != null)
 			{
 				var product_3_pic = data['product3'][0]['pic_url1'];
@@ -376,7 +270,7 @@ function getRating(Compare_id,Prod_id){
 			if(data['data'] != ''){
 
 
-				 var rating_point = data['data']['RatingAVG'][0]['RatingAVG'];
+				 var rating_point = data['data']['RatingAVG2'][0]['RatingAVG'];
 				 if(0 < rating_point && rating_point <= 0.5)
 				 {
 					 rating =
@@ -456,7 +350,7 @@ function getRating(Compare_id,Prod_id){
 					 '<span class="fa  fa-grey fa-star "></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>';
 				 }
-				 $(div_rating).append('<h5 class="viewed_title">'+(data['data']['RatingAVG'][0]['RatingAVG'] != null ? data['data']['RatingAVG'][0]['RatingAVG']:0)+'  เต็ม  5</h5>'+
+				 $(div_rating).append('<h5 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != null ? data['data']['RatingAVG2'][0]['RatingAVG']:0)+'  เต็ม  5</h5>'+
 				'<fieldset class="rating ct">'+
 				rating+
 				'</fieldset>');

@@ -34,11 +34,12 @@ function changeProduct(Prod_id,status)
           getProduct_FILLTER(1);
           break;
         }
-        console.log(filltertype);
         swal({
           title: "Success !",
+          button: false,
+          timer: 1500,
+          icon: "success",
           text: "เปลี่ยนสถานะสินค้าสำเร็จ !",
-          type: "success"
         });
       }else{
         swal({
@@ -81,8 +82,10 @@ function DeleteProd(Prod_id)
         }
         swal({
           title: "Success !",
+          button: false,
+          timer: 1500,
+          icon: "success",
           text: "ลบสินค้าสำเร็จ !",
-          type: "success"
         });
       }else{
         swal({
@@ -186,7 +189,7 @@ function getProduct(){
           +'</td>'+
           '<td class="text-right">'+
           '<div class="tooltip-demo">'+
-          '<a data-toggle="tooltip" data-placement="top" title="แก้ไข SKU" onclick="skuChange ('+data['product'][i]['Prod_id']+')"><i class="fas fa-list-ol i-prod"></i></a>'+
+          '<a data-toggle="tooltip" data-placement="top" title="แก้ไข SKU" onclick="skuChange ('+data['product'][i]['Prod_id']+',\'' + sku + '\')"><i class="fas fa-list-ol i-prod"></i></a>'+
 
           '<a  data-toggle="tooltip" data-placement="top" title="เปลี่ยนสถานะ" onclick="changeProduct ('+data['product'][i]['Prod_id']+','+data['product'][i]['show']+')"><i class="fas fa-toggle-on i-prod"></i></a>'+
 
@@ -268,7 +271,7 @@ function getProduct_BY_ID(Prod_id){
             +'</td>'+
             '<td class="text-right">'+
             '<div class="tooltip-demo">'+
-            '<a data-toggle="tooltip" data-placement="top" title="แก้ไข SKU" onclick="skuChange ('+data['product'][i]['Prod_id']+')"><i class="fas fa-list-ol i-prod"></i></a>'+
+            '<a data-toggle="tooltip" data-placement="top" title="แก้ไข SKU" onclick="skuChange ('+data['product'][i]['Prod_id']+',\'' + sku + '\')"><i class="fas fa-list-ol i-prod"></i></a>'+
 
             '<a  data-toggle="tooltip" data-placement="top" title="เปลี่ยนสถานะ" onclick="changeProduct ('+data['product'][i]['Prod_id']+','+data['product'][i]['show']+')"><i class="fas fa-toggle-on i-prod"></i></a>'+
 
@@ -360,6 +363,7 @@ function editGroup(prodlist){
   if(prodlist.length <= 1){
     alert('สามารถแก้ไขสินค้าตั้งแต่ 2 ชิ้นขึ้นไป');
   }else{
+    $("#ModelSKU").empty();
     $("#model_body").empty();
     $("#modal_header_title").empty();
     $("#modal_header_title").text('แก้ไขสินค้าหลายชิ้น');
@@ -737,7 +741,7 @@ function getProduct_FILLTER(status_show){
             +'</td>'+
             '<td class="text-right">'+
             '<div class="tooltip-demo">'+
-            '<a data-toggle="tooltip" data-placement="top" title="แก้ไข SKU" onclick="skuChange ('+data['product'][i]['Prod_id']+')"><i class="fas fa-list-ol i-prod"></i></a>'+
+            '<a data-toggle="tooltip" data-placement="top" title="แก้ไข SKU" onclick="skuChange ('+data['product'][i]['Prod_id']+',\'' + sku + '\')"><i class="fas fa-list-ol i-prod"></i></a>'+
 
             '<a  data-toggle="tooltip" data-placement="top" title="เปลี่ยนสถานะ" onclick="changeProduct ('+data['product'][i]['Prod_id']+','+data['product'][i]['show']+')"><i class="fas fa-toggle-on i-prod"></i></a>'+
 
@@ -769,15 +773,41 @@ function getProduct_FILLTER(status_show){
 }
 var sku_pid = 0;
 
-function skuChange(prod_id){
+function skuChange(prod_id,prod_sku){
+  $("#ModelSKU").empty();
+  $("#ModelSKU").append('<div class="modal fade" id="skuModal" tabindex="-1" role="dialog" aria-labelledby="skuModal">'+
+    '<div class="modal-dialog" role="document">'+
+      '<div class="modal-content">'+
+        '<div class="modal-header">'+
+          '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+          '<h4 class="modal-title" id="modal_header_title">แก้ไข SKU</h4>'+
+        '</div>'+
+        '<div class="modal-body" id="model_body">'+
+          '<div class="form-group"><label>รหัสสินค้าที่ต้องการ (SKU)</label> <input maxlength="20" onkeypress="return (event.charCode != 32 ) && (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 45" type="text" placeholder="Enter product sku" id="prod_sku" class="form-control" name="prod_sku" autocomplete="off"></div>'+
+          '<div><button id="btn_sku_save" class="btn btn-sm btn-primary m-t-n-xs" type="button"><strong>บันทึก</strong></button></div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>');
+
   sku_pid = prod_id;
   $("#prod_sku").val('');
   $('#skuModal').modal('show');
-
+  $("#prod_sku").val(prod_sku);
+  if(prod_sku == "ยังไม่ได้กำหนด"){
+    $("#prod_sku").val('');
+  }
+  var osku = prod_sku;
   $('#btn_sku_save').click(function(){
     var prod_sku = $("#prod_sku").val();
-
-    if(prod_sku != ''){
+    if(prod_sku == osku){
+      swal({
+        title: "เกิดข้อผิดพลาด !",
+        text: "SKU ที่กรอกเหมือนกับที่ใช้งานอยู่ !",
+        type: "error"
+      });
+    }else{
+      if(prod_sku != ''){
       $.ajax({
         url: '/api/change-Sku',
         headers: {
@@ -785,7 +815,7 @@ function skuChange(prod_id){
           'Content-Type':'application/json'
         },
         method: 'POST',
-        data: JSON.stringify({ "prod_sku":prod_sku,"prod_id":prod_id }),
+        data: JSON.stringify({ "prod_sku":prod_sku,"prod_id":sku_pid }),
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function(data){
@@ -805,15 +835,18 @@ function skuChange(prod_id){
             }
             swal({
               title: "Success !",
+              button: false,
+              timer: 1500,
+              icon: "success",
               text: "แก้ไข รหัสสินค้า (SKU) สำเร็จ !",
-              type: "success"
             });
-          }else{
+          }else if(data['sku_error'] != null){
             swal({
-              title: "Error !",
-              text: "เกิดข้อผิดพลาดบางประการ !",
+              title: "เกิดข้อผิดพลาด !",
+              text: "SKU นี้ถูกใช้งานแล้วกรุณากรอกใหม่ !",
               type: "error"
             });
+            $("#prod_sku").val('');
           }
         }
       });
@@ -823,6 +856,7 @@ function skuChange(prod_id){
         text: "กรุณาใส่ SKU ที่ต้องการ !",
         type: "error"
       });
+    }
     }
   });
 }

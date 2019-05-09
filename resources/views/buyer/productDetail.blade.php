@@ -20,6 +20,13 @@
 		</div>
 	</div>
 </div>
+<hr>
+<div class="wrapper wrapper-content2 animated fadeInRight">
+	<h4 class="viewed_title">สินค้าแนะนำ</h4>
+	<div class="row" id="recommend-list">
+	</div>
+</div>
+<hr>
 
 <div class="viewed">
 	<div class="container">
@@ -327,7 +334,7 @@
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>';
 					}
-					$('#Rating_AVG').append('<h4 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != 'null' ? data['data']['RatingAVG2'][0]['RatingAVG']:0)+'  เต็ม  5</h4>'+
+					$('#Rating_AVG').append('<h4 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != null ? data['data']['RatingAVG2'][0]['RatingAVG']:0)+'  เต็ม  5</h4>'+
 						'<fieldset class="rating ct">'+
 						rating+
 						'</fieldset>');
@@ -366,8 +373,8 @@ function getProduct(){
 					'<div class="product_category"><a href="#">#'+data['data']['CatRoom_name']+'</a> <a href="#">#'+data['data']['CatProd_name']+'</a></div>'+
 					'<div class="product_name">'+data['data']['name']+'</div>'+
 					'<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>'+
-					'<div class="product_price">'+data['data']['price']+'</div>'+
-					'<div class="product_text"><p>'+data['data']['description']+'</p></div>'+
+					'<div class="product_price">'+data['data']['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' บาท</div>'+
+					'<div class="product_text"><p>'+data['data']['description']+'</p></div><br>'+
 					'<div class=" d-flex flex-row">'+
 					'<form action="#">'+
 					'<div class="clearfix" style="z-index: 1000;">'+
@@ -383,11 +390,19 @@ function getProduct(){
 					'<div class="button_container">'+
 					'<button type="button" class="button cart_button" onclick="addCart(\'' + data['data']['name'] + '\','+data['data']['prod_id']+','+data['data']['price']+',\'' + data['data']['Picture']['pic_url1'] + '\')">เพิ่มใส่ตะกร้า</button>'+
 					'<div class="product_fav"><i class="fas fa-heart"></i></div>'+
+					'<h4>สินค้าจากร้าน : '+data['data']['ShopName']+' '+data['data']['ShopSurname']+'</h4>'+
+					'<p>แบรนด์ : '+data['data']['BrandName']+'</p>'+
 					'</div>'+
 					'</form>'+
 					'</div>'+
 					'</div>'+
 					'</div>');
+				var prod_foots = '';
+				if(data['data']['foot'] == null){
+					prod_foots = "-";
+				}else{
+					prod_foots = data['data']['foot'];
+				}
 				$('#desc').append('<h4>รายละเอียดสินค้า</h4>'+
 					'<div class=" text-muted des-bt" id="prod_desc">'+
 					'</div>'+
@@ -403,7 +418,7 @@ function getProduct(){
 					'<dd id="prod_mat">'+data['data']['Material']+'</dd>'+
 					'<dd id="prod_color">'+data['data']['Color']+'</dd>'+
 					'<dd id="prod_size">'+data['data']['Size']+'</dd>'+
-					'<dd id="prod_foot">'+data['data']['foot']+'</dd>'+
+					'<dd id="prod_foot">'+prod_foots+'</dd>'+
 					'<dd id="prod_qty">'+data['data']['stock']+'</dd>'+
 					'</div>'+
 					'</div>'+
@@ -596,18 +611,65 @@ function getProduct(){
 					'<span class="fa  fa-grey fa-star "></span>';
 				}
 
-				$('#Rating_AVG').append('<h4 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != 'null' ? data['data']['RatingAVG2'][0]['RatingAVG']:"0")+'  เต็ม  5</h4>'+
-						'<fieldset class="rating ct">'+
-						rating+
-						'</fieldset>');
-				
-				}
-			},
-			failure: function(errMsg) {
-				alert(errMsg);
+				$('#Rating_AVG').append('<h4 class="viewed_title">'+(data['data']['RatingAVG2'][0]['RatingAVG'] != null ? data['data']['RatingAVG2'][0]['RatingAVG']:0)+'  เต็ม  5</h4>'+
+					'<fieldset class="rating ct">'+
+					rating+
+					'</fieldset>');
+
 			}
-		});
+		},
+		failure: function(errMsg) {
+			alert(errMsg);
+		}
+	});
 }
 
+function getRecommend(){
+	var prod_id = getCookie();
+	(async () => {
+		const rawResponse = await fetch('/api/recommend-product', {
+			method: 'POST',
+			headers: {
+				'Authorization':'Bearer '+b_token,
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({"prod_id":prod_id})
+		});
+		const content = await rawResponse.json();
+		if(content['recommend'] != ''){
+			console.log(content['recommend']);
+			for(i=0;i<content['recommend'].length;i++){
+				$('#recommend-list').append('<div class="col-md-2">'+
+					'<div class="ibox">'+
+					'<div class="ibox-content product-box" >'+
+					'<div class="product-imitation-prod" onclick="productDetail('+content['recommend'][i]['prod_id']+')">'+
+					'<img src="'+content['recommend'][i]['pic_url1']+'" alt="">'+
+					'</div>'+
+					'<div class="product-desc">'+
+					'<span class="product-price">'+
+					content['recommend'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'฿'+
+					'</span>'+
+					'<div class="shop_bar"></div><a> <div class="product-name-a" onclick="productDetail('+content['recommend'][i]['prod_id']+')">'+
+					content['recommend'][i]['prod_name']+'</div></a>'+
+					'<div class="text-muted m-t-xs cut-str">'+
+					content['recommend'][i]['prod_desc']+
+					'</div>'+
+					'</div>'+
+					'</div>'+
+					'</div>'+
+					'</div>');
+			}
+		}else{
+			Swal.fire({
+				title: '<strong>เกิดข้อผิดพลาด</strong>',
+				type:'error',
+				showConfirmButton: true,
+			});
+		}
+
+	})();
+}
+getRecommend();
 </script>
 @endsection

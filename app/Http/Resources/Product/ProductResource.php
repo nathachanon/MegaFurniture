@@ -22,12 +22,14 @@ class ProductResource extends JsonResource
       ->where('status',0)->where('show',0)
       ->where('Prod_id', $this->Prod_id)->count();
 
-      $prod_info = DB::table('products')->select('CatRoom_Name','CatProd_Name','RM_value','SizeProd_width','SizeProd_height','SizeProd_length','SizeProd_foot','ColorProd_value','weight')
+      $prod_info = DB::table('products')->select('CatRoom_Name','CatProd_Name','RM_value','SizeProd_width','SizeProd_height','SizeProd_length','SizeProd_foot','ColorProd_value','weight','sellers.name','sellers.surname','brands.brand_name')
       ->join('rmproducts', 'products.RM_id', '=', 'rmproducts.RM_id')
       ->join('catagoiesproducts', 'products.CatProd_id', '=', 'catagoiesproducts.CatProd_id')
       ->join('catagoiesrooms', 'catagoiesproducts.CatRoom_id', '=', 'catagoiesrooms.CatRoom_id')
       ->join('sizeproducts', 'products.SizeProd_id', '=', 'sizeproducts.SizeProd_id')
       ->join('colorproducts', 'products.ColorProd_id', '=', 'colorproducts.ColorProd_id')
+      ->join('brands', 'products.brand_id', '=', 'brands.brand_id')
+      ->join('sellers', 'brands.seller_id', '=', 'sellers.id')
       ->where('status',0)->where('show',0)
       ->where('Prod_id', $this->Prod_id)->first();
 
@@ -54,7 +56,10 @@ class ProductResource extends JsonResource
         ];
       
       }else{
-        return ['foot' => $prod_info->SizeProd_foot,
+        return ['ShopName' => $prod_info->name,
+        'ShopSurname' => $prod_info->surname,
+        'BrandName' => $prod_info->brand_name,
+        'foot' => $prod_info->SizeProd_foot,
         'RatingAVG2' => $getRating,
         'Comment' => $getReview,
         'CatRoom_name' => $prod_info->CatRoom_Name,

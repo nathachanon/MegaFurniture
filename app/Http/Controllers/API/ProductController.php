@@ -76,6 +76,11 @@ function EditProduct(Request $request){
 
  $input = $request->all();
 
+ $skuCheck = DB::table('products')->where('sku', $request['sku'])->count();
+ if($skuCheck == 1){
+  return response()->json(['sku_error'=>'SKU Is Used !'], $this-> successStatus);
+ }
+
  $rmCount = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->count();
  $rmData = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->pluck('RM_id');
  if($rmCount != 0)
@@ -285,7 +290,6 @@ function AddProduct(Request $request){
     'SizeProd_width' => 'required',
     'SizeProd_length' => 'required',
     'SizeProd_height' => 'required',
-    'SizeProd_foot' => 'required',
     'ColorProd_value' => 'required',
     'weight' => 'required',
     'pic1' => 'required'
@@ -296,6 +300,11 @@ function AddProduct(Request $request){
  }
 
  $input = $request->all();
+ $skuCheck = DB::table('products')->where('sku', $request['sku'])->count();
+ if($skuCheck == 1){
+  return response()->json(['sku_error'=>'SKU Is Used !'], $this-> successStatus);
+ }
+
  $rmCount = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->count();
  $rmData = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->pluck('RM_id');
  if($rmCount != 0)
@@ -1070,6 +1079,10 @@ function change_sku(Request $request){
   $prod_id = $request['prod_id'];
   $sku = $request['prod_sku'];
 
+  $skuCheck = DB::table('products')->where('sku', $sku)->count();
+   if($skuCheck == 1){
+    return response()->json(['sku_error'=>'SKU Is Used !'], $this-> successStatus);
+   }
     $updateSKU = DB::table('products')
     ->where('Prod_id', $prod_id)
     ->update(['sku' => $sku]);
@@ -1077,33 +1090,33 @@ function change_sku(Request $request){
   return response()->json(['success'=>'change Success'], $this-> successStatus);
 }
 
-function recommend(Request $request){
-  $prod_id = $request['prod_id'];
-  $countTag = $getTag = DB::table('keywords')
-  ->select('keyword_value')
-  ->where('Prod_id', $prod_id)
-  ->count();
+function product_recommend(Request $request){
+  $validator = Validator::make($request->all(), [
+    'prod_id' => 'required'
+  ]);
 
-  $getTag = DB::table('keywords')
-  ->select('keyword_value')
-  ->where('Prod_id', $prod_id)
-  ->first();
+  if ($validator->fails()) {
+   return response()->json(['error'=>$validator->errors()], 401);
+ }
 
+ $input = $request->all();
 
-  for($x = 0 ;$x<$countTag;$x++){}
-    $getTag_rec = DB::table('keywords')
-    ->select('Prod_id')
-    ->where('keyword_value', $getTag->keyword_value)
-    ->whereNotIn('Prod_id',[$prod_id])
-    ->get();
+ $getCatProd_id = DB::table('products')
+ ->where('prod_id', $input['prod_id'])->value('CatProd_id');
 
+ $myproduct = DB::table('products')
+ ->select('prod_id','prod_name','prod_price')
+ ->where('prod_id', $input['prod_id'])
+ ->get();
 
+ $recommendProduct = DB::table('products')
+ ->select('prod_id','prod_name','prod_price','pic_url1','prod_desc')
+ ->where('CatProd_id', $getCatProd_id)
+ ->where('prod_id', "!=" , $input['prod_id'])
+ ->limit(6)
+ ->get();
 
-
-
-
-  return response()->json(['rec_id'=>$getTag_rec], $this-> successStatus);
+ return response()->json(['myproduct'=>$myproduct,'recommend'=>$recommendProduct], $this-> successStatus);
 }
-
 
 }
