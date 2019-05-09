@@ -13,7 +13,7 @@
                                 <div class="col-xs-6 col-sm-2">
                                   <div class="user_icon"><img src="layout/images/user.svg" alt=""></div><a href="#" id="name"></a><hr>
                                   <button type="button" class="btn btn-w-m btn-info"><i class="fa fa-check"></i>&nbsp;แก้ไขข้อมูล</button>
-                                  <button type="button" class="btn btn-outline btn-info" onclick="window.location.href = '/address';">จัดการที่อยู่</button>
+                                  <button type="button" class="btn btn-outline btn-info" onclick="telCheck()">จัดการที่อยู่</button>
                                   <button type="button" class="btn btn-outline btn-info" onclick="window.location.href = '/purchase';">การสั่งซื้อ</button>
                                 </div>
                                 <div class="clearfix visible-xs">
@@ -75,6 +75,33 @@ function check_user(){
   }else{
     window.location.replace('/');
   }
+
+}
+
+function telCheck(){
+  (async () => {
+          const rawResponse = await fetch('/api/telCheck', {
+            method: 'POST',
+            headers: {
+              'Authorization':'Bearer '+b_token,
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"buyer_id": buyer_id})
+          });
+          const content = await rawResponse.json();
+          if(content['success'][0]['tel'] == null){
+            Swal.fire({
+              type: 'error',
+              title: 'กรุณากรอกเบอร์โทรศัพท์ก่อน !',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }else{
+            window.location.href = '/address';
+          }
+
+        })();
 
 }
 

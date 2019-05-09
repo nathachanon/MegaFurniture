@@ -112,7 +112,7 @@ public function addBankAccount(Request $request) {
   $validator = Validator::make($request->all(), [
    'bank_id' => 'required',
    'bank_account' => 'required',
-   'brand_id' => 'required',
+   'seller_id' => 'required',
    'account_name' => 'required'
   ]);
 
@@ -139,7 +139,7 @@ public function getBankName(){
 public function getBankAccount(Request $request){
 
   $validator = Validator::make($request->all(), [
-   'brand_id' => 'required'
+   'seller_id' => 'required'
   ]);
 
 
@@ -152,7 +152,7 @@ public function getBankAccount(Request $request){
   $getbankaccount = DB::table('bank_accounts')
   ->select('bank_accounts.BankAccount_id','banks.bank_name','banks.bank_id','account_name','bank_account','status')
   ->join('banks', 'bank_accounts.bank_id', '=', 'banks.bank_id')
-  ->where('brand_id',$input['brand_id'])
+  ->where('seller_id',$input['seller_id'])
   ->get();
 
   return response()->json(['success'=>$getbankaccount], $this-> successStatus);
@@ -250,6 +250,5 @@ public function deletebankAccount(Request $request){
   return response()->json(['success'=>'Delete bankaccount success !'], $this-> successStatus);
 
 }
-
 
 }

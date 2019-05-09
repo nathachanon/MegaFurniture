@@ -1,0 +1,45 @@
+
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-grid;
+    cursor: pointer;
+    padding-right: 15px;
+  }
+  .cen{
+    text-align: center;
+    
+  }
+
+  .btn-pic {
+    border: 1.6px solid #F59121;
+    border-style: dashed;
+    color: gray;
+    background-color: white;
+
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .add-pic{
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+  }
+
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+  }
+  .i-size{
+   padding: 60px 60px;
+ }
+ .p-mt{
+  margin-top: 10px; 
+}

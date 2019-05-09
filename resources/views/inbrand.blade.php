@@ -41,8 +41,6 @@
   <div class="ibox-content ">
     <div class="animated bounceIn">
       <a href="product"><button class="btn btn-info dim2 ani btn-large-dim ani b-shadow " type="button"><i class="fa fa-list"></i><div class="text-title">สินค้า</div></button></a>
-      <a href="order"><button class="btn btn-danger dim2 ani btn-large-dim ani b-shadow " type="button"><i class="fa fa-th-large"></i><div class="text-title">คำสั่งซื้อ</div></button></a>
-      <a href="brandSettings"><button class="btn btn-primary  dim2 btn-large-dim ani b-shadow" type="button"><i class="fa fa-gears"></i><div class="text-title">ตั้งค่าร้าน</div></button></a>
     </div>
   </div>
 </div>

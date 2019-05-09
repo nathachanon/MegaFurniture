@@ -1,6 +1,9 @@
 @extends('layouts.layout_brand')
 
 @section('content')
+<head>
+    <link href="css/imgStyle_addProd.css" rel="stylesheet">
+</head>
 <body >
 
   <div class="row mt-mt">
@@ -8,32 +11,57 @@
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h3>แก้ไขรูปภาพสินค้า</h3>
-          <div class="form-group">
-            <img id='spic1' src="#" class="preview" hidden="true" width="250" height="180"></img>
-            <label for="catagry_name">ภาพปก</label>
-            <input id="file_pic1" type="file" name="pic1" class="form-control" onchange="showpic1(this)">
-          </div>
-          <div class="form-group">
-            <img id='spic2' src="#" class="preview" hidden="true" width="250" height="180"></img>
-            <label for="catagry_name">รูปที่ 2</label>
-            <input id="file_pic2" type="file" name="pic2" class="form-control" onchange="showpic2(this)">
-          </div>
-          <div class="form-group">
-            <img id='spic3' src="#" class="preview" hidden="true" width="250" height="180"></img>
-            <label for="catagry_name">รูปที่ 3</label>
-            <input id="file_pic3" type="file" name="pic3" class="form-control" onchange="showpic3(this)">
-          </div>
-          <div class="form-group">
-            <img id='spic4' src="#" class="preview" hidden="true" width="250" height="180"></img>
-            <label for="catagry_name">รูปที่ 4</label>
-            <input id="file_pic4" type="file" name="pic4" class="form-control" onchange="showpic4(this)">
-          </div>
-          <div class="form-group">
-            <img id='spic5' src="#" class="preview" hidden="true" width="250" height="180"></img>
-            <label for="catagry_name">รูปที่ 5</label>
-            <input id="file_pic5" type="file" name="pic5" class="form-control" onchange="showpic5(this)">
-          </div>
-      </div>
+       <div class="cen">
+              <div class="upload-btn-wrapper">                    
+                <div id="is1" class="btn-pic i-size">
+                  <div id="i1" class="fa fa-picture-o"></div>
+                  <img id='spic1' src="#" hidden="true" class="add-pic"></img>
+                </div>
+                <input id="file_pic1" type="file" name="pic1"  onchange="showpic1(this)">
+                <p class="p-mt">ภาพปก<p>
+                </div>
+
+                <div class="upload-btn-wrapper">                    
+                  <div id="is2" class="btn-pic i-size">
+                    <div id="i2" class="fa fa-picture-o"></div>
+                    <img id='spic2' src="#" hidden="true" class="add-pic"></img>
+                  </div>
+                  <input id="file_pic2" type="file" name="pic2"  onchange="showpic2(this)">
+                  <p class="p-mt">ภาพ1<p>
+                  </div>
+
+                  <div class="upload-btn-wrapper">                    
+                    <div id="is3" class="btn-pic i-size">
+                      <div id="i3" class="fa fa-picture-o"></div>
+                      <img id='spic3' src="#" hidden="true" class="add-pic"></img>
+                    </div>
+                    <input id="file_pic3" type="file" name="pic3"  onchange="showpic3(this)">
+                    <p class="p-mt">ภาพ2<p>
+                    </div>
+
+                    <div class="upload-btn-wrapper">                    
+                      <div id="is4" class="btn-pic i-size">
+                        <div id="i4" class="fa fa-picture-o"></div>
+                        <img id='spic4' src="#" hidden="true" class="add-pic"></img>
+                      </div>
+                      <input id="file_pic4" type="file" name="pic4"  onchange="showpic4(this)">
+                      <p class="p-mt">ภาพ3<p>
+                      </div>
+
+                      <div class="upload-btn-wrapper">                    
+                        <div id="is5" class="btn-pic i-size">
+                          <div id="i5" class="fa fa-picture-o"></div>
+                          <img id='spic5' src="#" hidden="true" class="add-pic"></img>
+                        </div>
+                        <input id="file_pic5" type="file" name="pic5"  onchange="showpic5(this)">
+                        <p class="p-mt">ภาพ4<p>
+                        </div>
+
+                      </div>
+                       <div class="hr-line-dashed"></div>
+                    </div>
+
+       
 
       <div class="ibox-content">
         <form method="get" class="form-horizontal">
@@ -435,17 +463,32 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
     var catProd_id = $('#optionproduct').val();
     if(catProd_id != 0)
     {
+      if(catProd_id == 1){
       $("#inputs_wlhf").empty();
-      $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
-        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
-        '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
-        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ยาว (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_length" type="text" placeholder="Enter Product Length" class="form-control input-lg"></div></div>'+
-        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สูง (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_height" type="text" placeholder="Enter Product Height" class="form-control input-lg"></div></div>'+
-        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ฟุต</label><div class="col-sm-10"><input type="number" id="SizeProd_foot" type="text" placeholder="Enter Product Foot" class="form-control input-lg"></div></div>');
-      $("#inputs_cr").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>สีและวัสดุ</h3></div>'+
-        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
-        '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg"></div></div>'+
-        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
+      $("#inputs_cr").empty();
+    $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
+      '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ยาว (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_length" type="text" placeholder="Enter Product Length" class="form-control input-lg"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สูง (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_height" type="text" placeholder="Enter Product Height" class="form-control input-lg"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ฟุต</label><div class="col-sm-10"><input type="number" id="SizeProd_foot" type="text" placeholder="Enter Product Foot" class="form-control input-lg"></div></div>');
+    $("#inputs_cr").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>สีและวัสดุ</h3></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
+      '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg" onkeypress="return (event.charCode != 32 && event.charCode >= 161) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
+  }else{
+      $("#inputs_wlhf").empty();
+      $("#inputs_cr").empty();
+    $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
+      '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ยาว (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_length" type="text" placeholder="Enter Product Length" class="form-control input-lg"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สูง (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_height" type="text" placeholder="Enter Product Height" class="form-control input-lg"></div></div>');
+    $("#inputs_cr").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>สีและวัสดุ</h3></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
+      '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg" onkeypress="return (event.charCode != 32 && event.charCode >= 161) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)"></div></div>'+
+      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
+  }
     }else{
       $("#inputs_wlhf").empty();
       $("#inputs_cr").empty();
@@ -733,8 +776,11 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
       var ColorProd_value = $('#ColorProd_value').val();
       var RM_value = $('#RM_value').val();
       var weight = $('#weight').val();
+      if($('#SizeProd_foot').val() == undefined){
+        SizeProd_foot = '';
+      }
       if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
-       SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '' && product_ids != '')
+       SizeProd_length != '' && SizeProd_height != '' && ColorProd_value != '' && RM_value != '' && weight != '' && product_ids != '')
       {
 
         var formData = new FormData();
@@ -811,8 +857,11 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
       var ColorProd_value = $('#ColorProd_value').val();
       var RM_value = $('#RM_value').val();
       var weight = $('#weight').val();
+      if($('#SizeProd_foot').val() == undefined){
+        SizeProd_foot = '';
+      }
       if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
-       SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '' && product_ids != '')
+       SizeProd_length != '' && SizeProd_height != '' && ColorProd_value != '' && RM_value != '' && weight != '' && product_ids != '')
       {
         var formData = new FormData();
 
