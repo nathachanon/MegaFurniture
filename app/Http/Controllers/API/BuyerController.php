@@ -202,4 +202,22 @@ class BuyerController extends Controller
 
 	}
 
+	public function telCheck(Request $request){
+	  $validator = Validator::make($request->all(), [
+	   'buyer_id' => 'required'
+	  ]);
+
+
+	  if ($validator->fails()) {
+	    return response()->json(['error'=>$validator->errors()], 401);
+	  }
+
+	  $input = $request->all();
+
+	  $getTel = DB::table('buyers')->select('tel')->where('id', $input['buyer_id'])->get();
+
+	  	return response()->json(['success'=>$getTel], $this-> successStatus);
+
+	}
+
 }

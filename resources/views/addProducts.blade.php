@@ -1,44 +1,56 @@
 @extends('layouts.layout_brand')
 
 @section('content')
+<head>
+  <link href="css/addPord_excel.css" rel="stylesheet">
+</head>
 <body >
 
   <div class="row mt-mt ibox-title">
 
-    <div class="col-lg-7">
-      <div class="panel panel-mega">
-       <div class="panel-heading">
-        <i class="fa fa-file-excel-o"></i> เพิ่มไฟล์ Excel
+   <h2>เพิ่มสินค้าหลายชิ้น</h2> 
+   <div class="hr-line-dashed"></div>
+
+   <div class="col-lg-8">
+    <div class="panel panel-mega">
+     <div class="panel-heading">
+      <i class="fa fa-file-excel-o"></i> เพิ่มไฟล์ Excel
+    </div>
+
+    <form method="post" action="{{url('/api/excelUpload')}}" enctype="multipart/form-data"
+    class="dropzone" id="dropzone">
+  </form>
+
+
+</div>
+</div>
+
+
+<div class="col-lg-4">
+  <div class="box8">
+    <img src="/css/patterns/excel-01.png">
+    <h3 class="title">ดาวน์โหลด Template สินค้า</h3>
+    <h3 class="title2">เพื่อความสะดวกรวดเร็ว<br> กรุณาศึกษาคู่มือการใช้งาน Template <br>การเพิ่มสินค้าทีละหลายชิ้น </h3>
+
+    <div class="box-content">
+
+      <div class="icon">
+        <button   class="btn btn-white input-lg col-lg-6" type="button" >คู่มือการใช้งาน</button>
+        <button  class="btn btn-white input-lg col-lg-6 " type="button" >ดาวน์โหลด</button>
+
       </div>
 
 
-      <form method="post" action="{{url('/api/excelUpload')}}" enctype="multipart/form-data"
-      class="dropzone" id="dropzone">
-    </form>
-
-
-  </div>
-</div>
-<div class="col-lg-5">
-  <div class="panel panel-warning">
-
-    <div class="panel-body">
-      <div></div>
-        <h3>ดาวน์โหลด Template สินค้า</h3>
-      <p></p>
     </div>
-  </div>
+  </div><br>
+  <button id="upload" class="btn btn-primary input-lg col-lg-6 btn-lg " type="button" >เพิ่มสินค้า</button>
+  <button id="cancel" class="btn btn-white input-lg  col-lg-6 btn-lg " type="button" >ยกเลิก</button>
 </div>
 
-<div class="col-lg-12">
-
-  <div class="ibox float-e-margins">
 
 
-</div>
-<div><button id="upload" type="button" class="btn btn-info btn-lg col-lg-12">เพิ่มสินค้า</button></div>
-<div><button id="cancel" type="button" class="btn btn-danger btn-lg col-lg-12">ยกเลิก</button></div>
-</div>
+
+
 </div>
 
 

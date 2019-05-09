@@ -372,7 +372,7 @@
 
 
 
-
+</body>
 
 	<script src="layout/js/jquery-3.3.1.min.js"></script>
 	<script src="layout/styles/bootstrap4/popper.js"></script>
@@ -407,7 +407,7 @@
 	<script src="js/plugins/iCheck/icheck.min.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
-</body>
+
 <script>
 	var b_token = localStorage.getItem("b_token");
 	var buyer_id = localStorage.getItem("buyer_id");

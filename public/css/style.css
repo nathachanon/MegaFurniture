@@ -1,4 +1,6 @@
 
+
+
 @import url("https://fonts.googleapis.com/css?family=Prompt:300,400");
 
 /*
@@ -3669,7 +3671,7 @@ video {
   z-index: 2200;
 }
 .modal-body {
-  padding: 20px 30px 30px 30px;
+  padding: 20px 20px 20px 20px;
 }
 .inmodal .modal-body {
   background: #f8fafb;

@@ -65,7 +65,6 @@ function EditProduct(Request $request){
     'SizeProd_width' => 'required',
     'SizeProd_length' => 'required',
     'SizeProd_height' => 'required',
-    'SizeProd_foot' => 'required',
     'ColorProd_value' => 'required',
     'weight' => 'required'
   ]);
@@ -115,12 +114,12 @@ $sizeCount = DB::table('sizeProducts')
 ->where('SizeProd_width', $input['SizeProd_width'])
 ->where('SizeProd_length', $input['SizeProd_length'])
 ->where('SizeProd_height', $input['SizeProd_height'])
-->where('SizeProd_foot', $input['SizeProd_foot'])->count();
+->where('SizeProd_foot', $request['SizeProd_foot'])->count();
 $sizeData = DB::table('sizeproducts')
 ->where('SizeProd_width', $input['SizeProd_width'])
 ->where('SizeProd_length', $input['SizeProd_length'])
 ->where('SizeProd_height', $input['SizeProd_height'])
-->where('SizeProd_foot', $input['SizeProd_foot'])->pluck('SizeProd_id');
+->where('SizeProd_foot', $request['SizeProd_foot'])->pluck('SizeProd_id');
 if($sizeCount != 0)
 {
   $size = str_replace('[', '', $sizeData);
@@ -344,7 +343,7 @@ $sizeData = DB::table('sizeproducts')
 ->where('SizeProd_width', $input['SizeProd_width'])
 ->where('SizeProd_length', $input['SizeProd_length'])
 ->where('SizeProd_height', $input['SizeProd_height'])
-->where('SizeProd_foot', $input['SizeProd_foot'])->pluck('SizeProd_id');
+->where('SizeProd_foot', $request['SizeProd_foot'])->pluck('SizeProd_id');
 if($sizeCount != 0)
 {
   $size = str_replace('[', '', $sizeData);
@@ -355,7 +354,7 @@ if($sizeCount != 0)
     'SizeProd_width' => $input['SizeProd_width'],
     'SizeProd_length' => $input['SizeProd_length'],
     'SizeProd_height' => $input['SizeProd_height'],
-    'SizeProd_foot' => $input['SizeProd_foot']
+    'SizeProd_foot' => $request['SizeProd_foot']
   ]);
 
   $SIZE_id = $productSize->id;

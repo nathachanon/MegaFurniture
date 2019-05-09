@@ -42,7 +42,7 @@ class AllDB extends Migration
 
      Schema::create('bank_accounts', function (Blueprint $table) {
       $table->unsignedInteger('bank_id');
-      $table->unsignedInteger('brand_id');
+      $table->unsignedInteger('seller_id');
 
       $table->increments('BankAccount_id');
       $table->string('account_name',100);
@@ -50,7 +50,7 @@ class AllDB extends Migration
       $table->integer('status');
 
       $table->foreign('bank_id')->references('bank_id')->on('banks')->onDelete('cascade');
-      $table->foreign('brand_id')->references('brand_id')->on('brands')->onDelete('cascade');
+      $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
       $table->timestamps();
       });
 
@@ -208,7 +208,6 @@ class AllDB extends Migration
        $table->string('order_detail_id',20)->primary();
        $table->DateTime('requiredDate');
        $table->integer('price');
-       $table->integer('status');
 
        $table->foreign('Prod_id')->references('Prod_id')->on('products')->onDelete('cascade');
        $table->foreign('Order_id')->references('Order_id')->on('Orders')->onDelete('cascade');
@@ -219,10 +218,9 @@ class AllDB extends Migration
 
      Schema::create('Payments', function (Blueprint $table) {
        $table->unsignedInteger('BankAccount_id');
-
+       $table->unsignedInteger('order_id');
        $table->increments('pay_id');
-
-       $table->string('order_detail_id',20);
+       
        $table->string('transfer_slip')->nullable();
        $table->string('bank_account');
        $table->string('bank_name');
@@ -231,7 +229,7 @@ class AllDB extends Migration
        $table->integer('pay_status');
 
        $table->foreign('BankAccount_id')->references('BankAccount_id')->on('bank_accounts')->onDelete('cascade');
-       $table->foreign('order_detail_id')->references('order_detail_id')->on('orderDetails')->onDelete('cascade');
+       $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
        $table->timestamps();
      });
 
@@ -310,6 +308,7 @@ class AllDB extends Migration
              DB::table('Banks')->insert(array('Bank_name' => 'กรุงไทย'));
              DB::table('Banks')->insert(array('Bank_name' => 'กรุงศรีอธุธยา'));
              DB::table('Banks')->insert(array('Bank_name' => 'ทหารไทย'));
+             DB::table('Banks')->insert(array('Bank_name' => 'พร้อมเพย์'));
 
 
    }

@@ -29,6 +29,9 @@ Route::post('upload','API\ProductController@picedit');
 
 
 Route::group(['middleware' => 'multiauth:seller_api'],function(){
+	Route::post('canclePayment','API\PaymentController@canclePayment');
+	Route::post('changePayment','API\PaymentController@changePayment');
+	Route::post('getPayment','API\PaymentController@getPayment');
 	Route::post('getOrderDetails','API\OrderController@getDetailOrderByID');
 	Route::post('getOrder','API\OrderController@getOrder');
 	Route::post('change-Sku','API\ProductController@change_sku');
@@ -88,6 +91,7 @@ Route::post('registerBuyer','API\BuyerController@registerBuyer');
 
 
 Route::group(['middleware' => 'multiauth:buyer_api'],function(){
+	Route::post('telCheck','API\BuyerController@telCheck');
 	Route::post('payment-Add','API\PaymentController@addPayment');
 	Route::post('getBank-id','API\PaymentController@getBank_id');
 	Route::post('getBank-brand','API\PaymentController@getBank_brand');

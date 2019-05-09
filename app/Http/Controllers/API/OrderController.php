@@ -246,6 +246,7 @@ class OrderController extends Controller
 	function createOrder(Request $request){
 		$validator = Validator::make($request->all(), [
 			'order_list' => 'required',
+			'shop_list' => 'required',
 			'buyer_id' => 'required'
 		]);
 
@@ -260,30 +261,39 @@ class OrderController extends Controller
 			return response()->json(['error'=>'Cart ID Not Found !'], $this-> successStatus);
 		}
 		$totalprice = 0;
-		for($x = 0; $x < count($input['order_list']);$x++){
-			$totalprice += $input['order_list'][$x]['price'];
-		}
 
-		$createdOrder = Order::create(
-			['Cart_id' => $cartID,
-			'total_price' => $totalprice,
-			'status' => 0,
-		]);
+		for($x = 0; $x < count($input['shop_list']);$x++){
+			$totalprice = 0;
+			for($y = 0; $y < count($input['order_list']);$y++){
+				if($input['order_list'][$y]['seller_id'] == $input['shop_list'][$x]['seller_id']){
+					
+					$totalprice += $input['order_list'][$y]['price'];
 
-		$orderID = $createdOrder->id;
+				}
+			}
 
-		for($x = 0; $x < count($input['order_list']);$x++){
-			$order_detail_id = $orderID . "P" . $input['order_list'][$x]['prod_id'];
-			$createdOrderDetail = Orderdetail::create(
-				['order_detail_id' => $order_detail_id,
-				'Add_id' => $input['order_list'][$x]['add_id'],
-				'Order_id' => $orderID,
-				'Prod_id' => $input['order_list'][$x]['prod_id'],
-				'del_price_id' => $input['order_list'][$x]['del_price_id'],
-				'requiredDate' => date('Y-m-d H:i:s', strtotime("+3 days")),
-				'price' => $input['order_list'][$x]['price'],
-				'status' => 0
-			]);
+			$createdOrder = Order::create(
+						['Cart_id' => $cartID,
+						'total_price' => $totalprice,
+						'status' => 0,
+					]);
+
+			$orderID = $createdOrder->id;
+
+			for($y = 0; $y < count($input['order_list']);$y++){
+				if($input['order_list'][$y]['seller_id'] == $input['shop_list'][$x]['seller_id']){
+					$order_detail_id = $orderID . "P" . $input['order_list'][$y]['prod_id'];
+					$createdOrderDetail = Orderdetail::create(
+						['order_detail_id' => $order_detail_id,
+						 'Add_id' => $input['order_list'][$y]['add_id'],
+						 'Order_id' => $orderID,
+						 'Prod_id' => $input['order_list'][$y]['prod_id'],
+						 'del_price_id' => $input['order_list'][$y]['del_price_id'],
+						 'requiredDate' => date('Y-m-d H:i:s', strtotime("+3 days")),
+						 'price' => $input['order_list'][$y]['price']
+						]);
+				}
+			}
 		}
 
 		DB::table('Product_in_carts')->where('Cart_id', $cartID)->delete();
@@ -299,7 +309,7 @@ class OrderController extends Controller
 
 	function getOrder(Request $request){
 		$validator = Validator::make($request->all(), [
-			'brand_id' => 'required'
+			'seller_id' => 'required'
 		]);
 
     if ($validator->fails()) {
@@ -307,14 +317,15 @@ class OrderController extends Controller
 		}
 		$input = $request->all();
 
-		$getOrder = DB::table('orderdetails')
-		->select(DB::raw('DATE_FORMAT(orderdetails.created_at, "%m/%d/%Y %H:%i:%s") as created_at') , 'brands.brand_name' , 'buyers.name' , 'buyers.surname' , 'orderdetails.prod_id' , 'orderdetails.order_id', 'orderdetails.order_detail_id' , 'orderdetails.price' , DB::raw('DATE_FORMAT(orderdetails.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at') , 'products.prod_id' , 'orderdetails.status')
-		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
+		$getOrder = DB::table('orders')
+		->select(DB::raw('DATE_FORMAT(orders.created_at, "%m/%d/%Y %H:%i:%s") as created_at') , 'brands.brand_name' , 'buyers.name' , 'buyers.surname' , 'orders.order_id' , 'orders.total_price' , DB::raw('DATE_FORMAT(orders.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at') , 'orders.status')->distinct('orders.order_id')
+		->join('orderdetails', 'orders.order_id', '=', 'orderdetails.order_id')
+		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
 		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
-		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
 		->join('brands', 'products.brand_id', '=', 'brands.brand_id')
-		->where('brands.brand_id', $input['brand_id'])
+		->join('sellers', 'brands.seller_id', '=', 'sellers.id')
+		->where('sellers.id', $input['seller_id'])
 		->get();
 
 		return response()->json(['success'=>$getOrder], $this-> successStatus);
@@ -332,7 +343,7 @@ class OrderController extends Controller
 		$input = $request->all();
 
 		$getOrder = DB::table('orderdetails')
-		->select(DB::raw('DATE_FORMAT(orderdetails.created_at, "%m/%d/%Y %H:%i:%s") as created_at') , 'brands.brand_name' , 'brands.brand_id' , 'orderdetails.prod_id' , 'orderdetails.order_id', 'orderdetails.order_detail_id' , 'orderdetails.price' , DB::raw('DATE_FORMAT(orderdetails.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at') , 'products.prod_id' , 'orderdetails.status')
+		->select(DB::raw('DATE_FORMAT(orderdetails.created_at, "%m/%d/%Y %H:%i:%s") as created_at') , 'brands.brand_name' , 'brands.brand_id' , 'orderdetails.prod_id' , 'orderdetails.order_id', 'orderdetails.order_detail_id' , 'orderdetails.price' , DB::raw('DATE_FORMAT(orderdetails.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at') , 'products.prod_id')
 		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
 		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
@@ -342,22 +353,13 @@ class OrderController extends Controller
 		->get();
 
 		$getOrderID = DB::table('orderdetails')
-		->select('orders.order_id',DB::raw('DATE_FORMAT(orders.created_at, "%m/%d/%Y %H:%i:%s") as created_at'))->distinct('orders.order_id')
+		->select('orders.order_id','orders.status','orders.total_price','sellers.id',DB::raw('DATE_FORMAT(orders.created_at, "%m/%d/%Y %H:%i:%s") as created_at'))->distinct('orders.order_id')
 		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
 		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
 		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
 		->join('brands', 'products.brand_id', '=', 'brands.brand_id')
-		->where('buyers.id', $input['buyer_id'])
-		->get();
-
-		$getBrandID = DB::table('orderdetails')
-		->select('orderdetails.status','brands.brand_id','brands.brand_name')->distinct('brands.brand_id')
-		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
-		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
-		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
-		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
-		->join('brands', 'products.brand_id', '=', 'brands.brand_id')
+		->join('sellers', 'brands.seller_id', '=', 'sellers.id')
 		->where('buyers.id', $input['buyer_id'])
 		->get();
 
@@ -372,14 +374,13 @@ class OrderController extends Controller
 		->groupBy('orders.order_id')
 		->get();
 
-		return response()->json(['success'=>$getOrder,'order_list'=>$getOrderID,'brand_list'=>$getBrandID,'sum'=>$purchases], $this-> successStatus);
+		return response()->json(['success'=>$getOrder,'order_list'=>$getOrderID,'sum'=>$purchases], $this-> successStatus);
 
 	}
 
 	function getDetailOrderByID(Request $request){
 
 		$validator = Validator::make($request->all(), [
-			'prod_id' => 'required',
 			'order_id' => 'required'
 		]);
 
@@ -388,19 +389,30 @@ class OrderController extends Controller
 		}
 		$input = $request->all();
 
-		$getDetailOrder = DB::table('orderdetails')
-		->select('buyers.name' , 'buyers.surname' , 'orderdetails.order_detail_id' ,'orderdetails.price' , 'products.prod_name' , 'products.prod_price' , 'delivery_prices.price as delivery_price' , 'orderdetails.status' , 'deliverys.deliveryname','products.pic_url1',DB::raw('DATE_FORMAT(orderdetails.created_at, "%m/%d/%Y %H:%i:%s") as created_at'),DB::raw('DATE_FORMAT(orderdetails.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at'))
-		->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
+		$getOrder = DB::table('orders')
+		->select('buyers.name' , 'buyers.surname','buyers.tel' , 'orders.order_id' ,'orders.total_price' , 'orders.status' ,DB::raw('DATE_FORMAT(orders.created_at, "%m/%d/%Y %H:%i:%s") as created_at'),DB::raw('DATE_FORMAT(orders.updated_at, "%m/%d/%Y %H:%i:%s") as updated_at'))->distinct('orders.order_id')
+		->join('orderdetails', 'orders.order_id', '=', 'orderdetails.order_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
 		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
 		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
 		->join('delivery_prices', 'orderdetails.del_price_id', '=', 'delivery_prices.del_price_id')
 		->join('deliverys', 'delivery_prices.delivery_id', '=', 'deliverys.delivery_id')
-		->where('orderdetails.prod_id', $input['prod_id'])
 		->where('orderdetails.order_id', $input['order_id'])
 		->get();
 
-		return response()->json($getDetailOrder, $this-> successStatus);
+		$getOrderDetail = DB::table('orders')
+		->select('products.sku','orderdetails.order_detail_id' ,'orderdetails.price','orderdetails.Add_id','deliverys.deliveryname','products.prod_price','delivery_prices.price as del_price','addresses.area','addresses.district','addresses.province','addresses.zipcode')
+		->join('orderdetails', 'orders.order_id', '=', 'orderdetails.order_id')
+		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
+		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
+		->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
+		->join('delivery_prices', 'orderdetails.del_price_id', '=', 'delivery_prices.del_price_id')
+		->join('deliverys', 'delivery_prices.delivery_id', '=', 'deliverys.delivery_id')
+		->join('addresses', 'orderdetails.Add_id', '=', 'addresses.Add_id')
+		->where('orderdetails.order_id', $input['order_id'])
+		->get();
+
+		return response()->json(['order'=>$getOrder,'orderDetail'=>$getOrderDetail], $this-> successStatus);
 	}
 
 }

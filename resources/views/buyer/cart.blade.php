@@ -72,7 +72,7 @@ getAddress();
         $("#product_list_count").empty();
         $("#product_list").empty();
         $("#total").empty();
-        if(data['success'] != null)
+        if(data['success'] )
         {
           var cart_count;
           var allprice;

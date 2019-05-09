@@ -619,6 +619,8 @@ for (var i = 0; i < tags.length; i++) {
 });
 
 function showpic1(input) {
+$('#i1').remove(".fa");
+$('#is1').removeClass("i-size");
 $('#spic1').attr('hidden',false);
 if (input.files && input.files[0]) {
  var reader = new FileReader();
@@ -631,6 +633,8 @@ if (input.files && input.files[0]) {
 }
 
 function showpic2(input) {
+$('#i2').remove(".fa");
+$('#is2').removeClass("i-size");
 $('#spic2').attr('hidden',false);
 if (input.files && input.files[0]) {
   var reader = new FileReader();
@@ -642,6 +646,8 @@ if (input.files && input.files[0]) {
 }
 }
 function showpic3(input) {
+$('#i3').remove(".fa");
+$('#is3').removeClass("i-size");
 $('#spic3').attr('hidden',false);
 if (input.files && input.files[0]) {
  var reader = new FileReader();
@@ -653,6 +659,8 @@ if (input.files && input.files[0]) {
 }
 }
 function showpic4(input) {
+$('#i4').remove(".fa");
+$('#is4').removeClass("i-size");
 $('#spic4').attr('hidden',false);
 if (input.files && input.files[0]) {
  var reader = new FileReader();
@@ -664,6 +672,8 @@ if (input.files && input.files[0]) {
 }
 }
 function showpic5(input) {
+$('#i5').remove(".fa");
+$('#is5').removeClass("i-size");
 $('#spic5').attr('hidden',false);
 if (input.files && input.files[0]) {
  var reader = new FileReader();
