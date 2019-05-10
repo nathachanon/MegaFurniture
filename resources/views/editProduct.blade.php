@@ -139,7 +139,11 @@
               </div>
 
             </div>
-
+            <div class="form-group"><label class="col-sm-2 control-label">Keyword</label>
+              <div class="col-sm-10">
+                    <input name='tags' class="form-control input-lg" placeholder='กรุณาใส่ keyword ที่ต้องการ ตามด้วย , หรือ enter' value=''  data-blacklist='' id="tags">
+              </div>
+            </div>
 
 
             <div class="hr-line-dashed"></div>
@@ -362,6 +366,7 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(data){
+          console.log(data);
           $('#optionroom').val(data['catagoies'][0]['CatRoom_id']);
           roomselect();
           $('#prod_sku').val(data['product'][0]['sku']);
@@ -422,6 +427,17 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
             $('#ColorProd_value').val(data['product_color'][0]['ColorProd_value']);
             $('#RM_value').val(data['product_rm'][0]['RM_value']);
           }, 1000);
+          //ke
+          if(data['keywords'].length != 0){
+          var sum_keyword = "";
+            for(var x=0;x<data['keywords'].length;x++){
+              sum_keyword += data['keywords'][x]['keyword_value'];
+              if(x!=data['keywords'].length-1){
+              sum_keyword = sum_keyword+',';
+            }
+            }
+          }
+            $('#tags').val(sum_keyword);
         },
         failure: function(errMsg) {
           alert(errMsg);
@@ -733,6 +749,8 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
       var ColorProd_value = $('#ColorProd_value').val();
       var RM_value = $('#RM_value').val();
       var weight = $('#weight').val();
+      var tags = $('#tags').val().split(",");
+
       if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
        SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '' && product_ids != '')
       {
@@ -767,6 +785,10 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
         formData.append("buyer", valueBUYER);
         formData.append("status", 0);
         formData.append("show", 1);
+
+        for (var i = 0; i < tags.length; i++) {
+            formData.append('tags[]', tags[i]);
+        }
 
         $.ajax({
           url: '/api/EditProduct',
@@ -811,6 +833,7 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
       var ColorProd_value = $('#ColorProd_value').val();
       var RM_value = $('#RM_value').val();
       var weight = $('#weight').val();
+      var tags = $('#tags').val().split(",");
       if(prod_name != '' && prod_desc != '' && prod_price != '' && prod_qty != '' && SizeProd_width != '' &&
        SizeProd_length != '' && SizeProd_height != '' && SizeProd_foot != '' && ColorProd_value != '' && RM_value != '' && weight != '' && product_ids != '')
       {
@@ -844,6 +867,11 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
         formData.append("buyer", valueBUYER);
         formData.append("status", 0);
         formData.append("show", 0);
+
+
+        for (var i = 0; i < tags.length; i++) {
+            formData.append('tags[]', tags[i]);
+        }
 
         $.ajax({
           url: '/api/EditProduct',

@@ -86,11 +86,18 @@
   function checksession()
   {
     var token = localStorage.getItem("user_token");
+    var b_id = localStorage.getItem("b_id");
+
     if(token == null)
     {
       alert('กรุณา Login ก่อนเข้าใช้งาน !');
       window.location.replace('/login');
     }
+    if(b_id == null){
+      alert('กรุณาเลือกเเบรนด์ก่อนเข้าใช้งาน !');
+      window.location.replace('/brand');
+    }
+
   }
   function load()
   {

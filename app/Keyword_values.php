@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Keyword extends Model
+class Keyword_values extends Model
 {
   protected $fillable = [
-      'keyword_value_id','Prod_id'
+      'keyword_value'
   ];
-  protected $primaryKey = 'keyword__id';
+  protected $primaryKey = 'keyword_value_id';
   public $incrementing = true;
 }

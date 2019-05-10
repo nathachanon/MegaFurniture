@@ -7,6 +7,7 @@ use App\Colorproduct;
 use App\Sizeproduct;
 use App\Product;
 use App\Keyword;
+use App\Keyword_values;
 use App\Delivery_price;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -272,6 +273,19 @@ $seller = DB::table('delivery_prices')
 
   } //img5 end
 
+//editKeywords
+  $Keywords_remove = DB::table('keywords')->where('Prod_id',$input['Prod_id'])->delete();
+  for($x = 0;$x<count($input["tags"]);$x++){
+
+    $Keywords_count = DB::table('keywords')->where('Prod_id',$input['Prod_id'])->where('keyword_value', $input['tags'][$x])->count();
+
+    if($input['tags'][$x] !=null){
+      $keyword = Keyword::create(
+       ['Prod_id' => $input['Prod_id'],
+        'keyword_value' => $input["tags"][$x]
+      ]);
+    }
+  }
 
 return response()->json(['success'=>$success], $this-> successStatus);
 
@@ -387,10 +401,29 @@ if($sizeCount != 0)
 
 //addKeyword
 for($x = 0;$x<count($input["tags"]);$x++){
-  $keyword = Keyword::create(
-   ['Prod_id' => $PID,
-    'keyword_value' => $input["tags"][$x]
-  ]);
+
+  $Keywords_count = DB::table('Keyword_values')->where('keyword_value', $input['tags'][$x])->count();
+
+  if($Keywords_count == 0 && $input['tags'][$x] !=null){
+    $keyword_value = Keyword_values::create([
+      'keyword_value' => $input["tags"][$x]
+    ]);
+
+    $value_id = $keyword_value->keyword_value_id;
+    $keyword_value = Keyword::create([
+      'keyword_value_id' => $value_id,
+      'Prod_id' => $PID
+    ]);
+
+  }else if($Keywords_count != 0 && $input['tags'][$x] !=null){
+    $Keyword_value_id = DB::table('Keyword_values')->where('keyword_value', $input['tags'][$x])->first();
+    $value_id = $Keyword_value_id->keyword_value_id;
+    $keyword_value = Keyword::create([
+      'keyword_value_id' => $value_id,
+      'Prod_id' => $PID
+    ]);
+
+  }
 }
 
 
@@ -623,8 +656,21 @@ $getProductDV = DB::select( DB::raw("SELECT deliverys.DeliveryName , delivery_pr
    'somevariable' => $input['Prod_id'],
  ));
 
-return response()->json(['catagoies'=>$getCat,'product'=>$getProduct,'product_size'=>$getProductSize,'product_color'=>$getProductColor,'product_rm'=>$getProductRM,'product_pic'=>$getPicProduct,'product_dv'=>$getProductDV,'delivery_count'=>$getProductDV_count], $this-> successStatus);
+$getKeywords_count = DB::table('keywords')->where('Prod_id', $input['Prod_id'])->count();
+$getKeywords = DB::table('keywords')
+->join('keyword_values', 'keywords.keyword_id', '=', 'keyword_values.keyword_value_id')
+->select('keyword_values.*')
+->where('Prod_id', $input['Prod_id'])
+->get();
+
+if(count($getKeywords)  == 0){
+ return response()->json(['catagoies'=>$getCat,'product'=>$getProduct,'product_size'=>$getProductSize,'product_color'=>$getProductColor,'product_rm'=>$getProductRM,'product_pic'=>$getPicProduct,'product_dv'=>$getProductDV,'delivery_count'=>$getProductDV_count], $this-> successStatus);
+}else{
+  return response()->json(['catagoies'=>$getCat,'product'=>$getProduct,'product_size'=>$getProductSize,'product_color'=>$getProductColor,'product_rm'=>$getProductRM,'product_pic'=>$getPicProduct,'product_dv'=>$getProductDV,'delivery_count'=>$getProductDV_count,'keywords'=>$getKeywords], $this-> successStatus);
+  }
 }
+
+
 
 public function picupload(Request $request)
 {
