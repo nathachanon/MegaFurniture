@@ -134,7 +134,7 @@
 						if(0 < rating_point && rating_point <= 0.5)
 						{
 							rating =
-							'<span class="fa fa-star-half-full"></span>'+
+							'<span class="fas fa-star-half-alt"></span>'+
 							'<span class="fa  fa-grey fa-star "></span>'+
 							'<span class="fa  fa-grey fa-star "></span>'+
 							'<span class="fa  fa-grey fa-star "></span>'+
@@ -149,7 +149,7 @@
 						}else if(1 < rating_point && rating_point <= 1.5){
 							rating =
 							'<span class="fa fa-star checked"></span>'+
-							'<span class="fa fa-star-half-full"></span>'+
+							'<span class="fas fa-star-half-alt"></span>'+
 							'<span class="fa  fa-grey fa-star "></span>'+
 							'<span class="fa  fa-grey fa-star "></span>'+
 							'<span class="fa  fa-grey fa-star "></span>';
@@ -164,7 +164,7 @@
 							rating =
 							'<span class="fa fa-star checked"></span>'+
 							'<span class="fa fa-star checked"></span>'+
-							'<span class="fa fa-star-half-full"></span>'+
+							'<span class="fas fa-star-half-alt"></span>'+
 							'<span class="fa  fa-grey fa-star "></span>'+
 							'<span class="fa  fa-grey fa-star "></span>';
 						}else if(2.5 < rating_point && rating_point <= 3){
@@ -179,7 +179,7 @@
 							'<span class="fa fa-star checked"></span>'+
 							'<span class="fa fa-star checked"></span>'+
 							'<span class="fa fa-star checked"></span>'+
-							'<span class="fa fa-star-half-full"></span>'+
+							'<span class="fas fa-star-half-alt"></span>'+
 							'<span class="fa  fa-grey fa-star "></span>';
 						}else if(3.5 < rating_point && rating_point <= 4){
 							rating =
@@ -194,7 +194,7 @@
 							'<span class="fa fa-star checked"></span>'+
 							'<span class="fa fa-star checked"></span>'+
 							'<span class="fa fa-star checked"></span>'+
-							'<span class="fa fa-star-half-full"></span>';
+							'<span class="fas fa-star-half-alt"></span>';
 						}else if(4.5 < rating_point  && rating_point <= 5){
 							rating =
 							'<span class="fa fa-star checked"></span>'+
@@ -231,7 +231,7 @@
 					if(0 < rating_point && rating_point <= 0.5)
 					{
 						rating =
-						'<span class="fa fa-star-half-full"></span>'+
+						'<span class="fas fa-star-half-alt"></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
@@ -246,7 +246,7 @@
 					}else if(1 < rating_point && rating_point <= 1.5){
 						rating =
 						'<span class="fa fa-star checked"></span>'+
-						'<span class="fa fa-star-half-full"></span>'+
+						'<span class="fas fa-star-half-alt"></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>';
@@ -261,7 +261,7 @@
 						rating =
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
-						'<span class="fa fa-star-half-full"></span>'+
+						'<span class="fas fa-star-half-alt"></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>';
 					}else if(2.5 < rating_point && rating_point <= 3){
@@ -276,7 +276,7 @@
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
-						'<span class="fa fa-star-half-full"></span>'+
+						'<span class="fas fa-star-half-alt"></span>'+
 						'<span class="fa  fa-grey fa-star "></span>';
 					}else if(3.5 < rating_point && rating_point <= 4){
 						rating =
@@ -291,7 +291,7 @@
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
-						'<span class="fa fa-star-half-full"></span>';
+						'<span class="fas fa-star-half-alt"></span>';
 					}else if(4.5 < rating_point  && rating_point <= 5){
 						rating =
 						'<span class="fa fa-star checked"></span>'+
@@ -410,7 +410,7 @@ function getProduct(){
 					if(0 < rating_point && rating_point <= 0.5)
 					{
 						rating =
-						'<span class="fa fa-star-half-full"></span>'+
+						'<span class="fas fa-star-half-alt"></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
@@ -425,7 +425,7 @@ function getProduct(){
 					}else if(1 < rating_point && rating_point <= 1.5){
 						rating =
 						'<span class="fa fa-star checked"></span>'+
-						'<span class="fa fa-star-half-full"></span>'+
+						'<span class="fas fa-star-half-alt"></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>';
@@ -440,7 +440,7 @@ function getProduct(){
 						rating =
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
-						'<span class="fa fa-star-half-full"></span>'+
+						'<span class="fas fa-star-half-alt"></span>'+
 						'<span class="fa  fa-grey fa-star "></span>'+
 						'<span class="fa  fa-grey fa-star "></span>';
 					}else if(2.5 < rating_point && rating_point <= 3){
@@ -455,7 +455,7 @@ function getProduct(){
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
-						'<span class="fa fa-star-half-full"></span>'+
+						'<span class="fas fa-star-half-alt"></span>'+
 						'<span class="fa  fa-grey fa-star "></span>';
 					}else if(3.5 < rating_point && rating_point <= 4){
 						rating =
@@ -470,7 +470,7 @@ function getProduct(){
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
 						'<span class="fa fa-star checked"></span>'+
-						'<span class="fa fa-star-half-full"></span>';
+						'<span class="fas fa-star-half-alt"></span>';
 					}else if(4.5 < rating_point  && rating_point <= 5){
 						rating =
 						'<span class="fa fa-star checked"></span>'+
@@ -507,7 +507,7 @@ function getProduct(){
 				if(0 < rating_point && rating_point <= 0.5)
 				{
 					rating =
-					'<span class="fa fa-star-half-full"></span>'+
+					'<span class="fas fa-star-half-alt"></span>'+
 					'<span class="fa  fa-grey fa-star "></span>'+
 					'<span class="fa  fa-grey fa-star "></span>'+
 					'<span class="fa  fa-grey fa-star "></span>'+
@@ -522,7 +522,7 @@ function getProduct(){
 				}else if(1 < rating_point && rating_point <= 1.5){
 					rating =
 					'<span class="fa fa-star checked"></span>'+
-					'<span class="fa fa-star-half-full"></span>'+
+					'<span class="fas fa-star-half-alt"></span>'+
 					'<span class="fa  fa-grey fa-star "></span>'+
 					'<span class="fa  fa-grey fa-star "></span>'+
 					'<span class="fa  fa-grey fa-star "></span>';
@@ -537,7 +537,7 @@ function getProduct(){
 					rating =
 					'<span class="fa fa-star checked"></span>'+
 					'<span class="fa fa-star checked"></span>'+
-					'<span class="fa fa-star-half-full"></span>'+
+					'<span class="fas fa-star-half-alt"></span>'+
 					'<span class="fa  fa-grey fa-star "></span>'+
 					'<span class="fa  fa-grey fa-star "></span>';
 				}else if(2.5 < rating_point && rating_point <= 3){
@@ -552,7 +552,7 @@ function getProduct(){
 					'<span class="fa fa-star checked"></span>'+
 					'<span class="fa fa-star checked"></span>'+
 					'<span class="fa fa-star checked"></span>'+
-					'<span class="fa fa-star-half-full"></span>'+
+					'<span class="fas fa-star-half-alt"></span>'+
 					'<span class="fa  fa-grey fa-star "></span>';
 				}else if(3.5 < rating_point && rating_point <= 4){
 					rating =
@@ -567,7 +567,7 @@ function getProduct(){
 					'<span class="fa fa-star checked"></span>'+
 					'<span class="fa fa-star checked"></span>'+
 					'<span class="fa fa-star checked"></span>'+
-					'<span class="fa fa-star-half-full"></span>';
+					'<span class="fas fa-star-half-alt"></span>';
 				}else if(4.5 < rating_point  && rating_point <= 5){
 					rating =
 					'<span class="fa fa-star checked"></span>'+
@@ -646,9 +646,16 @@ function getRecommend(){
 function saveHistoryview(){
 	console.log('function_Historyview');
     var buyer_id = localStorage.getItem("buyer_id");
+		if(!buyer_id){
+			$.getJSON("http://jsonip.com?callback=?", function (data) {
+
+			buyer_id = data.ip;
+});
+		}
 	  var b_token = localStorage.getItem("b_token");
 		var prod_id = getCookie();
-		
+		setTimeout(function() {
+			
 		$.ajax({
 			type: "POST",
 			url: "/api/saveHistoryview",
@@ -662,9 +669,8 @@ function saveHistoryview(){
 			}),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
-			success: function(data){
-				var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
-				if(s == "1")
+			success: function(data){		
+				if(data['success'] == "success")
 				{
 					console.log("saveHistoryview : success");
 
@@ -674,9 +680,10 @@ function saveHistoryview(){
 				}
 			},
 			failure: function(errMsg) {
-				alert(errMsg);
+				console.log(errMsg);
 			}
 		});
+	}, 1000);
 }
 getRecommend();
 saveHistoryview();

@@ -274,7 +274,7 @@ function getRating(Compare_id,Prod_id){
 				 if(0 < rating_point && rating_point <= 0.5)
 				 {
 					 rating =
-					 '<span class="fa fa-star-half-full"></span>'+
+					 '<span class="fas fa-star-half-alt"></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>'+
@@ -289,7 +289,7 @@ function getRating(Compare_id,Prod_id){
 				 }else if(1 < rating_point && rating_point <= 1.5){
 					 rating =
 					 '<span class="fa fa-star checked"></span>'+
-					 '<span class="fa fa-star-half-full"></span>'+
+					 '<span class="fas fa-star-half-alt"></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>';
@@ -304,7 +304,7 @@ function getRating(Compare_id,Prod_id){
 					 rating =
 					 '<span class="fa fa-star checked"></span>'+
 					 '<span class="fa fa-star checked"></span>'+
-					 '<span class="fa fa-star-half-full"></span>'+
+					 '<span class="fas fa-star-half-alt"></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>';
 				 }else if(2.5 < rating_point && rating_point <= 3){
@@ -319,7 +319,7 @@ function getRating(Compare_id,Prod_id){
 					 '<span class="fa fa-star checked"></span>'+
 					 '<span class="fa fa-star checked"></span>'+
 					 '<span class="fa fa-star checked"></span>'+
-					 '<span class="fa fa-star-half-full"></span>'+
+					 '<span class="fas fa-star-half-alt"></span>'+
 					 '<span class="fa  fa-grey fa-star "></span>';
 				 }else if(3.5 < rating_point && rating_point <= 4){
 					 rating =
@@ -334,7 +334,7 @@ function getRating(Compare_id,Prod_id){
 					 '<span class="fa fa-star checked"></span>'+
 					 '<span class="fa fa-star checked"></span>'+
 					 '<span class="fa fa-star checked"></span>'+
-					 '<span class="fa fa-star-half-full"></span>';
+					 '<span class="fas fa-star-half-alt"></span>';
 				 }else if(4.5 < rating_point  && rating_point <= 5){
 					 rating =
 					 '<span class="fa fa-star checked"></span>'+
