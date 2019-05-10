@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="layout/styles/shop_styles.css">
 	<link rel="stylesheet" type="text/css" href="layout/styles/shop_responsive.css">
 	<link rel="stylesheet" type="text/css" href="layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-
+	<link rel="stylesheet" type="text/css" href="layout/styles/product_styles.css">
 
 </head>
 <body>
@@ -91,6 +91,8 @@
 				<!-- Custom and plugin javascript -->
 				<script src="js/inspinia.js"></script>
 				<script src="js/plugins/pace/pace.min.js"></script>
+
+				<script src="js/plugins/iCheck/icheck.min.js"></script>
 				<script>
 					var b_token = localStorage.getItem("b_token");
 					var buyer_id = localStorage.getItem("buyer_id");

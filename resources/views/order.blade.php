@@ -318,6 +318,9 @@
             (data['success'][i]['status'] == 0 ? '<td><span class="label label-primary">รอจ่ายเงิน</span></td>':'')+
             (data['success'][i]['status'] == 1 ? '<td><span class="label label-warning">แจ้งโอนเงินแล้ว</span><button class="btn-white btn btn-xs" onclick="showPayment('+data['success'][i]['order_id']+')">หลักฐานการโอน</button></td>':'')+
             (data['success'][i]['status'] == 2 ? '<td><span class="label label-warning">รอส่งของ</span><button class="btn-white btn btn-xs" onclick="addTracking('+data['success'][i]['order_id']+')">กรอกเลข Tracking</button></td>':'')+
+            (data['success'][i]['status'] == 3 ? '<td><span class="label label-success">ผู้ซื้อได้รับสินค้าแล้ว</span></td>':'')+
+            (data['success'][i]['status'] == 4 ? '<td><span class="label label-success">คำสั่งซื้อถูกยกเลิก</span></td>':'')+
+            (data['success'][i]['status'] == 5 ? '<td><span class="label label-success">หมดเวลาชำระเงิน</span></td>':'')+
             '<td class="text-right">'+
             '<div class="btn-group">'+
             '<button class="btn-white btn btn-xs" onclick="show_details('+data['success'][i]['order_id']+')" >ดูรายละเอียด</button>'+
@@ -392,7 +395,7 @@
         '<div class="m-t-xs btn-group"><hr>'+
         'วันเวลาที่สั่งซื้อ : '+content['order'][0]['created_at']+' น. <br>'+
         'อัพเดทสถานะล่าสุด : '+content['order'][0]['updated_at']+' น. <hr>'+
-        'สถานะการสั่งซื้อ : '+(content['order'][0]['status'] == 0 ? '<td><span class="label label-primary">รอจ่ายเงิน</span></td>':'')+(content['order'][0]['status'] == 1 ? '<td><span class="label label-warning">มีการแจ้งโอนเงิน</span></td>':'')+''+(content['order'][0]['status'] == 2 ? '<td><span class="label label-warning">รอการส่งของ</span></td>':'')+''+
+        'สถานะการสั่งซื้อ : '+(content['order'][0]['status'] == 0 ? '<td><span class="label label-primary">รอจ่ายเงิน</span></td>':'')+(content['order'][0]['status'] == 1 ? '<td><span class="label label-warning">มีการแจ้งโอนเงิน</span></td>':'')+''+(content['order'][0]['status'] == 2 ? '<td><span class="label label-warning">รอการส่งของ</span></td>':'')+''+(content['order'][0]['status'] == 3 ? '<td><span class="label label-success">ผู้ซื้อได้รับสินค้าแล้ว และ ทำการรีวิวแล้ว</span></td>':'')+(content['order'][0]['status'] == 4 ? '<td><span class="label label-danger">คำสั่งซื้อถูกยกเลิก</span></td>':'')+(content['order'][0]['status'] == 5 ? '<td><span class="label label-default">เกินกำหนดเวลาชำระเงิน</span></td>':'')+
         '</div>'+
         '</div>'+
         '</div>'+
@@ -595,7 +598,7 @@
         '<th class="text-center">ราคาสินค้ารวมค่าจัดส่ง (บาท)</th>'+
         '<th class="text-center">ประเภทการจัดส่ง</th>'+
         '<th class="text-center">หมายเลข Tracking</th>'+
-        '<th class="text-center">ดำเนินการ</th>'+
+        '<th class="text-right">ดำเนินการ</th>'+
         '</tr>'+
         '</thead>'+
         '<tbody id="order_detail_row">'+
@@ -628,15 +631,23 @@
             '<td><input class="form-control" type="text" id="t_'+content['orderDetail'][i]['order_detail_id']+'"></input></td>'+
             '<td><button class="btn btn-w-m btn-primary" id="b_'+content['orderDetail'][i]['order_detail_id']+'" onclick="addTracking_ADD('+order_id+',\'' + content['orderDetail'][i]['order_detail_id'] + '\')">'+
             'ส่ง Tracking</button></td>'+
+            '<td><button id="be_'+content['orderDetail'][i]['order_detail_id']+'" onclick="addTracking_EDIT('+order_id+',\'' + content['orderDetail'][i]['order_detail_id'] + '\')" class="btn btn-danger dim" type="button"><i id="fa_'+content['orderDetail'][i]['order_detail_id']+'" class="fa fa-cog"></i></td>'+
             '</tr>');
         }
 
         for(i = 0 ; i<content['tracking'].length ; i++){
-          if(content['tracking'][i]['track_number'] != null){
+          if(content['tracking'][i]['track_number'] != null && content['tracking'][i]['status'] == 0){
             $("#t_"+content['tracking'][i]['order_detail_id']).val(content['tracking'][i]['track_number']);
             $("#t_"+content['tracking'][i]['order_detail_id']).attr("disabled", true);
             $("#b_"+content['tracking'][i]['order_detail_id']).attr("disabled", true);
+          }else if(content['tracking'][i]['track_number'] != null && content['tracking'][i]['status'] == 1){
+            $("#t_"+content['tracking'][i]['order_detail_id']).val('ผู้ซื้อได้รับสินค้าแล้ว');
+            $("#t_"+content['tracking'][i]['order_detail_id']).attr("disabled", true);
+            $("#b_"+content['tracking'][i]['order_detail_id']).attr("disabled", true);
+            $("#be_"+content['tracking'][i]['order_detail_id']).attr("disabled", true);
+            $("#b_"+content['tracking'][i]['order_detail_id']).html('ผู้ซื้อได้รับสินค้าแล้ว');
           }else{
+            $("#be_"+content['tracking'][i]['order_detail_id']).attr("disabled", true);
             $("#t_"+content['tracking'][i]['order_detail_id']).val();
           }
         }
@@ -657,6 +668,45 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({"order_detail_id":order_detail_id,"track_number":tracking_number,"status":0})
+        });
+        const data = await rawResponse.json();
+        if(data['success'] == 'success'){
+          addTracking(order_id);
+          Swal.fire(
+            'เรียบร้อย !',
+            'ส่งหมายเลข Tracking สำเร็จ',
+            'success'
+            )
+        }else{
+          Swal.fire(
+            'ผิดพลาด !',
+            'เกิดปัญหาบางประการ',
+            'error'
+            )
+        }
+      })();
+    }
+  }
+
+  function addTracking_EDIT(order_id,order_detail_id){
+    $("#t_"+order_detail_id).attr("disabled", false);
+    $("#fa_"+order_detail_id).attr("class",'fa fa-check');
+    $("#be_"+order_detail_id).attr("class",'btn btn-primary dim');
+    $("#be_"+order_detail_id).attr('onclick', 'addTracking_EDITSEND('+order_id+',\'' + order_detail_id + '\')');
+  }
+
+  function addTracking_EDITSEND(order_id,order_detail_id){
+    var tracking_number = $("#t_"+order_detail_id).val();
+    if(tracking_number != ''){
+      (async () => {
+        const rawResponse = await fetch('/api/editTracking', {
+          method: 'POST',
+          headers: {
+            'Authorization':'Bearer '+token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({"order_detail_id":order_detail_id,"track_number":tracking_number})
         });
         const data = await rawResponse.json();
         if(data['success'] == 'success'){

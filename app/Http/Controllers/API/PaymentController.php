@@ -178,6 +178,26 @@ class PaymentController extends Controller
                 'payments.updated_at' => date('Y-m-d H:i:s')
               ]);
 
+    $selectProduct = DB::table('orders')
+    ->select('orderdetails.Prod_id','orderdetails.count')
+    ->join('orderdetails', 'orders.Order_id', '=', 'orderdetails.Order_id')
+    ->where('orders.order_id', $input['order_id'])
+    ->get();
+
+    $result = json_decode($selectProduct, true);
+
+    for($y = 0; $y < count($result);$y++){
+        DB::table('products')
+          ->where('Prod_id', $result[$y]['Prod_id'])
+          ->decrement('qty', $result[$y]['count']);
+          
+        DB::table('products')
+        ->where('Prod_id', $result[$y]['Prod_id'])
+        ->update([
+                    'products.updated_at' => date('Y-m-d H:i:s')
+                  ]);
+      }
+
     return response()->json(['success' => 'success'], $this-> successStatus);
   }
 

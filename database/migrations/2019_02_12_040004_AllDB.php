@@ -208,6 +208,8 @@ class AllDB extends Migration
        $table->string('order_detail_id',20)->primary();
        $table->DateTime('requiredDate');
        $table->integer('price');
+       $table->integer('count');
+       $table->integer('status');
 
        $table->foreign('Prod_id')->references('Prod_id')->on('products')->onDelete('cascade');
        $table->foreign('Order_id')->references('Order_id')->on('Orders')->onDelete('cascade');
