@@ -1,0 +1,55 @@
+
+
+input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  cursor: pointer;
+}
+ .label-regis{
+  position: relative;
+  display: inline-block;
+  margin-right: 100px;
+  margin-bottom: 10px;
+  padding-right: 10px;
+  line-height: 36px;
+  cursor: pointer;
+}
+ .label-regis::before {
+  content: " ";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #1ab394;
+  border-radius: 4px;
+  z-index: -1;
+}
+input[type=radio] +  .label-regis::before {
+  border-radius: 18px;
+}
+/* Checked */
+
+input[type=radio]:checked +  label {
+  padding-left: 10px;
+  color: #fff;
+}
+.center-on-page {
+  left: 20%;
+  transform: translate(0%,10%);
+}
+input[type=radio]:checked +  .label-regis::before {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #1ab394;
+}
+/* Transition */
+ .label-regis,
+ .label-regis::before {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}

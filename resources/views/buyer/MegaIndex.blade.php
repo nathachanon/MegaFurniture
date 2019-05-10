@@ -3,6 +3,7 @@
 @section('content')
 <!-- Sweet Alert -->
 <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="layout/styles/shop_siderbar.css">
 
 <div class="shop">
   <div class="container">
@@ -15,9 +16,9 @@
             <div class="sidebar_title "><div class="shop_bar-t clearfix"> หมวดหมู่สินค้า</div></div><br>
             <ul class="li">
 
-              <li class="bor"><input   type="checkbox" id="cb1"/><label for="cb1">ห้องนอน </label>
+              <li class="bor "><input   type="checkbox" id="cb1"/><label for="cb1">ห้องนอน </label>
                 <ul >
-                  <li ><label onclick="searchCat('เตียง')">เตียง</label></li>
+                  <li  ><label onclick="searchCat('เตียง')">เตียง</label></li>
                   <li ><label onclick="searchCat('โต๊ะข้างเตียง')">โต๊ะข้างเตียง </label></li>
                   <li ><label onclick="searchCat('โซฟา')">โซฟา </label></li>
                   <li ><label onclick="searchCat('ตู้เสื้อผ้า')">ตู้เสื้อผ้า </label></li>
