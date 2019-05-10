@@ -674,9 +674,15 @@ function getRecommend(){
 function saveHistoryview(){
 	console.log('function_Historyview');
     var buyer_id = localStorage.getItem("buyer_id");
+		if(!buyer_id){
+			$.getJSON("http://jsonip.com?callback=?", function (data) {
+		buyer_id = data.ip;
+});
+		}
 	  var b_token = localStorage.getItem("b_token");
 		var prod_id = getCookie();
-		
+		setTimeout(function() {
+			
 		$.ajax({
 			type: "POST",
 			url: "/api/saveHistoryview",
@@ -705,6 +711,7 @@ function saveHistoryview(){
 				alert(errMsg);
 			}
 		});
+	}, 1000);
 }
 getRecommend();
 saveHistoryview();
