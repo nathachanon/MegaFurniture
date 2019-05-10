@@ -57,33 +57,6 @@
 			</div>
 			<div class="col-md-12 bg-c" id="comment">
 			</div>
-			<div class="col-md-12 bg-c" id="review_body">
-				<div class="ibox-content">
-
-					<div class="form-group">
-						<div class="col-sm-12 "><fieldset class="rating" >
-							<input type="radio" id="5" name="rating" value="5"  /><label class = "full" for="5" title="Awesome - 5 stars"></label>
-							<input type="radio" id="4.5" name="rating" value="4.5" /><label class="half" for="4.5" title="Pretty good - 4.5 stars"></label>
-							<input type="radio" id="4"  name="rating" value="4" /><label class = "full" for="4" title="Pretty good - 4 stars"></label>
-							<input type="radio" id="3.5" name="rating" value="3.5" /><label class="half" for="3.5" title="Meh - 3.5 stars"></label>
-							<input type="radio" id="3" name="rating" value="3" /><label class = "full" for="3" title="Meh - 3 stars"></label>
-							<input type="radio" id="2.5" name="rating" value="2.5" /><label class="half" for="2.5" title="Kinda bad - 2.5 stars"></label>
-							<input type="radio" id="2" name="rating" value="2" /><label class = "full" for="2" title="Kinda bad - 2 stars"></label>
-							<input type="radio" id="1.5" name="rating" value="1.5" /><label class="half" for="1.5" title="Meh - 1.5 stars"></label>
-							<input type="radio" id="1" name="rating" value="1" /><label class = "full" for="1" title="Sucks big time - 1 star"></label>
-							<input type="radio" id="0.5" name="rating" value="0.5" /><label class="half" for="0.5" title="Sucks big time - 0.5 stars"></label>
-						</fieldset></div>
-						<div class="col-sm-12"><input placeholder="ระบุความคิดเห็นต่อสินค้า..." id="reiview_content" type="text" class="form-control input-lg"></div>
-					</div>
-					<div class="form-group" id="footer" >
-						<div class="col-sm-6 col-sm-offset-2">
-
-							<button class="btn btn-warning input-lg" type="button" id="sub_review">ส่งความคิดเห็น</button>
-							<button class="btn btn-white input-lg" type="button" id="cancel">ยกเลิก</button>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
@@ -670,6 +643,42 @@ function getRecommend(){
 
 	})();
 }
+function saveHistoryview(){
+	console.log('function_Historyview');
+    var buyer_id = localStorage.getItem("buyer_id");
+	  var b_token = localStorage.getItem("b_token");
+		var prod_id = getCookie();
+		
+		$.ajax({
+			type: "POST",
+			url: "/api/saveHistoryview",
+			headers: {
+				'Authorization':'Bearer '+ b_token,
+				'Content-Type':'application/json'
+			},
+			data: JSON.stringify({
+				"buyer_id": buyer_id,
+				"prod_id": prod_id
+			}),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(data){
+				var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
+				if(s == "1")
+				{
+					console.log("saveHistoryview : success");
+
+				}else{
+					console.log("saveHistoryview : fail");
+
+				}
+			},
+			failure: function(errMsg) {
+				alert(errMsg);
+			}
+		});
+}
 getRecommend();
+saveHistoryview();
 </script>
 @endsection

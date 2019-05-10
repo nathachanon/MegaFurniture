@@ -291,7 +291,9 @@ class OrderController extends Controller
 						 'Prod_id' => $input['order_list'][$y]['prod_id'],
 						 'del_price_id' => $input['order_list'][$y]['del_price_id'],
 						 'requiredDate' => date('Y-m-d H:i:s', strtotime("+3 days")),
-						 'price' => $input['order_list'][$y]['price']
+						 'price' => $input['order_list'][$y]['price'],
+						 'count' => $input['order_list'][$y]['count'],
+						 'status' => 0
 						]);
 				}
 			}
@@ -403,7 +405,7 @@ class OrderController extends Controller
 		->get();
 
 		$getOrderTracking = DB::table('orderdetails')
-		->select('orderdetails.order_detail_id','trackings.track_number')
+		->select('orderdetails.order_detail_id','trackings.track_number','trackings.status')
 		->leftjoin('trackings', 'orderdetails.order_detail_id', '=', 'trackings.order_detail_id')
 		->where('orderdetails.order_id', $input['order_id'])
 		->get();
@@ -435,7 +437,7 @@ class OrderController extends Controller
 		$input = $request->all();
 
 		$getOrderDetail = DB::table('orders')
-		->select('products.sku','orderdetails.price','orderdetails.order_detail_id','deliverys.deliveryname','products.prod_price','delivery_prices.price as del_price')
+		->select('products.sku','products.prod_id','orderdetails.price','orderdetails.order_detail_id','deliverys.deliveryname','products.prod_price','delivery_prices.price as del_price')
 		->join('orderdetails', 'orders.order_id', '=', 'orderdetails.order_id')
 		->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
 		->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
@@ -447,7 +449,7 @@ class OrderController extends Controller
 		->get();
 
 		$getOrderTracking = DB::table('orderdetails')
-		->select('orderdetails.order_detail_id','trackings.track_number')
+		->select('orderdetails.order_detail_id','trackings.track_number','trackings.status')
 		->leftjoin('trackings', 'orderdetails.order_detail_id', '=', 'trackings.order_detail_id')
 		->where('orderdetails.order_id', $input['order_id'])
 		->get();
@@ -479,6 +481,63 @@ class OrderController extends Controller
 		$input = $request->all();
 
 		$createdTracking = Tracking::create($input);
+
+		return response()->json(['success'=>'success'], $this-> successStatus);
+
+	}
+
+	public function statusTracking(Request $request){
+		$validator = Validator::make($request->all(), [
+			'order_detail_id' => 'required',
+			'order_id' => 'required'
+		]);
+
+    if ($validator->fails()) {
+			return response()->json(['error'=>$validator->errors()], 201);
+		}
+		$input = $request->all();
+
+		DB::table('trackings')
+		->where('order_detail_id',$input['order_detail_id'])
+		->update(['status' => 1,
+				'updated_at' => date('Y-m-d H:i:s')]);
+
+		DB::table('orderdetails')
+		->where('order_detail_id',$input['order_detail_id'])
+		->update(['status' => 1,
+				'updated_at' => date('Y-m-d H:i:s')]);
+
+		$countDelivery = DB::table('orderdetails')
+		->where('order_id', $input['order_id'])
+		->where('status', 0)
+		->count();
+
+		if($countDelivery == 0){
+			DB::table('orders')
+			->where('order_id',$input['order_id'])
+			->update(['status' => 3,
+					'updated_at' => date('Y-m-d H:i:s')]);
+		}
+
+		return response()->json(['success'=>'success'], $this-> successStatus);
+	}
+
+	public function editTracking(Request $request){
+		$validator = Validator::make($request->all(), [
+			'order_detail_id' => 'required',
+			'track_number' => 'required'
+		]);
+
+    if ($validator->fails()) {
+			return response()->json(['error'=>$validator->errors()], 201);
+		}
+		$input = $request->all();
+
+		DB::table('trackings')
+			->where('order_detail_id',$input['order_detail_id'])
+			->update(['track_number' => $input['track_number'],
+					'status' => 0,
+					'updated_at' => date('Y-m-d H:i:s')]);
 
 		return response()->json(['success'=>'success'], $this-> successStatus);
 

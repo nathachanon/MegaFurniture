@@ -25,7 +25,7 @@ function changeProduct(Prod_id,status)
       {
         switch (filltertype) {
           case 'show_all':
-             getProduct();
+          getProduct();
           break;
           case 'show_sell':
           getProduct_FILLTER(0);
@@ -132,6 +132,7 @@ function getProduct(){
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function(data){
+      console.log(data);
       document.title = JSON.stringify(data['brand_name'][0]['brand_name']).replace(/['"]+/g, '')+' : Brand';
       var p_count = data['product_count'];
       if(p_count == null)
@@ -180,9 +181,7 @@ function getProduct(){
           '<td style="width:290px;">'+data['product'][i]['prod_name']+'</td>'+
           '<td>'+data['product'][i]['ColorProd_value']+'</td>'+
           '<td>'+data['product'][i]['qty']+'</td>'+
-          '<td>'+
-          '0'+
-          '</td>'+
+          '<td id="sellcount_'+data['product'][i]['Prod_id']+'">0</td>'+
           '<td>'+data['product'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</td>'+
           '<td>'+
           status
@@ -202,6 +201,12 @@ function getProduct(){
           '</td>'+
           '</tr>'
           );
+      }
+      if(p_count > 0){
+        for(i = 0 ; i<data['sellcount'].length ; i++){
+          $("#sellcount_"+data['sellcount'][i]['Prod_id']).empty();
+          $("#sellcount_"+data['sellcount'][i]['Prod_id']).append(data['sellcount'][i]['sell_count']);
+        }
       }
       $("#table").append('</table>');
       $('.dataTables-example').DataTable({
@@ -463,42 +468,42 @@ function groupchangeStatus_change(prodlist,status){
 function groupchangeDelete(prodlist,status){
   $('#exampleModal').modal('hide');
   $("#model_body").empty();
-    $.ajax({
-      url: '/api/changegroup-Delete',
-      headers: {
-        'Authorization':'Bearer '+token,
-        'Content-Type':'application/json'
-      },
-      method: 'POST',
-      data: JSON.stringify({ "length":prodlist.length,"prodlist":prodlist }),
-      contentType: "application/json; charset=utf-8",
-      dataType: 'json',
-      success: function(data){
-        if(data['success'] != null)
-        {
-          $('#exampleModal').modal('hide');
-          $("#model_body").empty();
-          switch (filltertype) {
-            case 'show_all':
-            getProduct();
-            break;
-            case 'show_sell':
-            getProduct_FILLTER(0);
-            break;
-            case 'show_unsell':
-            getProduct_FILLTER(1);
-            break;
-          }
-          swal("Deleted !", "สินค้าที่คุณเลือกถูกลบออกจากร้านแล้ว !", "success");
-        }else{
-          swal({
-            title: "Error !",
-            text: "เกิดข้อผิดพลาดบางประการ !",
-            type: "error"
-          });
+  $.ajax({
+    url: '/api/changegroup-Delete',
+    headers: {
+      'Authorization':'Bearer '+token,
+      'Content-Type':'application/json'
+    },
+    method: 'POST',
+    data: JSON.stringify({ "length":prodlist.length,"prodlist":prodlist }),
+    contentType: "application/json; charset=utf-8",
+    dataType: 'json',
+    success: function(data){
+      if(data['success'] != null)
+      {
+        $('#exampleModal').modal('hide');
+        $("#model_body").empty();
+        switch (filltertype) {
+          case 'show_all':
+          getProduct();
+          break;
+          case 'show_sell':
+          getProduct_FILLTER(0);
+          break;
+          case 'show_unsell':
+          getProduct_FILLTER(1);
+          break;
         }
+        swal("Deleted !", "สินค้าที่คุณเลือกถูกลบออกจากร้านแล้ว !", "success");
+      }else{
+        swal({
+          title: "Error !",
+          text: "เกิดข้อผิดพลาดบางประการ !",
+          type: "error"
+        });
       }
-    });
+    }
+  });
 
 }
 
@@ -541,7 +546,7 @@ function btn_price_save(prodlist){
           $("#model_body").empty();
           switch (filltertype) {
             case 'show_all':
-               getProduct();
+            getProduct();
             break;
             case 'show_sell':
             getProduct_FILLTER(0);
@@ -591,7 +596,7 @@ function btn_color_save(prodlist){
           $("#model_body").empty();
           switch (filltertype) {
             case 'show_all':
-               getProduct();
+            getProduct();
             break;
             case 'show_sell':
             getProduct_FILLTER(0);
@@ -641,7 +646,7 @@ function btn_qty_save(prodlist){
           $("#model_body").empty();
           switch (filltertype) {
             case 'show_all':
-               getProduct();
+            getProduct();
             break;
             case 'show_sell':
             getProduct_FILLTER(0);
@@ -777,18 +782,18 @@ function skuChange(prod_id,prod_sku){
   $("#ModelSKU").empty();
   $("#ModelSKU").append('<div class="modal fade" id="skuModal" tabindex="-1" role="dialog" aria-labelledby="skuModal">'+
     '<div class="modal-dialog" role="document">'+
-      '<div class="modal-content">'+
-        '<div class="modal-header">'+
-          '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-          '<h4 class="modal-title" id="modal_header_title">แก้ไข SKU</h4>'+
-        '</div>'+
-        '<div class="modal-body" id="model_body">'+
-          '<div class="form-group"><label>รหัสสินค้าที่ต้องการ (SKU)</label> <input maxlength="20" onkeypress="return (event.charCode != 32 ) && (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 45" type="text" placeholder="Enter product sku" id="prod_sku" class="form-control" name="prod_sku" autocomplete="off"></div>'+
-          '<div><button id="btn_sku_save" class="btn btn-sm btn-primary m-t-n-xs" type="button"><strong>บันทึก</strong></button></div>'+
-        '</div>'+
-      '</div>'+
+    '<div class="modal-content">'+
+    '<div class="modal-header">'+
+    '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+    '<h4 class="modal-title" id="modal_header_title">แก้ไข SKU</h4>'+
     '</div>'+
-  '</div>');
+    '<div class="modal-body" id="model_body">'+
+    '<div class="form-group"><label>รหัสสินค้าที่ต้องการ (SKU)</label> <input maxlength="20" onkeypress="return (event.charCode != 32 ) && (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 45" type="text" placeholder="Enter product sku" id="prod_sku" class="form-control" name="prod_sku" autocomplete="off"></div>'+
+    '<div><button id="btn_sku_save" class="btn btn-sm btn-primary m-t-n-xs" type="button"><strong>บันทึก</strong></button></div>'+
+    '</div>'+
+    '</div>'+
+    '</div>'+
+    '</div>');
 
   sku_pid = prod_id;
   $("#prod_sku").val('');
@@ -808,55 +813,55 @@ function skuChange(prod_id,prod_sku){
       });
     }else{
       if(prod_sku != ''){
-      $.ajax({
-        url: '/api/change-Sku',
-        headers: {
-          'Authorization':'Bearer '+token,
-          'Content-Type':'application/json'
-        },
-        method: 'POST',
-        data: JSON.stringify({ "prod_sku":prod_sku,"prod_id":sku_pid }),
-        contentType: "application/json; charset=utf-8",
-        dataType: 'json',
-        success: function(data){
-          if(data['success'] != null)
-          {
-            $('#skuModal').modal('hide');
-            switch (filltertype) {
-              case 'show_all':
-                 getProduct();
-              break;
-              case 'show_sell':
-              getProduct_FILLTER(0);
-              break;
-              case 'show_unsell':
-              getProduct_FILLTER(1);
-              break;
+        $.ajax({
+          url: '/api/change-Sku',
+          headers: {
+            'Authorization':'Bearer '+token,
+            'Content-Type':'application/json'
+          },
+          method: 'POST',
+          data: JSON.stringify({ "prod_sku":prod_sku,"prod_id":sku_pid }),
+          contentType: "application/json; charset=utf-8",
+          dataType: 'json',
+          success: function(data){
+            if(data['success'] != null)
+            {
+              $('#skuModal').modal('hide');
+              switch (filltertype) {
+                case 'show_all':
+                getProduct();
+                break;
+                case 'show_sell':
+                getProduct_FILLTER(0);
+                break;
+                case 'show_unsell':
+                getProduct_FILLTER(1);
+                break;
+              }
+              swal({
+                title: "Success !",
+                button: false,
+                timer: 1500,
+                icon: "success",
+                text: "แก้ไข รหัสสินค้า (SKU) สำเร็จ !",
+              });
+            }else if(data['sku_error'] != null){
+              swal({
+                title: "เกิดข้อผิดพลาด !",
+                text: "SKU นี้ถูกใช้งานแล้วกรุณากรอกใหม่ !",
+                type: "error"
+              });
+              $("#prod_sku").val('');
             }
-            swal({
-              title: "Success !",
-              button: false,
-              timer: 1500,
-              icon: "success",
-              text: "แก้ไข รหัสสินค้า (SKU) สำเร็จ !",
-            });
-          }else if(data['sku_error'] != null){
-            swal({
-              title: "เกิดข้อผิดพลาด !",
-              text: "SKU นี้ถูกใช้งานแล้วกรุณากรอกใหม่ !",
-              type: "error"
-            });
-            $("#prod_sku").val('');
           }
-        }
-      });
-    }else{
-      swal({
-        title: "Error !",
-        text: "กรุณาใส่ SKU ที่ต้องการ !",
-        type: "error"
-      });
-    }
+        });
+      }else{
+        swal({
+          title: "Error !",
+          text: "กรุณาใส่ SKU ที่ต้องการ !",
+          type: "error"
+        });
+      }
     }
   });
 }

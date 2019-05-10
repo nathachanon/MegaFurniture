@@ -75,9 +75,14 @@ function EditProduct(Request $request){
 
  $input = $request->all();
 
- $skuCheck = DB::table('products')->where('sku', $request['sku'])->count();
+ $skuCheck = DB::table('products')->where('sku', $request['sku'])->where('Prod_id', $request['Prod_id'])->count();
  if($skuCheck == 1){
-  return response()->json(['sku_error'=>'SKU Is Used !'], $this-> successStatus);
+  
+ }else{
+  $skuCheck2 = DB::table('products')->where('sku', $request['sku'])->count();
+  if($skuCheck2 == 1){
+    return response()->json(['sku_error'=>'SKU Is Used !'], $this-> successStatus);
+  }
  }
 
  $rmCount = DB::table('rmproducts')->where('RM_value', $input['RM_value'])->count();
@@ -587,10 +592,9 @@ $getCat = DB::table('products')
 
 
 $getProduct = DB::table('products')
-->select('CatProd_id','prod_name','prod_desc','prod_price','qty','weight')
+->select('CatProd_id','prod_name','prod_desc','prod_price','qty','weight','sku')
 ->where('Prod_id', $input['Prod_id'])
 ->get();
-
 
 $getProductSize = DB::table('products')
 ->select('sizeproducts.SizeProd_width','sizeproducts.SizeProd_height','sizeproducts.SizeProd_length','sizeproducts.SizeProd_foot')
@@ -893,12 +897,12 @@ function getProductMain(){
   $countProduct = DB::table('products')->where('status', 0)->where('show',0)->count();
   $getProduct = DB::select( DB::raw("select products.prod_id , products.prod_name as Name , catagoiesrooms.CatRoom_name as Room , products.prod_desc as Description , products.prod_price as Price , products.pic_url1 as Pic from products
   join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
-  join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id where products.status = 0 and products.show = 0 order by products.prod_id"));
+  join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id where products.status = 0 and products.show = 0 and products.qty > 1 order by products.prod_id"));
 
   $getRating = DB::select( DB::raw("select products.prod_id , ROUND(AVG(reviews.rating),1) as Rating from products
   join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
   join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
-  left join reviews on products.Prod_id = reviews.prod_id where products.status = 0 and products.show = 0
+  left join reviews on products.Prod_id = reviews.prod_id where products.status = 0 and products.show = 0 and products.qty > 1
   group by products.prod_id"));
 
   if($countProduct == 0){

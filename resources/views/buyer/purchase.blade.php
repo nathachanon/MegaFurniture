@@ -2,8 +2,23 @@
 
 @section('content')
 <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/LR.css">
 <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+<style type="text/css">
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+</style>
 <hr>
 <div class="row">
   <div class="col-lg-12">
@@ -111,7 +126,7 @@
             (content['order_list'][j]['status'] == 0 ? '<button type="button" onclick="payment('+content['order_list'][j]['order_id']+','+content['order_list'][j]['id']+','+content['order_list'][j]['total_price']+')" class="btn btn-w-m btn-info text-left">OrderID: #'+content['order_list'][j]['order_id']+'&nbsp แจ้งโอนเงิน ที่นี่ จำนวนเงินที่ต้องโอน: '+content['order_list'][j]['total_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' บาท &nbsp&nbsp&nbsp สถานะ : รอการจ่ายเงิน</button>':'')+
             (content['order_list'][j]['status'] == 1 ? '<button onclick="orderDetail('+content['order_list'][j]['order_id']+')" type="button" class="btn btn-w-m btn-warning text-left">OrderID: #'+content['order_list'][j]['order_id']+'&nbsp เมื่อผู้ขายยืนยันแล้วระบบจะอัพเดทให้อัตโนมัติ &nbsp&nbsp&nbsp สถานะ : รอตรวจสอบการชำระเงิน</button>':'')+
             (content['order_list'][j]['status'] == 2 ? '<button onclick="orderDetail('+content['order_list'][j]['order_id']+')" type="button" class="btn btn-w-m btn-warning text-left">OrderID: #'+content['order_list'][j]['order_id']+'&nbsp ดูรายละเอียดหมายเลข Tracking &nbsp&nbsp&nbsp สถานะ : กำลังส่งของ</button>':'')+
-            (content['order_list'][j]['status'] == 3 ? '<button onclick="orderDetail('+content['order_list'][j]['order_id']+')" type="button" class="btn btn-w-m btn-success text-left">OrderID: #'+content['order_list'][j]['order_id']+'&nbsp ได้รับสินค้าแล้วรอการรีวิว &nbsp&nbsp&nbsp สถานะ : ได้รับสินค้าแล้ว</button>':'')+
+            (content['order_list'][j]['status'] == 3 ? '<button onclick="orderDetail('+content['order_list'][j]['order_id']+')" type="button" class="btn btn-w-m btn-success text-left">OrderID: #'+content['order_list'][j]['order_id']+'&nbsp ได้รับสินค้าแล้วรีวิวแล้ว &nbsp&nbsp&nbsp สถานะ : ได้รับสินค้าแล้ว</button>':'')+
             (content['order_list'][j]['status'] == 4 ? '<button onclick="orderDetail('+content['order_list'][j]['order_id']+')" type="button" class="btn btn-w-m btn-danger text-left">OrderID: #'+content['order_list'][j]['order_id']+'&nbsp คำสั่งซื้อถูกยกเลิก &nbsp&nbsp&nbsp สถานะ : ยกเลิก</button>':'')+
             (content['order_list'][j]['status'] == 5 ? '<button onclick="orderDetail('+content['order_list'][j]['order_id']+')" type="button" class="btn btn-w-m btn-default text-left">OrderID: #'+content['order_list'][j]['order_id']+'&nbsp หมดเวลาชำระเงิน &nbsp&nbsp&nbsp สถานะ : เกินกำหนดเวลาชำระเงิน</button>':'')+
             '</div>');  
@@ -295,6 +310,7 @@
         '<th class="text-center small">ราคาสินค้ารวมค่าจัดส่ง (บาท)</th>'+
         '<th class="text-center small">ส่งโดย</th>'+
         '<th class="text-center small">หมายเลข Tracking</th>'+
+        '<th class="text-center small">ดำเนินการ</th>'+
         '</tr>'+
         '</thead>'+
         '<tbody id="order_detail_row">'+
@@ -312,7 +328,7 @@
         '</div>'+
         '</div>';
         Swal.fire({
-          width: 800,
+          width: 1000,
           showConfirmButton: false,
           html:swal_html
         });
@@ -323,6 +339,8 @@
             '<td class="text-left small">'+content['orderDetail'][i]['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</td>'+
             '<td class="text-center small">'+content['orderDetail'][i]['deliveryname']+'</td>'+
             '<td class="text-center small"><input id="'+content['orderDetail'][i]['order_detail_id']+'" class="form-control"type="text" value="" disabled></input></td>'+
+            '<td><button disabled class="btn btn-w-m btn-primary" id="b_'+content['orderDetail'][i]['order_detail_id']+'" onclick="confirmDelivery('+order_id+',\'' + content['orderDetail'][i]['order_detail_id'] + '\','+content['orderDetail'][i]['prod_id']+')">'+
+            'ยืนยันได้รับสินค้าแล้ว</button></td>'+
             '</tr>');
         }
         if(content['orderDetail'].length > 1){
@@ -336,16 +354,106 @@
           var tracking_number = '';
           if(content['tracking'][i]['track_number'] == null){
             tracking_number = "กำลังรอ Tracking Number";
-          }else{
+            $("#b_"+content['tracking'][i]['order_detail_id']).html('รอ Tracking Number');
+            $("#b_"+content['tracking'][i]['order_detail_id']).attr("class", 'btn btn-w-m btn-warning');
+          }else if(content['tracking'][i]['status'] == 0){
+            $("#b_"+content['tracking'][i]['order_detail_id']).attr("disabled", false);
             tracking_number = content['tracking'][i]['track_number'];
+          }else if(content['tracking'][i]['status'] == 1){
+            $("#b_"+content['tracking'][i]['order_detail_id']).attr("disabled", true);
+            $("#b_"+content['tracking'][i]['order_detail_id']).attr("class", 'btn btn-w-m btn-info');
+            $("#b_"+content['tracking'][i]['order_detail_id']).html('ได้รับสินค้า และ รีวิวแล้ว');
+            tracking_number = 'ได้รับสินค้า และ ทำการรีวิวแล้ว';
           }
-          
           $("#"+content['tracking'][i]['order_detail_id']).val(tracking_number);
         }
       }
 
     })();
 
+  }
+
+  function confirmDelivery(order_id,order_detail_id,prod_id){
+        var swal_html = '<div class="ibox-content">'+
+          '<div class="form-group">'+
+            'ให้คะแนนสินค้า<div class="col-md-12 bg-cc"><fieldset class="rating" >'+
+              '<input type="radio" id="5" name="rating" value="5"  /><label class = "full" for="5" title="ควรซื้อไว้มันดีมาก 5 คะแนน"></label>'+
+              '<input type="radio" id="4.5" name="rating" value="4.5" /><label class="half" for="4.5" title="แนะนำให้ลองซื้อดู 4.5 คะแนน"></label>'+
+              '<input type="radio" id="4"  name="rating" value="4" /><label class = "full" for="4" title="ดีมาก 4 คะแนน"></label>'+
+              '<input type="radio" id="3.5" name="rating" value="3.5" /><label class="half" for="3.5" title="ดี 3.5 คะแนน"></label>'+
+              '<input type="radio" id="3" name="rating" value="3" /><label class = "full" for="3" title="ค่อนข้างดี 3 คะแนน"></label>'+
+              '<input type="radio" id="2.5" name="rating" value="2.5" /><label class="half" for="2.5" title="พอใช้ 2.5 คะแนน"></label>'+
+              '<input type="radio" id="2" name="rating" value="2" /><label class = "full" for="2" title="พอใช้แต่ไม่ดีมากนัก 2 คะแนน"></label>'+
+              '<input type="radio" id="1.5" name="rating" value="1.5" /><label class="half" for="1.5" title="ค่อนข้างแย่ 1.5 คะแนน"></label>'+
+              '<input type="radio" id="1" name="rating" value="1" /><label class = "full" for="1" title="แย่ 1 คะแนน"></label>'+
+              '<input type="radio" id="0.5" name="rating" value="0.5" /><label class="half" for="0.5" title="แย่มาก 0.5 คะแนน"></label>'+
+            '</fieldset></div>'+
+            '<div class="col-sm-12"><input placeholder="ระบุความคิดเห็นต่อสินค้า..." id="review_comment" type="text" class="form-control input-lg"></div>'+
+          '</div>'+
+          '<div class="form-group" id="footer" >'+
+            '<div>'+
+              '<a class="btn btn-w-m btn-warning" onclick="addReview('+order_id+',\'' + order_detail_id + '\','+prod_id+')">ส่งความคิดเห็น</a>'+
+            '</div>'+
+          '</div>'+
+        '</div>';
+        Swal.fire({
+          width: 800,
+          showConfirmButton: false,
+          html:swal_html
+        });
+  }
+
+  function addReview(order_id,order_detail_id,prod_id){
+    var comment = $("#review_comment").val();
+    var point = $("input[name='rating']:checked").val();
+    if(comment != '' && point != undefined){
+      $.ajax({
+          type: "POST",
+          url: "/api/products/"+prod_id+"/reviews",
+          headers: {
+            'Content-Type':'application/json'
+          },
+          data: JSON.stringify({
+            "buyer_id": buyer_id,
+            "rating": point,
+            "description": comment
+          }),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function(data){
+            $.ajax({
+                type: "POST",
+                url: "/api/success-Delivery",
+                headers: {
+                  'Authorization':'Bearer '+b_token,
+                  'Content-Type':'application/json'
+                },
+                data: JSON.stringify({
+                  "order_detail_id": order_detail_id,
+                  "order_id": order_id
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){
+                  Swal.fire({
+                    type:'success',
+                    text:'ยืนยันการรับสินค้า และ รีวิว เรียบร้อยแล้ว',
+                    title:'เรียบร้อย',
+                    timer:3000
+                  });
+                },
+                failure: function(errMsg) {
+                  alert(errMsg);
+                }
+              });
+          },
+          failure: function(errMsg) {
+            alert(errMsg);
+          }
+        });
+    }else{
+      alert('กรุณาแสดงความคิดเห็น และ ให้คะแนน ก่อนกดส่ง !');
+    }
   }
 </script>
 

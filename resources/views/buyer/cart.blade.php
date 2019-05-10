@@ -128,7 +128,7 @@ getAddress();
                                     '</div>'+
                                   '</div>'+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ส่งโดย</label>'+
-                                    '<div class="col-sm-12"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+','+data['ProductInCart'][i]['id']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
+                                    '<div class="col-sm-12"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+','+data['ProductInCart'][i]['id']+','+data['ProductInCart'][i]['count']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="999">เลือกประเภทการจัดส่ง</option>'+
                                       '</select>'+
                                     '</div>'+
@@ -450,7 +450,7 @@ getAddress();
   });
 }
 
-  function delivery_change(source,prod_id,prod_price,seller_id){
+  function delivery_change(source,prod_id,prod_price,seller_id,count){
     if($(source).val() != 999){
       var del_price_id = source.value.split(',')[0].trim();
       var del_price = source.value.split(',')[1].trim();
@@ -469,6 +469,7 @@ getAddress();
         orderList ["seller_id"] = seller_id;
         orderList ["prod_id"] = prod_id;
         orderList ["price"] = allprice;
+        orderList ["count"] = count;
         orderList ["del_price_id"] = del_price_id;
         orderList ["add_id"] = $("#address_list_"+prod_id).val();
         findAndRemove(jsonOrder, ["prod_id"], prod_id);
@@ -545,7 +546,7 @@ getAddress();
                                     '</div>'+
                                   '</div>'+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ส่งโดย</label>'+
-                                    '<div class="col-sm-8"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+','+data['ProductInCart'][i]['id']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
+                                    '<div class="col-sm-8"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+','+data['ProductInCart'][i]['id']+','+data['ProductInCart'][i]['count']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="999">เลือกประเภทการจัดส่ง</option>'+
                                       '</select>'+
                                     '</div>'+

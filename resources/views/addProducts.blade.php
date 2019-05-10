@@ -36,7 +36,7 @@
 
       <div class="icon">
         <button   class="btn btn-white input-lg col-lg-6" type="button" >คู่มือการใช้งาน</button>
-        <button  class="btn btn-white input-lg col-lg-6 " type="button" >ดาวน์โหลด</button>
+        <button  class="btn btn-white input-lg col-lg-6 " onclick="window.location.href = 'excel/MegaFurniture_Product_Create.xlsx';" type="button" >ดาวน์โหลด</button>
 
       </div>
 
