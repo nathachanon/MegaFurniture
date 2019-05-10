@@ -27,7 +27,7 @@ class LogController extends Controller
        // $Historyview->prod_id = $request->get('prod_id');
       //  $Historyview->buyer_id = $request->get('buyer_id');
         $Historyview->create($input);
-      return response()->json(['success'=> Historyview::where('prod_id', $input['prod_id'])->get()]);
+      return response()->json(['success'=> 'success']);
     }
 
     public function create()

@@ -1,11 +1,53 @@
 @extends('layouts.layout')
   <link rel="stylesheet" type="text/css" href="css/LR.css">
 
+
+
 @section('content')
+
+
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">เข้าสู่ระบบ</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+     
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" placeholder="อีเมล" id="orangeForm-email" class="form-control validate">
+          
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password" placeholder="รหัสผ่าน" id="orangeForm-pass" class="form-control validate">
+         
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button  class="btn btn-primary input-lg col-lg-8 btn-lg " type="button">เข้าสู่ระบบ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <a  class="btn btn-default btn-rounded mb-6" data-toggle="modal" data-target="#modalRegisterForm">Launch
+    Modal Register Form</a>
+</div>
+
+
 
 <div class="row justify-content-md-center animated fadeInUp">
   <div class="col-md-10 offset+md-1">
-    <h2>เข้าสู่ระบบ</h2>
+    <h2>สมัครสมาชิก</h2>
     <div class="row justify-content-md-center">
       <div class="col-md-6 register-right">
 
@@ -36,6 +78,8 @@
 <script>
 var b_token = localStorage.getItem("b_token");
 var buyer_id = localStorage.getItem("buyer_id");
+
+
 
 check_user();
 
