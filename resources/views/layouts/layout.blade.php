@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="layout/styles/main_styles.css">
 	<link rel="stylesheet" type="text/css" href="layout/styles/responsive.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css">
+
 	<link rel="stylesheet" type="text/css" href="layout/styles/shop_styles.css">
 	<link rel="stylesheet" type="text/css" href="layout/styles/shop_responsive.css">
 	<link rel="stylesheet" type="text/css" href="layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
@@ -24,11 +25,8 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 </head>
-<style type="text/css">
-	.my-swal {
-		z-index: X;
-	}
-</style>
+
+
 <body>
 	<div class="super_container">
 
@@ -56,7 +54,7 @@
 									<div class="user_icon"><img src="layout/images/user.svg" alt=""></div>
 									<div><a data-toggle="modal" data-target="#modalRegisterForm">สมัครสมาชิก</a></div>
 									<div><a  data-toggle="modal" data-target="#modalLoginForm">ลงชื่อเข้าใช้</a></div>
-								
+
 								</div>
 							</div>
 						</div>
@@ -378,7 +376,7 @@
 
 	</div>
 	<!-- Login Modal -->
-	<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	<div class="modal fade" data-dismiss="modal" id="modalLoginForm" role="dialog" aria-labelledby="myModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -497,7 +495,7 @@
 
 
 
-<script src="js/jquery-2.1.1.js"></script>
+
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -537,6 +535,7 @@
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		return regex.test(email);
 	}
+
 
 	$('#reg').click(function(){
 		var sex;
@@ -630,10 +629,14 @@
 								showConfirmButton: false,
 								timer: 900
 							});
-							setTimeout(function () {
-								window.location.replace('/'); 
-							}, 1200);
+							
+							$('#modalRegisterForm').hide();
+							$('.modal-backdrop').hide();
 
+							setTimeout(function () {
+								$('#modalLoginForm').modal();
+							}, 1100);
+																	
 						}
 					},
 					failure: function(errMsg) {
@@ -847,5 +850,8 @@
 	$("#carts").click(function(){
 		window.location.href = "/cart";
 	});
+
+
+	
 </script>
 </html>

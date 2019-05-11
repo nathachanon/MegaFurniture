@@ -5,10 +5,26 @@
   <link href="css/addPord_excel.css" rel="stylesheet">
 </head>
 <body >
+   <div class="row border-bottom2">
+    <nav class="navbar navbar-static-top2" role="navigation" style="margin-bottom: 0">
+      <ul class="nav navbar-top-links navbar-left">
+        <li>
+         <h2 style="padding-left: 20px;">เพิ่มสินค้าหลายชิ้น</h2> 
+        </li>
+
+
+      </ul>
+      <ul class="nav navbar-top-links navbar-right">
+        <li>
+         <a href="product"><button  class="btn btn-info  " type="button"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;<span class="bold">ย้อนกลับ</span></button></a>
+       </li>
+     </ul>
+   </nav>
+ </div>
 
   <div class="row mt-mt ibox-title">
 
-   <h2>เพิ่มสินค้าหลายชิ้น</h2> 
+
    <div class="hr-line-dashed"></div>
 
    <div class="col-lg-8">
@@ -115,6 +131,15 @@ src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
 
     window.onload = load();
   });
+
+
+  $(document).ready(function () {
+    $('.i-checks').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+    });
+  });
+
 
 
 
