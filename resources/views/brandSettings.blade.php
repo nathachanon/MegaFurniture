@@ -13,6 +13,12 @@
   width:100%;
   height:100%;
 }
+.modal-backdrop {
+  z-index: 2040 !important;
+}
+.modal {
+  z-index: 2050 !important;
+}
 </style>
 
 <body >

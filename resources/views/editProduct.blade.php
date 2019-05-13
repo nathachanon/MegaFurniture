@@ -506,6 +506,7 @@ function prodSelect() {
   var catProd_id = $('#optionproduct').val();
   if(catProd_id != 0)
   {
+    createCookie('CatRoom_id',catProd_id,20);
     if(catProd_id == 1){
       $("#inputs_wlhf").empty();
       $("#inputs_cr").empty();

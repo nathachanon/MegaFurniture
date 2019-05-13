@@ -411,6 +411,7 @@
 	var b_token = localStorage.getItem("b_token");
 	var buyer_id = localStorage.getItem("buyer_id");
 
+
 	check_user();
 
 	function check_user(){
@@ -588,6 +589,9 @@
 							timer: 900
 						});
 
+						$('#modalLoginForm').hide();
+							$('.modal-backdrop').hide();
+
 						var mytoken = JSON.stringify(data['access_token']);
 						var buyer_id = JSON.stringify(data['buyer_id']);
 						var name = JSON.stringify(data['name']);
@@ -605,6 +609,7 @@
 						Swal.fire({
 							type: 'error',
 							title: 'Email หรือ Password ผิดพลาด กรุณาลองใหม่ !',
+							animation: "slide-from-top",
 							showConfirmButton: false,
 							timer: 1000
 						});
@@ -621,6 +626,7 @@
 
 				type: 'error',
 				title: 'กรุณากรอกข้อมูลให้ครบ !',
+				  animation: "slide-from-top",
 				showConfirmButton: false,
 				timer: 900
 			});

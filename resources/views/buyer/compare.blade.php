@@ -214,18 +214,10 @@
 				'</td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td><h4>ใส่ตะกร้า</h4></th>'+
-
-				'<td ><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i></a></td>'+
-				'<td ><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i></a></td>'+
-				'<td class="compare_P_3"><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i></a></td>'+
+			
 				'</tr>'+
 				'<tr>'+
-				'<td><h4>ความคิดเห็น</h4></th>'+
-
-				'<td ><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i></a></td>'+
-				'<td ><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i></a></td>'+
-				'<td class="compare_P_3"><a href="#"  class="btn btn-xs btn-outline btn-primary"><i class="fa fa-comment"></i></a></td>'+
+				
 				'</tr>'+
 				'</tbody>'+
 				'</table>'+
