@@ -151,7 +151,7 @@
             '<img src="images_brand/'+data['brand'][i]['brand_logo']+'" class ="brand_logo"></img>'+
             '</div>'+
             '<div class="product-desc">'+
-            '<a onclick="sbrand ('+data['brand'][i]['brand_id']+');" href="inbrand" class="product-name">'+data['brand'][i]['brand_name']+'</a>'+
+            '<a onclick="sbrand ('+data['brand'][i]['brand_id']+');" href="product" class="product-name">'+data['brand'][i]['brand_name']+'</a>'+
             '<div class="small m-t-xs">'+
             data['brand'][i]['brand_des']+
             '</div>'+

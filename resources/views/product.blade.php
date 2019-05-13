@@ -8,9 +8,10 @@
   <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
   <!-- FooTable -->
   <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body >
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  
   <div class="row border-bottom2">
     <nav class="navbar navbar-static-top2" role="navigation" style="margin-bottom: 0">
       <ul class="nav navbar-top-links navbar-left">
@@ -137,3 +138,4 @@
 <!-- Script -->
 <script src="js/Scripts/product.js"></script>
 @endsection
+

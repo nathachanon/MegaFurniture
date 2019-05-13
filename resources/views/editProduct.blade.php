@@ -135,7 +135,7 @@
                                   <h4 class="mb tl text-danger">ระบุค่าจัดส่ง &nbsp;&nbsp;<p id="SELLER_price" class="in"></p></h4>
                                   <h4 class="mb tl text-danger">ระบุค่าจัดส่ง &nbsp;&nbsp;<p id="BUYER_price" class="in"></p></h4>
                                 </div>
-                                <div class="col-sm-2 text-right">
+                                <div class="col-sm-2 gird text-right">
 
                                   <label class="switch delivery-mt">
                                     <input id="DHL" type="checkbox">

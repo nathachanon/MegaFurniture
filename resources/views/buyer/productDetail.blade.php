@@ -363,7 +363,7 @@ function getProduct(){
 					'<div class="button_container">'+
 					'<button type="button" class="button cart_button" onclick="addCart(\'' + data['data']['name'] + '\','+data['data']['prod_id']+','+data['data']['price']+',\'' + data['data']['Picture']['pic_url1'] + '\')">เพิ่มใส่ตะกร้า</button>'+
 					'<div class="product_fav"><i class="fas fa-heart"></i></div>'+
-					'<h4>สินค้าจากร้าน : '+data['data']['ShopName']+' '+data['data']['ShopSurname']+'</h4>'+
+					
 					'<p>แบรนด์ : '+data['data']['BrandName']+'</p>'+
 					'</div>'+
 					'</form>'+
