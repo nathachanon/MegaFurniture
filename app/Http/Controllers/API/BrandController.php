@@ -144,6 +144,8 @@ function getCatagoiesRoom()
 
 function getCatagoiesProduct(Request $request)
 {
+$request['catroom_id'] = $request->cookie('CatRoom_id');
+
   $validator = Validator::make($request->all(), [
     'catroom_id' => 'required',
   ]);

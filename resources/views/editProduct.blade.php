@@ -370,6 +370,16 @@
                   window.location.replace('/login');
                 }
               }
+               function createCookie(name,value,second) {
+                if (second) {
+                var date = new Date();
+                date.setTime(date.getTime()+(second*1000));
+                var expires = "; expires="+date.toGMTString();
+                } else {
+                var expires = "";
+                }
+                document.cookie = name+"="+value+expires+"; path=/";
+                }
               function load()
               {
                 checksession();
@@ -391,6 +401,7 @@
                     dataType: "json",
                     success: function(data){
                       console.log(data);
+                      createCookie('CatRoom_id',data['catagoies'][0]['CatRoom_id'],20);
                       $('#optionroom').val(data['catagoies'][0]['CatRoom_id']);
                       roomselect();
                       $('#prod_sku').val(data['product'][0]['sku']);
