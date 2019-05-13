@@ -88,7 +88,8 @@ function load()
       dataType: "json",
       success: function(data){
 
-        createCookie('CatRoom_id',data['catagoies'][0]['CatRoom_id'],20);
+        createCookie('CatRoom_id',data['catagoies'][0]['CatRoom_id'],120);
+
         $('#optionroom').val(data['catagoies'][0]['CatRoom_id']);
         roomselect();
         $('#prod_name').val(data['product'][0]['prod_name']);
@@ -197,6 +198,7 @@ function roomselect(){
   var catroom_id = $('#optionroom').val();
   if(catroom_id != 0)
   {
+    createCookie('CatRoom_id',catroom_id,120);
     $("#CatProduct").empty();
     $("#inputs_wlhf").empty();
     $("#inputs_cr").empty();
