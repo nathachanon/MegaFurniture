@@ -17,11 +17,16 @@
 	<link rel="stylesheet" type="text/css" href="layout/styles/main_styles.css">
 	<link rel="stylesheet" type="text/css" href="layout/styles/responsive.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css">
+
 	<link rel="stylesheet" type="text/css" href="layout/styles/shop_styles.css">
 	<link rel="stylesheet" type="text/css" href="layout/styles/shop_responsive.css">
 	<link rel="stylesheet" type="text/css" href="layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="css/radio.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 </head>
+
+
 <body>
 	<div class="super_container">
 
@@ -47,8 +52,9 @@
 								<div class="top_bar_user" id="top_bar_user">
 
 									<div class="user_icon"><img src="layout/images/user.svg" alt=""></div>
-									<div><a href="registerBuyer">สมัครสมาชิก</a></div>
-									<div><a href="loginBuyer">ลงชื่อเข้าใช้</a></div>
+									<div><a data-toggle="modal" data-target="#modalRegisterForm">สมัครสมาชิก</a></div>
+									<div><a  data-toggle="modal" data-target="#modalLoginForm">ลงชื่อเข้าใช้</a></div>
+
 								</div>
 							</div>
 						</div>
@@ -236,26 +242,6 @@
 
 								<!-- Main Nav Menu -->
 
-								<div class="main_nav_menu ml-auto">
-									<ul class="standard_dropdown main_nav_dropdown">
-
-
-										<li class="hassubs">
-											<a href="#">Pages<i class="fas fa-chevron-down"></i></a>
-											<ul>
-												<li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-												<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-											</ul>
-										</li>
-										<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-										<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-									</ul>
-								</div>
 
 								<!-- Menu Trigger -->
 
@@ -276,89 +262,7 @@
 
 			<!-- Menu -->
 
-			<div class="page_menu">
-				<div class="container">
-					<div class="row">
-						<div class="col">
-
-							<div class="page_menu_content">
-
-								<div class="page_menu_search">
-									<form action="#">
-										<input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
-									</form>
-								</div>
-								<ul class="page_menu_nav">
-									<li class="page_menu_item has-children">
-										<a href="#">Language<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item has-children">
-										<a href="#">Currency<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item">
-										<a href="#">Home<i class="fa fa-angle-down"></i></a>
-									</li>
-									<li class="page_menu_item has-children">
-										<a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
-											<li class="page_menu_item has-children">
-												<a href="#">Menu Item<i class="fa fa-angle-down"></i></a>
-												<ul class="page_menu_selection">
-													<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-													<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item has-children">
-										<a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item has-children">
-										<a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
-										<ul class="page_menu_selection">
-											<li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										</ul>
-									</li>
-									<li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
-									<li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
-								</ul>
-
-								<div class="menu_contact">
-									<div class="menu_contact_item"><div class="menu_contact_icon"><img src="" alt=""></div>+38 068 005 3570</div>
-									<div class="menu_contact_item"><div class="menu_contact_icon"><img src="" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 		</header>
 
 
@@ -369,48 +273,144 @@
 		@yield('content')
 
 	</div>
+	<!-- Login Modal -->
+	<div class="modal fade" data-dismiss="modal" id="modalLoginForm" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<h4 class="modal-title w-100 font-weight-bold">เข้าสู่ระบบ</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body mx-3">
+
+				<div class="md-form mb-5">
+					<i class="fas fa-envelope prefix or"></i>
+					<input type="email" placeholder="อีเมล" id="email" required class="form-control validate">
+
+				</div>
+
+				<div class="md-form mb-4">
+					<i class="fas fa-lock prefix or"></i>
+					<input type="password" placeholder="รหัสผ่าน" id="password" required class="form-control validate">
+				</div>
+
+			</div>
+			<div class="modal-footer d-flex justify-content-center">
+				<button id="login" class="btn btn-primary input-lg col-lg-8 btn-lg " type="button">เข้าสู่ระบบ</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="modalRegisterForm"  role="dialog" aria-labelledby="myModalLabel"
+>
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header text-center">
+			<h4 class="modal-title w-100 font-weight-bold">สมัครสมาชิก</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body mx-3">
+
+			<div class="md-form mb-3"> 
+				<i class="fas fa-user prefix or"></i>
+				<input type="text"   name="regis_name" id="regis_name" class="form-control validate" placeholder="ชื่อ" required>
+			</div>
+
+			<div class="md-form mb-3">
+				<i class="fas fa-user-edit prefix or"></i>
+				<input type="text"  name="surname" id="surname" class="form-control validate" placeholder="นามสกุล" required>
+			</div>
+			<div class="md-form mb-2">
+				<div class="center-on-page ">
+					<input type="radio" name="sex" id="sex_m" value="ชาย" />
+					<label style="padding-left: 30px;" class="lb label-regis" for="sex_m">ชาย</label>
+					<input type="radio" name="sex" id="sex_f" value="หญิง" />
+					<label style="padding-left: 30px;" class="lb label-regis" for="sex_f">หญิง</label>
+				</div>
+			</div>
+			<div class="md-form mb-3"> 
+				<i class="fas fa-birthday-cake prefix or"></i>
+				<input type="date"  name="birthday"  id="birthday" class="form-control validate" placeholder="วันเกิด" required>
+			</div>
+
+
+			<div class="md-form mb-3">
+				<i class="fas fa-envelope prefix or"></i>
+				<input type="email"  id="regis_email" class="form-control validate" placeholder="อีเมล" required>
+
+			</div>
+
+			<div class="md-form mb-3">
+				<i class="fas fa-lock prefix or"></i>
+				<input type="password"  id="regis_password" name="regis_password" class="form-control validate" placeholder="รหัสผ่าน" required>
+			</div>
+
+			<div class="md-form mb-3">
+				<i class="fas fa-unlock prefix or"></i>
+				<input type="password"  id="c_password" name="c_password" class="form-control validate" placeholder="ยืนยันรหัสผ่าน" required>
+			</div>
+
+			<div class="form-group-mg ch mb-3">
+				<label> <input id="role" required="" value="true" type="checkbox" class="checkbox i-checks"><i></i> ยอมรับเงื่อนไขข้อตกลงจากผู้ให้บริการ </label>
+			</div>
+		</div>
+		<div class="modal-footer d-flex justify-content-center">
+			<button id="reg" class="btn btn-primary input-lg col-lg-8 btn-lg" type="button">ลงทะเบียน</button>
+		</div>
+	</div>
+</div>
+</div>
 
 
 
 
-
-	<script src="layout/js/jquery-3.3.1.min.js"></script>
-	<script src="layout/styles/bootstrap4/popper.js"></script>
-	<script src="layout/styles/bootstrap4/bootstrap.min.js"></script>
-	<script src="layout/plugins/greensock/TweenMax.min.js"></script>
-	<script src="layout/plugins/greensock/TimelineMax.min.js"></script>
-	<script src="layout/plugins/scrollmagic/ScrollMagic.min.js"></script>
-	<script src="layout/plugins/greensock/animation.gsap.min.js"></script>
-	<script src="layout/plugins/greensock/ScrollToPlugin.min.js"></script>
-	<script src="layout/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-	<script src="layout/plugins/slick-1.8.0/slick.js"></script>
-	<script src="layout/plugins/easing/easing.js"></script>
-	<script src="layout/js/custom.js"></script>
-
-
-	<script src="layout/plugins/Isotope/isotope.pkgd.min.js"></script>
-	<script src="layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-	<script src="layout/plugins/parallax-js-master/parallax.min.js"></script>
-
-
-
-	<script src="js/jquery-2.1.1.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-	<!-- Custom and plugin javascript -->
-	<script src="js/inspinia.js"></script>
-	<script src="js/plugins/pace/pace.min.js"></script>
-
-	<!-- iCheck -->
-	<script src="js/plugins/iCheck/icheck.min.js"></script>
-
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 </body>
+
+<script src="layout/js/jquery-3.3.1.min.js"></script>
+<script src="layout/styles/bootstrap4/popper.js"></script>
+<script src="layout/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="layout/plugins/greensock/TweenMax.min.js"></script>
+<script src="layout/plugins/greensock/TimelineMax.min.js"></script>
+<script src="layout/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="layout/plugins/greensock/animation.gsap.min.js"></script>
+<script src="layout/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="layout/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="layout/plugins/slick-1.8.0/slick.js"></script>
+<script src="layout/plugins/easing/easing.js"></script>
+<script src="layout/js/custom.js"></script>
+
+
+<script src="layout/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="layout/plugins/parallax-js-master/parallax.min.js"></script>
+
+
+
+
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+
 <script>
 	var b_token = localStorage.getItem("b_token");
 	var buyer_id = localStorage.getItem("buyer_id");
+
 
 	check_user();
 
@@ -430,6 +430,210 @@
 
 	}
 
+	function isEmail(email) {
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		return regex.test(email);
+	}
+
+
+	$('#reg').click(function(){
+		var sex;
+		var m = document.getElementById("sex_m")
+		var f = document.getElementById("sex_f")
+		if(m.checked == true){
+			sex = "ชาย"
+			console.log(sex)
+		}else if(f.checked == true){
+			sex = "หญิง"
+			console.log(sex)
+		}else{
+			sex = null;
+			console.log(sex)
+		}
+
+		var data = {
+			name : $("#regis_name").val(),
+			surname : $("#surname").val(),
+			sex :sex,
+			birthday : $("#birthday").val(),
+			email : $("#regis_email").val(),
+			password : $("#regis_password").val(),
+			c_password : $("#c_password").val()
+
+		};
+		console.log(data);
+		if( $("#regis_name").val() != '' && $("#surname").val() != '' && $("#birthday").val() != '' && $("#regis_email").val() != '' ){
+			if(isEmail($("#regis_email").val()) == ''){
+				Swal.fire({
+					type: 'error',
+					title: 'รูปแบบ Email ไม่ถูกต้อง !',
+					showConfirmButton: false,
+					timer: 900
+				});
+
+			}
+			else if($("#regis_password").val() != $("#c_password").val()){
+				Swal.fire({
+					type: 'error',
+					title: 'รหัสผ่านไม่ตรงกัน!',
+					showConfirmButton: false,
+					timer: 900
+				});
+
+			}
+			else if($("input[id='role']:checked").val() == null){
+				Swal.fire({
+					type: 'error',
+					title: 'กรุณายอมรับเงื่อนไขข้อตกลงจากผู้ให้บริการ!',
+					showConfirmButton: false,
+					timer: 1100
+				});
+
+			}else if(sex == null){
+				Swal.fire({
+					type: 'error',
+					title: 'กรุณาระบุเพศ !',
+					showConfirmButton: false,
+					timer: 900
+				});
+				
+			}else{
+				console.clear();
+				console.log(data);
+
+				$.ajax({
+					type: "POST",
+					url: "/api/registerBuyer",
+					data: JSON.stringify(data),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(data){
+						console.log(data);
+						var status = JSON.stringify(data['success']);
+						var status2 = JSON.stringify(data['error']);
+						if( status2 == "\"Email is already\""){
+
+							Swal.fire({
+								type: 'error',
+								title: 'Email นี้ถูกใช้งานแล้ว !',
+								showConfirmButton: false,
+								timer: 900
+							});
+							$("#regis_email").val('');
+						}
+						else if (status == "\"Register Success\""){
+							Swal.fire({
+								type: 'success',
+								title: 'สมัครสมาชิกสำเร็จ',
+								showConfirmButton: false,
+								timer: 900
+							});
+							
+							$('#modalRegisterForm').hide();
+							$('.modal-backdrop').hide();
+
+							setTimeout(function () {
+								$('#modalLoginForm').modal();
+							}, 1100);
+																	
+						}
+					},
+					failure: function(errMsg) {
+						alert(errMsg);
+					}
+				});
+			}
+		}
+		else{
+			Swal.fire({
+
+				type: 'error',
+				title: 'กรุณากรอกข้อมูลให้ครบ !',
+				showConfirmButton: false,
+				timer: 900
+			});
+		}
+
+	});
+
+	$('#login').click(function(){
+		var email = $("#email").val();
+		var password = $("#password").val();
+		if(email != '' && password != ''){
+			if(isEmail(email) == ''){
+				Swal.fire({
+					type: 'error',
+					title: 'รูปแบบ Email ไม่ถูกต้อง !',
+					showConfirmButton: false,
+					timer: 900
+				});
+			}
+			else{
+				$.ajax({
+					type: "POST",
+					url: "/api/loginBuyer",
+					data: JSON.stringify({
+						"email": email,
+						"password": password,
+						"provider": "buyer",
+					}),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(data){
+						console.log(data);
+						Swal.fire({
+
+							type: 'success',
+							title: 'เข้าสู่ระบบสำเร็จ',
+							showConfirmButton: false,
+							timer: 900
+						});
+
+						$('#modalLoginForm').hide();
+							$('.modal-backdrop').hide();
+
+						var mytoken = JSON.stringify(data['access_token']);
+						var buyer_id = JSON.stringify(data['buyer_id']);
+						var name = JSON.stringify(data['name']);
+						localStorage.setItem("b_token",mytoken.replace(/['"]+/g, ''));
+						localStorage.setItem("buyer_id",buyer_id.replace(/['"]+/g, ''));
+						localStorage.setItem("name",name.replace(/['"]+/g, ''));
+						
+						setTimeout(function () {
+							window.location.replace('/'); 
+						}, 1000);
+						
+					},
+					error: function(data){
+						console.log(data);
+						Swal.fire({
+							type: 'error',
+							title: 'Email หรือ Password ผิดพลาด กรุณาลองใหม่ !',
+							animation: "slide-from-top",
+							showConfirmButton: false,
+							timer: 1000
+						});
+					}
+					,
+					failure: function(errMsg) {
+						alert(errMsg);
+					}
+				});
+			}
+		}
+		else{
+			Swal.fire({
+
+				type: 'error',
+				title: 'กรุณากรอกข้อมูลให้ครบ !',
+				  animation: "slide-from-top",
+				showConfirmButton: false,
+				timer: 900
+			});
+		}
+
+	});
+
 	$("#logout").click(function(){
 		$.ajax({
 			url: '/api/logoutBuyer',
@@ -440,12 +644,21 @@
 			method: 'GET',
 			dataType: 'json',
 			success: function(data){
-				alert("ออกจากระบบแล้ว !");
+				console.log(data);
+				Swal.fire({
+
+					type: 'success',
+					title: 'ออกจากระบบแล้ว',
+					showConfirmButton: false,
+					timer: 900
+				});
 				removeCookies();
 				localStorage.removeItem("b_token");
 				localStorage.removeItem("name");
 				localStorage.removeItem("buyer_id");
-				window.location.replace('/');
+				setTimeout(function () {
+					window.location.replace('/'); 
+				}, 1000);
 			}
 		});
 	});
@@ -541,5 +754,8 @@
 	$("#carts").click(function(){
 		window.location.href = "/cart";
 	});
+
+
+	
 </script>
 </html>

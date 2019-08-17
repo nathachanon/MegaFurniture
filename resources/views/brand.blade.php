@@ -13,6 +13,12 @@
   width:100%;
   height:100%;
 }
+.modal-backdrop {
+  z-index: 2040 !important;
+}
+.modal {
+  z-index: 2050 !important;
+}
 </style>
 
 <body >
@@ -62,7 +68,6 @@
         <h4 class="modal-title">เพิ่มแบรนด์สินค้า</h4>
       </div>
       <div class="modal-body">
-       <form action="{{url('/api/AddBrand')}}" method="post" enctype="multipart/form-data" name="test_ajax" id="test_ajax">
         <input id="seller_id" name="seller_id" hidden="true">
         <input id="brand_status" name="brand_status" value="0" hidden="true">
         <div class="form-group"><label>ชื่อแบรนด์</label> <input id="brand_name" name="brand_name" type="text" placeholder="กรุณากรอกชื่อแบรนด์" class="form-control" require="true"></div>
@@ -71,7 +76,7 @@
           <label>โลโก้แบรนด์</label>
           <div>  <img id='b_logo_show' src="#" class="preview" hidden="true"  ></img> <div>
 
-            <input id="brand_logo" type="file" name="brand_logo" class="form-control" onchange="logoSelect(this)">
+            <input id="file_brand_logo" type="file" name="brand_logo" class="form-control" onchange="logoSelect(this)">
 
           </div>
 
@@ -81,9 +86,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-white" data-dismiss="modal">ปิด</button>
-    <button id="Add" type="submit" class="btn btn-primary">เพิ่มแบรนด์</button>
+    <button id="Add" type="button" class="btn btn-primary">เพิ่มแบรนด์</button>
   </div>
-    </form>
+  
 </div>
 </div>
 </div>
@@ -151,7 +156,7 @@
             '<img src="images_brand/'+data['brand'][i]['brand_logo']+'" class ="brand_logo"></img>'+
             '</div>'+
             '<div class="product-desc">'+
-            '<a onclick="sbrand ('+data['brand'][i]['brand_id']+');" href="inbrand" class="product-name">'+data['brand'][i]['brand_name']+'</a>'+
+            '<a onclick="sbrand ('+data['brand'][i]['brand_id']+');" href="product" class="product-name">'+data['brand'][i]['brand_name']+'</a>'+
             '<div class="small m-t-xs">'+
             data['brand'][i]['brand_des']+
             '</div>'+
@@ -193,44 +198,59 @@
       }
     });
   }
-  $("#Add").click(function(){
-    id= localStorage.getItem("sid");
+ $("#Add").click(function(){
     var token = localStorage.getItem("user_token");
-    var brand_name = $("#b_name").val();
-    var brand_des = $("#b_des").val();
-    if(brand_name != '' && brand_des != ''){
-      $.ajax({
-        type: "POST",
-        url: "/api/AddBrand",
-        headers: {
-          'Authorization':'Bearer '+ token,
-          'Content-Type':'application/json'
-        },
-        data: JSON.stringify({
-          "seller_id": id,
-          "brand_name": brand_name,
-          "brand_des": brand_des,
-          "brand_status": 0}),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(data){
-          var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
-          if(s == "1")
-          {
-            alert("เพิ่ม Brand สำเร็จ !");
-            window.location.replace('/brand');
-          }else{
-            alert(s);
-            $("#b_name").val('');
+    var brand_name = $("#brand_name").val();
+    var brand_des = $("#brand_des").val();
+    var brand_logo = $('#file_brand_logo').prop('files')[0];
+
+      console.log("addBrand");
+      var formData = new FormData();
+      console.log($('#file_brand_logo').prop('files')[0]);
+      formData.append("brand_logo",$('#file_brand_logo').prop('files')[0]);
+      formData.append("brand_name",brand_name);
+      formData.append("brand_des",brand_des);
+      formData.append("brand_status",0);
+      formData.append("seller_id",id);
+     if(brand_name != '' && brand_des != '' && $('#file_brand_logo').prop('files')[0] != undefined){
+        $.ajax({
+           url: '/api/AddBrand',
+           headers: {
+             'Authorization':'Bearer '+token,
+           },
+           method: 'POST',
+           data: formData,
+           contentType: false,
+           processData: false,
+           dataType: 'json',
+           success: function(data){
+            var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
+            if(s == "1")
+            {
+              alert("เพิ่ม Brand สำเร็จ !");
+              window.location.replace('/brand');
+            }else{
+              alert(s);
+              $("#b_name").val('');
+            }
+          },
+          failure: function(errMsg) {
+            alert(errMsg);
           }
-        },
-        failure: function(errMsg) {
-          alert(errMsg);
-        }
-      });
-    }else{
-      alert('กรุณากรอกข้อมูลให้ครบ');
+        });
+      }else if(brand_name != '' && brand_des != ''){
+
+        if($('#file_brand_logo').prop('files')[0] == undefined ){
+          alert('กรุณาเลือกโลโก้แบรนด์');
+        }else{
+        alert('กรุณากรอกข้อมูลให้ครบ');
+      }
     }
+    else{
+        alert('กรุณากรอกข้อมูลและเลือกโลโก้แบรนด์');
+      }
+
+
   });
 
   function checksession()

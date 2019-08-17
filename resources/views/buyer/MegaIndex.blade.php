@@ -3,6 +3,7 @@
 @section('content')
 <!-- Sweet Alert -->
 <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="layout/styles/shop_siderbar.css">
 
 <div class="shop">
   <div class="container">
@@ -15,9 +16,9 @@
             <div class="sidebar_title "><div class="shop_bar-t clearfix"> หมวดหมู่สินค้า</div></div><br>
             <ul class="li">
 
-              <li class="bor"><input   type="checkbox" id="cb1"/><label for="cb1">ห้องนอน </label>
+              <li class="bor "><input   type="checkbox" id="cb1"/><label for="cb1">ห้องนอน </label>
                 <ul >
-                  <li ><label onclick="searchCat('เตียง')">เตียง</label></li>
+                  <li  ><label onclick="searchCat('เตียง')">เตียง</label></li>
                   <li ><label onclick="searchCat('โต๊ะข้างเตียง')">โต๊ะข้างเตียง </label></li>
                   <li ><label onclick="searchCat('โซฟา')">โซฟา </label></li>
                   <li ><label onclick="searchCat('ตู้เสื้อผ้า')">ตู้เสื้อผ้า </label></li>
@@ -42,26 +43,8 @@
 
             </ul>
           </div>
-          <div class="sidebar_section filter_by_section">
-            <div class="sidebar_title">Filter By</div>
-            <div class="sidebar_subtitle">Price</div>
-            <div class="filter_price">
-              <div id="slider-range" class="slider_range"></div>
-              <p>Range: </p>
-              <p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
-            </div>
-          </div>
-          <div class="sidebar_section">
-            <div class="sidebar_subtitle color_subtitle">Color</div>
-            <ul class="colors_list">
-              <li class="color"><a href="#" style="background: #b19c83;"></a></li>
-              <li class="color"><a href="#" style="background: #000000;"></a></li>
-              <li class="color"><a href="#" style="background: #999999;"></a></li>
-              <li class="color"><a href="#" style="background: #0e8ce4;"></a></li>
-              <li class="color"><a href="#" style="background: #df3b3b;"></a></li>
-              <li class="color"><a href="#" style="background: #ffffff; border: solid 1px #e1e1e1;"></a></li>
-            </ul>
-          </div>
+       
+      
         </div>
       </div>
       <div class="col-lg-9 ">

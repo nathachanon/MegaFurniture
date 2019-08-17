@@ -57,6 +57,16 @@ function checksession()
     window.location.replace('/login');
   }
 }
+function createCookie(name,value,second) {
+if (second) {
+var date = new Date();
+date.setTime(date.getTime()+(second*1000));
+var expires = "; expires="+date.toGMTString();
+} else {
+var expires = "";
+}
+document.cookie = name+"="+value+expires+"; path=/";
+}
 function load()
 {
   checksession();
@@ -78,8 +88,7 @@ function load()
       dataType: "json",
       success: function(data){
 
-
-        console.log(data);
+        createCookie('CatRoom_id',data['catagoies'][0]['CatRoom_id'],120);
 
         $('#optionroom').val(data['catagoies'][0]['CatRoom_id']);
         roomselect();
@@ -165,29 +174,29 @@ function prodSelect() {
     if(catProd_id == 1){
       $("#inputs_wlhf").empty();
       $("#inputs_cr").empty();
-    $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
-      '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ยาว (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_length" type="text" placeholder="Enter Product Length" class="form-control input-lg"></div></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สูง (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_height" type="text" placeholder="Enter Product Height" class="form-control input-lg"></div></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ฟุต</label><div class="col-sm-10"><input type="number" id="SizeProd_foot" type="text" placeholder="Enter Product Foot" class="form-control input-lg"></div></div>');
-    $("#inputs_cr").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>สีและวัสดุ</h3></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
-      '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg" onkeypress="return (event.charCode != 32 && event.charCode >= 161) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)"></div></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
-  }else{
+      $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
+        '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ยาว (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_length" type="text" placeholder="Enter Product Length" class="form-control input-lg"></div></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สูง (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_height" type="text" placeholder="Enter Product Height" class="form-control input-lg"></div></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ฟุต</label><div class="col-sm-10"><input type="number" id="SizeProd_foot" type="text" placeholder="Enter Product Foot" class="form-control input-lg"></div></div>');
+      $("#inputs_cr").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>สีและวัสดุ</h3></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
+        '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg" onkeypress="return (event.charCode != 32 && event.charCode >= 161) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)"></div></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
+    }else{
       $("#inputs_wlhf").empty();
       $("#inputs_cr").empty();
-    $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
-      '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ยาว (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_length" type="text" placeholder="Enter Product Length" class="form-control input-lg"></div></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สูง (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_height" type="text" placeholder="Enter Product Height" class="form-control input-lg"></div></div>');
-    $("#inputs_cr").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>สีและวัสดุ</h3></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
-      '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg" onkeypress="return (event.charCode != 32 && event.charCode >= 161) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)"></div></div>'+
-      '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
-  }
+      $("#inputs_wlhf").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>ขนาด</h3></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">กว้าง (Cm)</label>'+
+        '<div class="col-sm-10"><input type="number" id="SizeProd_width" type="text" placeholder="Enter Product Width" class="form-control input-lg"></div></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">ยาว (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_length" type="text" placeholder="Enter Product Length" class="form-control input-lg"></div></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สูง (Cm)</label><div class="col-sm-10"><input type="number" id="SizeProd_height" type="text" placeholder="Enter Product Height" class="form-control input-lg"></div></div>');
+      $("#inputs_cr").append('<div class="hr-line-dashed"></div><div class="ibox-title"><h3>สีและวัสดุ</h3></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">สี</label>'+
+        '<div class="col-sm-10"><input id="ColorProd_value" type="text" placeholder="Enter Product Color" class="form-control input-lg" onkeypress="return (event.charCode != 32 && event.charCode >= 161) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)"></div></div>'+
+        '<div class="form-group animated bounceInRight has-error"><label class="col-sm-2 control-label">วัสดุ (ไม้,ผ้า)</label><div class="col-sm-10"><input id="RM_value" type="text" placeholder="Enter Product Material" class="form-control input-lg"></div></div>');
+    }
 
   }else{
     $("#inputs_wlhf").empty();
@@ -199,6 +208,7 @@ function roomselect(){
   var catroom_id = $('#optionroom').val();
   if(catroom_id != 0)
   {
+    createCookie('CatRoom_id',catroom_id,120);
     $("#CatProduct").empty();
     $("#inputs_wlhf").empty();
     $("#inputs_cr").empty();
@@ -297,7 +307,6 @@ $(document).ready(function(){
       document.getElementById("BUYER_input").disabled = false;
       document.getElementById("BUYER_price").innerHTML = '('+valueBUYER+'฿)';
     }
-    console.log(valueDHL,valueEMS,valueKERRY,valueSB,valueSELLER,valueBUYER);
   });
 
   $("#confirmKERRY").click(function(){
@@ -524,14 +533,19 @@ $(document).ready(function(){
        success: function(data){
          if(data['success'] != null)
          {
-           alert('เพิ่มสินค้าสำเร็จ !');
-           window.location.replace('/product');
-         }else if(data['sku_error'] != null){
-           alert('SKU นี้ถูกใช้งานแล้ว กรุณาเปลี่ยนใหม่!');
-           $('#prod_sku').val('');
-         }
+          Swal.fire({
+            type: 'success',
+            title: 'เพิ่มสินค้าสำเร็จ',
+            showConfirmButton: false,
+            timer: 900
+          });
+          window.location.replace('/product');
+        }else if(data['sku_error'] != null){
+         alert('SKU นี้ถูกใช้งานแล้ว กรุณาเปลี่ยนใหม่!');
+         $('#prod_sku').val('');
        }
-     });
+     }
+   });
 
    }else{
      alert('กรอกข้อมูลให้ครบ');
@@ -598,34 +612,38 @@ $(document).ready(function(){
      }
 
 
-
-     $.ajax({
-       url: '/api/AddProduct',
-       headers: {
-         'Authorization':'Bearer '+token,
-       },
-       method: 'POST',
-       data: formData,
-       contentType: false,
-       processData: false,
-       dataType: 'json',
-       success: function(data){
-         if(data['success'] != null)
-         {
-           alert('เพิ่มสินค้าสำเร็จ !');
-           window.location.replace('/product');
-         }else if(data['sku_error'] != null){
-           alert('SKU นี้ถูกใช้งานแล้ว กรุณาเปลี่ยนใหม่!');
-           $('#prod_sku').val('');
-         }
-       }
-     });
-
-   }else{
-     alert('กรอกข้อมูลให้ครบ');
+    $.ajax({
+     url: '/api/AddProduct',
+     headers: {
+       'Authorization':'Bearer '+token,
+     },
+     method: 'POST',
+     data: formData,
+     contentType: false,
+     processData: false,
+     dataType: 'json',
+     success: function(data){
+       if(data['success'] != null)
+       {
+        Swal.fire({
+          type: 'success',
+          title: 'เพิ่มสินค้าสำเร็จ',
+          showConfirmButton: false,
+          timer: 900
+        });
+        window.location.replace('/product');
+      }else if(data['sku_error'] != null){
+       alert('SKU นี้ถูกใช้งานแล้ว กรุณาเปลี่ยนใหม่!');
+       $('#prod_sku').val('');
+     }
    }
-
  });
+
+  }else{
+   alert('กรอกข้อมูลให้ครบ');
+ }
+
+});
 
 
 
@@ -637,58 +655,68 @@ $(document).ready(function(){
 });
 
 function showpic1(input) {
-$('#spic1').attr('hidden',false);
-if (input.files && input.files[0]) {
- var reader = new FileReader();
- reader.onload = function (e) {
-   $('#spic1')
-   .attr('src', e.target.result);
- };
- reader.readAsDataURL(input.files[0]);
-}
+  $('#i1').remove(".fa");
+  $('#is1').removeClass("i-size");
+  $('#spic1').attr('hidden',false);
+  if (input.files && input.files[0]) {
+   var reader = new FileReader();
+   reader.onload = function (e) {
+     $('#spic1')
+     .attr('src', e.target.result);
+   };
+   reader.readAsDataURL(input.files[0]);
+ }
 }
 
 function showpic2(input) {
-$('#spic2').attr('hidden',false);
-if (input.files && input.files[0]) {
-  var reader = new FileReader();
-  reader.onload = function (e) {
-    $('#spic2')
-    .attr('src', e.target.result);
-  };
-  reader.readAsDataURL(input.files[0]);
-}
+  $('#i2').remove(".fa");
+  $('#is2').removeClass("i-size");
+  $('#spic2').attr('hidden',false);
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#spic2')
+      .attr('src', e.target.result);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
 }
 function showpic3(input) {
-$('#spic3').attr('hidden',false);
-if (input.files && input.files[0]) {
- var reader = new FileReader();
- reader.onload = function (e) {
-   $('#spic3')
-   .attr('src', e.target.result);
- };
- reader.readAsDataURL(input.files[0]);
-}
+  $('#i3').remove(".fa");
+  $('#is3').removeClass("i-size");
+  $('#spic3').attr('hidden',false);
+  if (input.files && input.files[0]) {
+   var reader = new FileReader();
+   reader.onload = function (e) {
+     $('#spic3')
+     .attr('src', e.target.result);
+   };
+   reader.readAsDataURL(input.files[0]);
+ }
 }
 function showpic4(input) {
-$('#spic4').attr('hidden',false);
-if (input.files && input.files[0]) {
- var reader = new FileReader();
- reader.onload = function (e) {
-   $('#spic4')
-   .attr('src', e.target.result);
- };
- reader.readAsDataURL(input.files[0]);
-}
+  $('#i4').remove(".fa");
+  $('#is4').removeClass("i-size");
+  $('#spic4').attr('hidden',false);
+  if (input.files && input.files[0]) {
+   var reader = new FileReader();
+   reader.onload = function (e) {
+     $('#spic4')
+     .attr('src', e.target.result);
+   };
+   reader.readAsDataURL(input.files[0]);
+ }
 }
 function showpic5(input) {
-$('#spic5').attr('hidden',false);
-if (input.files && input.files[0]) {
- var reader = new FileReader();
- reader.onload = function (e) {
-   $('#spic5')
-   .attr('src', e.target.result);
- };
- reader.readAsDataURL(input.files[0]);
-}
+  $('#i5').remove(".fa");
+  $('#is5').removeClass("i-size");
+  $('#spic5').attr('hidden',false);
+  if (input.files && input.files[0]) {
+   var reader = new FileReader();
+   reader.onload = function (e) {
+     $('#spic5')
+     .attr('src', e.target.result);
+   };
+   reader.readAsDataURL(input.files[0]);
+ }
 }

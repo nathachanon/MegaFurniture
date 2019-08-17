@@ -29,6 +29,12 @@ Route::post('recommend','API\ProductController@recommend');
 
 
 Route::group(['middleware' => 'multiauth:seller_api'],function(){
+	Route::post('editTracking','API\OrderController@editTracking');
+
+	Route::post('addTracking','API\OrderController@addTracking');
+	Route::post('canclePayment','API\PaymentController@canclePayment');
+	Route::post('changePayment','API\PaymentController@changePayment');
+	Route::post('getPayment','API\PaymentController@getPayment');
 	Route::post('getOrderDetails','API\OrderController@getDetailOrderByID');
 	Route::post('getOrder','API\OrderController@getOrder');
 	Route::post('change-Sku','API\ProductController@change_sku');
@@ -86,11 +92,17 @@ Route::post('compareProduct','API\ProductController@compareProduct');
 Route::post('loginBuyer','API\BuyerController@loginBuyer');
 Route::post('registerBuyer','API\BuyerController@registerBuyer');
 
+Route::post('saveHistoryview','API\LogController@saveHistoryview');
+Route::get('getHistory','API\LogController@getHistory');
+
 
 
 Route::post('saveHistoryview','API\LogController@saveHistoryview');
 
 Route::group(['middleware' => 'multiauth:buyer_api'],function(){
+	Route::post('success-Delivery','API\OrderController@statusTracking');
+	Route::post('orderbuyer','API\OrderController@orderbuyer');
+	Route::post('telCheck','API\BuyerController@telCheck');
 	Route::post('payment-Add','API\PaymentController@addPayment');
 	Route::post('getBank-id','API\PaymentController@getBank_id');
 	Route::post('getBank-brand','API\PaymentController@getBank_brand');

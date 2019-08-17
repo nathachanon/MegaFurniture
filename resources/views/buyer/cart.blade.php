@@ -41,6 +41,7 @@ var b_token = localStorage.getItem("b_token");
 var buyer_id = localStorage.getItem("buyer_id");
 var jsonDelivery = [];
 var jsonOrder = [];
+var shopList = [];
 var prod_id_list = [];
 check_user();
 getAddress();
@@ -127,7 +128,7 @@ getAddress();
                                     '</div>'+
                                   '</div>'+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ส่งโดย</label>'+
-                                    '<div class="col-sm-12"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
+                                    '<div class="col-sm-12"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+','+data['ProductInCart'][i]['id']+','+data['ProductInCart'][i]['count']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="999">เลือกประเภทการจัดส่ง</option>'+
                                       '</select>'+
                                     '</div>'+
@@ -263,6 +264,7 @@ getAddress();
                 prod_id_list = jQuery.grep(prod_id_list, function(value) {
                   return value != prod_id;
                 });
+                shopList = [];
                 Swal.fire({
                   type: 'success',
                   title: 'ลบสินค้าออกจากตะกร้า เรียบร้อย',
@@ -341,6 +343,7 @@ getAddress();
               prod_id_list = jQuery.grep(prod_id_list, function(value) {
                 return value != prod_id;
               });
+              shopList = [];
               Swal.fire({
                 type: 'success',
                 title: 'ลบสินค้าออกจากตะกร้า เรียบร้อย',
@@ -363,7 +366,6 @@ getAddress();
 
   function checkout(){
     var select_0=0;
-    console.log(prod_id_list);
     for(var i = 0 ; i < prod_id_list.length ; i++){
       if($('#delivery_option_'+prod_id_list[i]+'').val() != 999){
 
@@ -376,7 +378,7 @@ getAddress();
         findAndRemove(jsonDelivery, ["prod_id"], prod_id_list[i]);
       }
     }
-
+    console.log(shopList);
     console.log(jsonOrder);
 
 
@@ -405,7 +407,7 @@ getAddress();
               'Content-Type':'application/json'
             },
             method: 'POST',
-            data: JSON.stringify({ "buyer_id":buyer_id,"order_list":jsonOrder }),
+            data: JSON.stringify({ "buyer_id":buyer_id,"order_list":jsonOrder,"shop_list":shopList }),
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function(data){
@@ -448,7 +450,7 @@ getAddress();
   });
 }
 
-  function delivery_change(source,prod_id,prod_price){
+  function delivery_change(source,prod_id,prod_price,seller_id,count){
     if($(source).val() != 999){
       var del_price_id = source.value.split(',')[0].trim();
       var del_price = source.value.split(',')[1].trim();
@@ -464,13 +466,19 @@ getAddress();
        $('#price_total_'+prod_id+'').append(' รวมราคา : '+ allprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' บาท');
 
         orderList = {}
+        orderList ["seller_id"] = seller_id;
         orderList ["prod_id"] = prod_id;
         orderList ["price"] = allprice;
+        orderList ["count"] = count;
         orderList ["del_price_id"] = del_price_id;
         orderList ["add_id"] = $("#address_list_"+prod_id).val();
-
         findAndRemove(jsonOrder, ["prod_id"], prod_id);
 
+        shopL = {}
+        shopL ["seller_id"] = seller_id;
+        findAndRemove(shopList, ["seller_id"], seller_id);
+
+        shopList.push(shopL);
         jsonOrder.push(orderList);
     }else{
       $('#prod_price_'+prod_id+'').empty();
@@ -538,7 +546,7 @@ getAddress();
                                     '</div>'+
                                   '</div>'+
                                 '<div class="m-t-sm"><label class="col-sm-6 control-label">ส่งโดย</label>'+
-                                    '<div class="col-sm-8"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
+                                    '<div class="col-sm-8"><select disabled onchange="delivery_change(this,'+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']*data['ProductInCart'][i]['count']+','+data['ProductInCart'][i]['id']+','+data['ProductInCart'][i]['count']+')" id="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'"class="form-control " name="delivery_option_'+data['ProductInCart'][i]['Prod_id']+'">'+
                                       '<option value="999">เลือกประเภทการจัดส่ง</option>'+
                                       '</select>'+
                                     '</div>'+

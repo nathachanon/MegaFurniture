@@ -21,8 +21,9 @@
   <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
   <link href="css/animate.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css">
   <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
   <style>
 
@@ -85,7 +86,7 @@
 
           <li>
             <a id='logout'>
-              <i class="fa fa-sign-out"></i> Log out
+              <i id="i-logout" class="fas fa-sign-out-alt"></i> Log out
             </a>
           </li>
         </ul>
@@ -132,6 +133,8 @@
 <script src="js/plugins/dropzone/dropzone.js"></script>
 
 <!-- iCheck -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+
 <script src="js/plugins/iCheck/icheck.min.js"></script>
 <script src="js/plugins/footable/footable.all.min.js"></script>
 <script src="js/plugins/slick/slick.min.js"></script>

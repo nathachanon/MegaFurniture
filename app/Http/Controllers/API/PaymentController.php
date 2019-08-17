@@ -48,7 +48,7 @@ class PaymentController extends Controller
   public function getBank_brand(Request $request){
 
     $validator = Validator::make($request->all(), [
-    'brand_id' => 'required'
+    'seller_id' => 'required'
     ]);
 
     if ($validator->fails()) {
@@ -56,11 +56,11 @@ class PaymentController extends Controller
     }
     $input = $request->all();
 
-    $getBrandBank = DB::table('brands')
-    ->select('brands.brand_name','bank_accounts.bankaccount_id','bank_accounts.account_name','bank_accounts.bank_account','banks.bank_name')
-    ->join('bank_accounts', 'brands.brand_id', '=', 'bank_accounts.brand_id')
+    $getBrandBank = DB::table('sellers')
+    ->select('sellers.name','sellers.surname','bank_accounts.bankaccount_id','bank_accounts.account_name','bank_accounts.bank_account','banks.bank_name')
+    ->join('bank_accounts', 'sellers.id', '=', 'bank_accounts.seller_id')
     ->join('banks', 'bank_accounts.bank_id', '=', 'banks.bank_id')
-    ->where('brands.brand_id', $input['brand_id'])
+    ->where('sellers.id', $input['seller_id'])
     ->where('bank_accounts.status', 1)
     ->get();
 
@@ -95,7 +95,8 @@ class PaymentController extends Controller
     'amount' => 'required',
     'bank_account' => 'required',
     'bank_name' => 'required',
-    'date_time' => 'required'
+    'date_time' => 'required',
+    'sl' => 'required'
     ]);
     $request['pay_status'] = 0;
 
@@ -104,36 +105,124 @@ class PaymentController extends Controller
     }
     $input = $request->all();
 
-    $getOrder = DB::table('orderdetails')
-    ->select('orderdetails.order_detail_id','orderdetails.price')
-    ->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
-    ->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
-    ->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
-    ->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
-    ->join('brands', 'products.brand_id', '=', 'brands.brand_id')
-    ->where('orders.order_id', $request['order_id'])
-    ->where('brands.brand_id', $request['brand_id'])
+    $input['amount'] = str_replace(',', '', $input['amount']);
+
+    DB::table('orders')
+    ->where('order_id', $request['order_id'])
+    ->update([
+                'orders.status' => 1,
+                'orders.updated_at' => date('Y-m-d H:i:s')
+              ]);
+
+    $insertPayment = Payment::create($input);
+
+    $image = $request->file('sl');
+    $imageName = date('mdYHis').uniqid().'.'.$image->getClientOriginalExtension();
+    $image->move(public_path('image_payment'),$imageName);
+    $pathImg1 = "image_payment/$imageName";
+
+    DB::table('payments')
+    ->where('pay_id', $insertPayment->id)
+    ->update(['transfer_slip' => $pathImg1]);
+
+    return response()->json(['success' => 'success'], $this-> successStatus);
+  }
+
+  public function getPayment(Request $request){
+    $validator = Validator::make($request->all(), [
+    'order_id' => 'required'
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['error'=>$validator->errors()], 201);
+    }
+    $input = $request->all();
+
+    $getPayment = DB::table('payments')
+    ->select('payments.transfer_slip','payments.bank_account as buyer_account','payments.bank_name as buyer_name',DB::raw('DATE_FORMAT(payments.date_time, "%m/%d/%Y %H:%i:%s") as buyer_datetime'),'payments.amount as buyer_amount','banks.bank_name','bank_accounts.account_name','bank_accounts.bank_account')
+    ->join('bank_accounts', 'payments.BankAccount_id', '=', 'bank_accounts.BankAccount_id')
+    ->join('banks', 'bank_accounts.bank_id', '=', 'banks.bank_id')
+    ->where('order_id', $input['order_id'])
+    ->where('pay_status', 0)
     ->get();
 
-    DB::table('orderdetails')
-    ->join('orders', 'orderdetails.order_id', '=', 'orders.order_id')
-    ->join('carts', 'orders.cart_id', '=', 'carts.cart_id')
-    ->join('buyers', 'carts.buyer_id', '=', 'buyers.id')
-    ->join('products', 'orderdetails.prod_id', '=', 'products.prod_id')
-    ->join('brands', 'products.brand_id', '=', 'brands.brand_id')
-    ->where('brands.brand_id', $request['brand_id'])
-    ->where('orders.order_id', $request['order_id'])
-    ->update([
-                'orderdetails.status' => 1,
-                'orderdetails.updated_at' => date('Y-m-d H:i:s')
-              ]);
-    for($x = 0;$x<count($getOrder);$x++){
-      $input['order_detail_id'] = $getOrder[$x]->order_detail_id;
-      $input['amount'] = $getOrder[$x]->price;
-      $insertPayment = Payment::create($input);
-    }
+    $getOrder = DB::table('orders')
+    ->select(DB::raw('DATE_FORMAT(orders.created_at, "%m/%d/%Y %H:%i:%s") as created_at'),'status')
+    ->where('order_id', $input['order_id'])
+    ->get();
 
-    return response()->json(['success' => $getOrder], $this-> successStatus);
+    return response()->json(['success' => $getPayment,'order'=>$getOrder], $this-> successStatus);
+  }
+
+  public function changePayment(Request $request){
+    $validator = Validator::make($request->all(), [
+    'order_id' => 'required'
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['error'=>$validator->errors()], 201);
+    }
+    $input = $request->all();
+
+    DB::table('orders')
+    ->where('order_id', $input['order_id'])
+    ->update([
+                'orders.status' => 2,
+                'orders.updated_at' => date('Y-m-d H:i:s')
+              ]);
+
+    DB::table('payments')
+    ->where('order_id', $input['order_id'])
+    ->update([
+                'payments.pay_status' => 1,
+                'payments.updated_at' => date('Y-m-d H:i:s')
+              ]);
+
+    $selectProduct = DB::table('orders')
+    ->select('orderdetails.Prod_id','orderdetails.count')
+    ->join('orderdetails', 'orders.Order_id', '=', 'orderdetails.Order_id')
+    ->where('orders.order_id', $input['order_id'])
+    ->get();
+
+    $result = json_decode($selectProduct, true);
+
+    for($y = 0; $y < count($result);$y++){
+        DB::table('products')
+          ->where('Prod_id', $result[$y]['Prod_id'])
+          ->decrement('qty', $result[$y]['count']);
+          
+        DB::table('products')
+        ->where('Prod_id', $result[$y]['Prod_id'])
+        ->update([
+                    'products.updated_at' => date('Y-m-d H:i:s')
+                  ]);
+      }
+
+    return response()->json(['success' => 'success'], $this-> successStatus);
+  }
+
+  public function canclePayment(Request $request){
+    $validator = Validator::make($request->all(), [
+    'order_id' => 'required'
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(['error'=>$validator->errors()], 201);
+    }
+    $input = $request->all();
+
+    DB::table('orders')
+    ->where('order_id', $input['order_id'])
+    ->update([
+                'orders.status' => 0,
+                'orders.updated_at' => date('Y-m-d H:i:s')
+              ]);
+
+    DB::table('payments')
+    ->where('order_id', $input['order_id'])
+    ->delete();
+
+    return response()->json(['success' => 'success'], $this-> successStatus);
   }
 
 }

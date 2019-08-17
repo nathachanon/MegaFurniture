@@ -13,6 +13,12 @@
   width:100%;
   height:100%;
 }
+.modal-backdrop {
+  z-index: 2040 !important;
+}
+.modal {
+  z-index: 2050 !important;
+}
 </style>
 
 <body >
@@ -117,7 +123,7 @@
 <script>
 var token = localStorage.getItem("user_token");
 var id= localStorage.getItem("sid");
-var b_id = localStorage.getItem("b_id");
+var sid = localStorage.getItem("sid");
 
 getDetails();
 getBankName();
@@ -136,7 +142,7 @@ load();
   }
   function checkbrand()
   {
-    if(b_id == null)
+    if(sid == null)
     {
       alert('กรุณาเลือกbrandก่อนเข้าใช้งาน !');
       window.location.replace('/brandSettings');
@@ -145,29 +151,8 @@ load();
 
   function load()
   {
-    if(b_id != null){
+    if(sid != null){
 
-      (async () => {
-          const rawResponse = await fetch('/api/getbrandName', {
-            method: 'POST',
-            headers: {
-              'Authorization':'Bearer '+token,
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({"brand_id": b_id})
-          });
-          const content = await rawResponse.json();
-          console.log(content);
-          if(content['success'] != null){
-            $("#brand_name").empty();
-            $("#brand_name").append("ชื่อแบรนด์ : "+content['success'][0]['brand_name']);
-            checkbrand();
-            checksession();
-          }else{
-            window.location.replace('/profile');
-          }
-        })();
 
     }else{
       window.location.replace('/profile');
@@ -185,7 +170,7 @@ load();
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"brand_id": b_id,"bank_id": bankname,"bank_account": a_number,"account_name": a_name})
+            body: JSON.stringify({"seller_id": sid,"bank_id": bankname,"bank_account": a_number,"account_name": a_name})
           });
           const content = await rawResponse.json();
           console.log(content);
@@ -210,7 +195,7 @@ load();
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"brand_id": b_id})
+            body: JSON.stringify({"seller_id": sid})
           });
           const content = await rawResponse.json();
           console.log(content);

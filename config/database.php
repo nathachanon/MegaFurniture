@@ -33,6 +33,7 @@ return [
 
     'connections' => [
 
+        
       'mongodb' => [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST'),
@@ -43,6 +44,7 @@ return [
             'password' => env('MONGO_DB_PASSWORD'),
             'options'  => []
         ],
+
 
         'sqlite' => [
             'driver' => 'sqlite',

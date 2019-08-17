@@ -92,10 +92,18 @@ function sbrand(Request $request)
  ->join('colorproducts', 'products.ColorProd_id', '=', 'colorproducts.ColorProd_id')
  ->where('status', 0)->where('brand_id', $input['brand_id'])->get();
 
+ $getCountProductSell = DB::select( DB::raw("SELECT products.Prod_id,sum(orderdetails.count) as sell_count from orderdetails
+  join orders on orderdetails.Order_id = orders.Order_id
+  left join products on orderdetails.Prod_id = products.Prod_id
+  join brands on products.brand_id = brands.brand_id
+  where orders.status >= 2 and brands.brand_id = :somevariable GROUP BY products.Prod_id "), array(
+     'somevariable' => $input['brand_id'],
+   ));
+
  if($getProduct == 0){
   return response()->json(['brand_count'=>$getProduct,'brand_name'=>$getBrand], $this-> successStatus);
 }else{
-  return response()->json(['brand_name'=>$getBrand,'product_count'=>$getProduct,'product'=>$getProduct2], $this-> successStatus);
+  return response()->json(['brand_name'=>$getBrand,'product_count'=>$getProduct,'product'=>$getProduct2,'sellcount'=>$getCountProductSell], $this-> successStatus);
 }
 }
 
@@ -136,6 +144,8 @@ function getCatagoiesRoom()
 
 function getCatagoiesProduct(Request $request)
 {
+$request['catroom_id'] = $request->cookie('CatRoom_id');
+
   $validator = Validator::make($request->all(), [
     'catroom_id' => 'required',
   ]);

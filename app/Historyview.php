@@ -11,6 +11,6 @@ class Historyview extends Eloquent
     protected $collection = 'history_view';
 
     protected $fillable = [
-        'buyer_id', 'prod_id'
+        'buyer_id', 'prod_id' ,
     ];
 }
