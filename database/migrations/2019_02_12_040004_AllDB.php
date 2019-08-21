@@ -98,6 +98,7 @@ class AllDB extends Migration
         $table->unsignedInteger('ColorProd_id');
         $table->unsignedInteger('RM_id');
 
+
         $table->increments('Prod_id');
         $table->string('prod_name',120);
         $table->string('prod_desc',5000)->nullable();
@@ -261,15 +262,24 @@ class AllDB extends Migration
        $table->timestamps();
      });
 
-     Schema::create('Keywords', function (Blueprint $table) {
-       $table->unsignedInteger('Prod_id');
-
-       $table->increments('keyword_id');
+     Schema::create('Keyword_values', function (Blueprint $table) {
+       $table->increments('keyword_value_id');
        $table->string('keyword_value',30);
-
-       $table->foreign('Prod_id')->references('Prod_id')->on('Products')->onDelete('cascade');
        $table->timestamps();
      });
+
+     Schema::create('Keywords', function (Blueprint $table) {
+       $table->increments('keyword_id');
+
+       $table->unsignedInteger('Prod_id');
+       $table->unsignedInteger('keyword_value_id');
+
+       $table->foreign('Prod_id')->references('Prod_id')->on('Products')->onDelete('cascade');
+       $table->foreign('keyword_value_id')->references('keyword_value_id')->on('Keyword_values')->onDelete('cascade');
+       $table->timestamps();
+     });
+
+
 
 
   //insert Data ประเภทห้อง

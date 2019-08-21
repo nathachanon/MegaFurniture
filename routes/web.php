@@ -107,7 +107,12 @@ Route::get('/productDetail', function () {
     return view('buyer.productDetail');
 });
 
-
+Route::get('/admin', function () {
+    return view('admin.login');
+});
+Route::get('/admin/index', function () {
+    return view('admin.index');
+});
 
 
 Route::get('/login/facebook', 'API\SellerController@facebookAuthRedirect');
