@@ -272,7 +272,7 @@ function searchCat(CatProd_name){
          rating+
          '</div>'+
          '<div class="inline2"><div class="m-t inline2">'+
-         '<a href="#" onclick="addCart(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\')" class="btn btn-xs btn-outline btn-primary"><i class="fa fa-shopping-cart"></i> </a>'+
+         '<a onclick="addCart(\'' + name + '\','+data['product'][i]['prod_id']+','+price+',\'' + pic + '\')" class="btn btn-xs btn-outline btn-primary"><i class=" prim fa fa-shopping-cart"></i> </a>'+
          '</div>'+
          '</div>'+
          '</div>'+
@@ -645,5 +645,213 @@ function addCompare(prod_name,prod_id,prod_price,prod_pic)
   $('#compare').append(compare_count);
 }else{
   alert('สามารถเปรียบเทียบสินค้าได้สูงสุด 3 ชิ้น');
+}
+}
+
+function getCart(){
+  $.ajax({
+    url: '/api/getCart',
+    headers: {
+      'Authorization':'Bearer '+b_token,
+      'Content-Type':'application/json'
+    },
+    method: 'POST',
+    data: JSON.stringify({ "buyer_id":buyer_id }),
+    contentType: "application/json; charset=utf-8",
+    dataType: 'json',
+    success: function(data){
+      if(data['success'] != null)
+      {
+        var cart_count;
+        var allprice;
+
+        if(data['success'][0]['NumOfProduct'] == null){
+          cart_count = 0;
+        }else{
+          cart_count = data['success'][0]['NumOfProduct'];
+        }
+
+        if(data['success'][0]['Price'] == null){
+          allprice = 0;
+          $('#allprice').empty();
+        }else{
+          allprice = data['success'][0]['Price'];
+        }
+        $('#small_cart_count').empty();
+        $("#small_cart_list").empty();
+        $('#cart_list').empty();
+        $('#cart').empty();
+        $('#allprice').empty();
+        if(cart_count > 0){
+          for(var i = 0 ; i < cart_count ; i++){
+
+            $("#small_cart_list").append('<div>'+
+            '<div class="author-name">'+
+                    data['ProductInCart'][i]['prod_name']+
+                '</div>'+
+                '<img width="180" alt="image" class="img-circle" src="'+data['ProductInCart'][i]['pic_url1']+'">'+
+                '<div class="chat-message active">'+
+                    '฿'+data['ProductInCart'][i]['prod_price']+' จำนวน '+data['ProductInCart'][i]['count']+' ชิ้น'+
+                '</div>'+
+                '<button type="button" class="btn btn-danger btn-sm btn-block" onclick="deleteProductInCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')"><i class="fa fa-trash"></i> ลบออกจากตะกร้า</button>'+
+            '</div>');
+
+            $('#cart_list').append('<li>'+
+            '<div class="dropdown-messages-box">'+
+            '<a href="#" class="pull-left">'+
+            '<img alt="image" class="img-circle" src="'+data['ProductInCart'][i]['pic_url1']+'">'+
+            '</a>'+
+            '<div class="media-body">'+
+            '<strong>'+data['ProductInCart'][i]['prod_name']+'</strong><br>฿'+data['ProductInCart'][i]['prod_price']+' x '+data['ProductInCart'][i]['count']+
+            '</div>'+
+            '</div>'+
+            '<a href="#" onclick="deleteProductInCart('+data['ProductInCart'][i]['Prod_id']+','+data['ProductInCart'][i]['prod_price']+')">ลบ</a></li><br>');
+
+          }
+        }
+        $('#small_cart_count').append(cart_count);
+        $('#cart').append(cart_count);
+        $('#allprice').append('฿'+allprice);
+      }else{
+        swal({
+          title: "Error !",
+          text: "เกิดข้อผิดพลาดบางประการ !",
+          type: "error"
+        });
+      }
+    }
+  });
+}
+
+function addCart(prod_name,prod_id,prod_price,prod_pic)
+{
+
+  if(b_token == null && buyer_id == null)
+  {
+    Swal.fire({
+      title: 'เกิดข้อผิดพลาดบางอย่าง !',
+      text: "กรุณา Login ก่อนเพิ่มสินค้าลงตะกร้า !",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Login',
+      cancelButtonText: 'Register',
+    }).then((result) => {
+      if (result.value) {
+        window.location.href = ('/loginBuyer');
+      }else{
+        window.location.href = ('/registerBuyer');
+      }
+    });
+
+  }else{
+
+    $.ajax({
+      url: '/api/addCart',
+      headers: {
+        'Authorization':'Bearer '+b_token,
+        'Content-Type':'application/json'
+      },
+      method: 'POST',
+      data: JSON.stringify({ "buyer_id":buyer_id,"prod_id":prod_id,"prod_price":prod_price }),
+      contentType: "application/json; charset=utf-8",
+      dataType: 'json',
+      success: function(data){
+        if(data['success'] != null)
+        {
+          const node = document.querySelector("#icon_cart")
+          node.classList.add('rubberBand', 'animated')
+
+          function handleAnimationEnd() {
+          node.classList.remove('rubberBand', 'animated')
+          node.removeEventListener('animationend', handleAnimationEnd)
+
+          if (typeof callback === 'function') callback()
+          }
+          node.addEventListener('animationend', handleAnimationEnd)
+          Swal.fire({
+            type: 'success',
+            title: 'เพิ่มสินค้าลงตะกร้า เรียบร้อย',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          getCart();
+        }else{
+          swal({
+            title: "Error !",
+            text: "เกิดข้อผิดพลาดบางประการ !",
+            type: "error"
+          });
+        }
+      }
+    });
+  }
+
+}
+
+function ThisBuyer(){
+  if(b_token == null && buyer_id == null)
+  {
+    $('#cart').append(0);
+  }
+  else{
+    $("#small_cart").append('<div class="small-chat-box fadeInRight animated">'+
+        '<div class="heading" draggable="true">'+
+            'สินค้าในตะกร้า'+
+        '</div>'+
+        '<div class="content" id="small_cart_list">'+
+        '</div>'+
+        '<div class="form-chat">'+
+            '<div class="input-group input-group-sm"><button type="button" class="btn btn-default btn-sm btn-block" id="carts_2" ><i class="fa fa-arrow-right"></i>จัดการตะกร้า</button></div>'+
+        '</div>'+
+    '</div>'+
+    '<div id="small-chat">'+
+        '<span class="badge badge-warning pull-right" id="small_cart_count">0</span>'+
+        '<a class="open-small-chat">'+
+            '<i class="fa fa-shopping-cart"></i>'+
+        '</a>'+
+    '</div>');
+    getCart();
+  }
+}
+
+function addCompare(prod_name,prod_id,prod_price,prod_pic)
+{
+if(compare_count < 3){
+compare_count += 1;
+
+allprice += prod_price;
+
+jsonCart.push({prod_id:prod_id});
+
+$('#compare').empty();
+
+const node = document.querySelector("#icon_compare")
+node.classList.add('rubberBand', 'animated')
+
+function handleAnimationEnd() {
+node.classList.remove('rubberBand', 'animated')
+node.removeEventListener('animationend', handleAnimationEnd)
+
+if (typeof callback === 'function') callback()
+}
+
+node.addEventListener('animationend', handleAnimationEnd)
+
+$('#compare_list').append('<li>'+
+'<div class="dropdown-messages-box">'+
+'<a href="#" class="pull-left">'+
+'<img alt="image" class="img-circle" src="'+prod_pic+'">'+
+'</a>'+
+'<div class="media-body">'+
+'<strong>'+prod_name+'</strong><br>'+prod_price+' บาท'+
+'</div>'+
+'</div>'+
+'</li><br>');
+
+$('#compare').append(compare_count);
+}else{
+alert('สามารถเปรียบเทียบสินค้าได้สูงสุด 3 ชิ้น');
 }
 }

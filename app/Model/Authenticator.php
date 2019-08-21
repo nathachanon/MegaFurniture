@@ -71,5 +71,31 @@ class Authenticator
     }
 
 
+    public function attemptAdmin(
+       string $username,
+       string $password,
+       string $provider
+   ): ?Authenticatable {
+
+          if (! $model = config('auth.providers.'.$provider.'.model')) {
+           throw new RuntimeException('Unable to determine authentication model from configuration.');
+       }
+       /** @var Authenticatable $user */
+       if (! $user = (new $model)->where('username', $username)->first()) {
+           return null;
+       }
+
+       $admin = DB::table('admins')->where('username', $username)->value('password');
+
+        if ( Hash::check($password,$admin) == false ) {
+           return null;
+       }
+
+
+
+       return $user;
+   }
+
+
 
 }
