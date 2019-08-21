@@ -45,6 +45,10 @@ return [
             'driver' => 'passport',
             'provider' => 'buyer',
         ],
+        'admin_api' => [
+            'driver' => 'passport',
+            'provider' => 'admin',
+        ],
 
 
         'seller' => [
@@ -82,6 +86,10 @@ return [
         'seller' => [
             'driver' => 'eloquent',
             'model' => App\Seller::class,
+        ],
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
         ],
 
         // 'users' => [
