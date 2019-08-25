@@ -149,6 +149,16 @@ function load()
           $('#ColorProd_value').val(data['product_color'][0]['ColorProd_value']);
           $('#RM_value').val(data['product_rm'][0]['RM_value']);
         }, 1000);
+        if(data['keywords'].length != 0){
+        var sum_keyword = "";
+          for(var x=0;x<data['keywords'].length;x++){
+            sum_keyword += data['keywords'][x]['keyword_value'];
+            if(x!=data['keywords'].length-1){
+            sum_keyword = sum_keyword+',';
+          }
+          }
+        }
+          $('#tags').val(sum_keyword);
       },
       failure: function(errMsg) {
         alert(errMsg);
@@ -277,6 +287,10 @@ $(document).ready(function(){
       document.getElementById("SELLER_price").innerHTML = '('+valueSELLER+'฿)';
     }
   });
+
+  $("#optionroom_1").click(function(){   $("#tags").val($("#tags").val()+"ห้องนอน,")     });
+  $("#optionroom_2").click(function(){   $("#tags").val($("#tags").val()+"ห้องนั่งเล่น,")      });
+  $("#optionroom_3").click(function(){   $("#tags").val($("#tags").val()+"ห้องทำงาน,")     });
 
   $("#confirmBUYER").click(function(){
     valueBUYER = $('#BUYER_input').val();
@@ -501,7 +515,10 @@ $(document).ready(function(){
      formData.append("buyer", valueBUYER);
      formData.append("status", 0);
      formData.append("show", 1);
-     formData.append("tags",tags);
+
+     for (var i = 0; i < tags.length; i++) {
+         formData.append('tags[]', tags[i]);
+     }
 
      $.ajax({
        url: '/api/AddProduct',
@@ -590,10 +607,10 @@ $(document).ready(function(){
      formData.append("status", 0);
      formData.append("show", 0);
 
-
      for (var i = 0; i < tags.length; i++) {
-      formData.append('tags[]', tags[i]);
-    }
+         formData.append('tags[]', tags[i]);
+     }
+
 
     $.ajax({
      url: '/api/AddProduct',

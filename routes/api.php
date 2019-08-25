@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+//admins
+
+Route::post('registerAdmin','API\AdminController@registerAdmin');
+Route::post('loginAdmin','API\AdminController@loginAdmin');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
 });
@@ -22,8 +28,8 @@ Route::post('excelUpload','API\ProductController@excelUpload');
 Route::post('AddBrand','API\BrandController@AddBrand');
 Route::post('editupload','API\ProductController@picedit');
 Route::post('upload','API\ProductController@picedit');
-
-
+//public
+Route::post('recommend','API\ProductController@recommend');
 
 
 
@@ -95,6 +101,9 @@ Route::post('registerBuyer','API\BuyerController@registerBuyer');
 Route::post('saveHistoryview','API\LogController@saveHistoryview');
 Route::get('getHistory','API\LogController@getHistory');
 
+
+
+Route::post('saveHistoryview','API\LogController@saveHistoryview');
 
 Route::group(['middleware' => 'multiauth:buyer_api'],function(){
 	Route::post('success-Delivery','API\OrderController@statusTracking');
