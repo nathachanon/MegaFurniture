@@ -43,12 +43,9 @@
 
             </ul><br>
             <p>
-          <label for="amount">ราคา:</label>
-          <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+          <label for="amount">ช่วงราคาราคา:</label>
+          <input type="number" id="min_price" placeholder="MIN"><input type="number" id="max_price" placeholder="MAX"><button type="button" onclick="search_price()">ตกลง</button>
         </p>
-        
-        <div id="slider-range"></div>
- 
           </div>
        
       
