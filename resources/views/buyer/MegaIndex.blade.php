@@ -41,7 +41,14 @@
                 </ul>
               </li>
 
-            </ul>
+            </ul><br>
+            <p>
+          <label for="amount">ราคา:</label>
+          <input type="text" id="amount"  readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </p>
+        
+        <div id="slider-range"></div>
+ 
           </div>
        
       
@@ -96,8 +103,37 @@
     <!-- Script -->
     <script src="js/Scripts/megaindex.js"></script>
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 100000,
+      values: [ 75, 30000 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] +" บาท");
+      }
+    });
+    $( "#amount" ).val(  $( "#slider-range" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range" ).slider( "values", 1 ) + " บาท" );
+  } );
+  </script>
 
+<style>
+.ui-slider .ui-slider-range{
+  background-color:#f59121;
+}
 
-
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+  border: 1px solid #f59121;
+    background: #ffffff;
+    font-weight: normal;
+    color: #ffffff;
+}
+</style>
 
 @endsection
