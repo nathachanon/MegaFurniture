@@ -45,12 +45,14 @@ return [
             'driver' => 'passport',
             'provider' => 'buyer',
         ],
-        'admin_api' => [
-            'driver' => 'passport',
-            'provider' => 'admin',
-        ],
-
-
+      'admin' => [
+          'driver' => 'passport',
+          'provider' => 'admin',
+      ],
+      'admin_api' => [
+          'driver' => 'passport',
+          'provider' => 'admin',
+      ],
         'seller' => [
             'driver' => 'session',
             'provider' => 'seller',
@@ -77,7 +79,7 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-        
+
     'providers' => [
         'buyer' => [
             'driver' => 'eloquent',

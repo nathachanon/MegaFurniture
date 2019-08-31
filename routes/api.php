@@ -15,6 +15,13 @@ use Illuminate\Http\Request;
 
 Route::post('registerAdmin','API\AdminController@registerAdmin');
 Route::post('loginAdmin','API\AdminController@loginAdmin');
+Route::get('getPromotion','API\AdminController@getPromotion');
+
+Route::group(['middleware' => 'multiauth:admin_api'],function(){
+Route::get('logoutAdmin','API\AdminController@logoutAdmin');
+Route::post('addPromotion','API\AdminController@addPromotion');
+
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
@@ -88,6 +95,7 @@ Route::get('com2','API\ProductController@com2');
 Route::get('getProductMain','API\ProductController@getProductMain');
 Route::post('getProductType','API\ProductController@getProductType');
 Route::post('getProductPrice','API\ProductController@getProductPrice');
+Route::post('getProductFunc','API\ProductController@getProductFunc');
 Route::post('searchResult','API\ProductController@searchResult');
 
 

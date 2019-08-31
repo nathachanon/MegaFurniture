@@ -49,9 +49,9 @@ class BrandController extends Controller
     $brand = Brand::create($input);
 
     $success['brand_name'] =  $brand->brand_name;
-    return Redirect::back()->withErrors(['msg', 'The Message']);
+    //return Redirect::back()->withErrors(['msg', 'The Message']);
 
-    //return response()->json(['success'=>'1'], $this-> successStatus);
+    return response()->json(['success'=>'1'], $this-> successStatus);
   }
 }
 
