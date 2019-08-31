@@ -60,7 +60,7 @@ function getPromotion(){
 
       }
         console.log(i);
-      for(var i=1 ;i<=data['promotion_count'];i++){
+      for(var i=1 ;i<data['promotion_count'];i++){
 
       $('.carousel-indicators').append(
         '<li data-target="#demo" data-slide-to="'+i+'"></li>'

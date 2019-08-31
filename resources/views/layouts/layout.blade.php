@@ -175,7 +175,9 @@
 									<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
 										<div class="cat_burger"><span></span><span></span><span></span></div>
 										<div class="cat_menu_text">หมวดหมู่สินค้า</div>
+
 									</div>
+
 
 									<ul class="cat_menu">
 										<li class="hassubs">
@@ -253,7 +255,8 @@
 										</div>
 									</div>
 								</div>
-
+								<a href="/promotion"
+								<div class="cat_menu_text" style="color: black;margin-top:11px;">โปรโมชัน</div>	</a>
 							</div>
 						</div>
 					</div>
