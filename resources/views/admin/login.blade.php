@@ -19,7 +19,8 @@
 
 <body class="gray-bg">
   <center>
-  <h1 class="logo-name" >ADMIN</h1>
+  <h1 class="logo-name" >MEGA </h1>
+  <h1 class="logo-name" >Furniture </h1>
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
@@ -29,18 +30,15 @@
 
             </div>
             <h3>ผู้ดูแลระบบ</h3>
-            <p>MEGA Furniture
-                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-            </p>
 
 
                 <div class="form-group">
-                    <input type="text" id="username" class="form-control" placeholder="Username" required="">
+                    <input type="text" id="username" class="form-control" placeholder="ชื่อยูสเยอร์" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password" class="form-control" placeholder="Password" required="">
+                    <input type="password" id="password" class="form-control" placeholder="รหัสผ่าน" required="">
                 </div>
-                <button type="submit" id="loginAdmin" class="btn btn-primary block full-width m-b" style="background-color: #F59121;border: 1px solid gray;">Login</button>
+                <button type="submit" id="loginAdmin" class="btn btn-primary block full-width m-b" style="background-color: #F59121;border: 1px solid gray;">เข้าสู่ระบบ</button>
 
 
 
@@ -101,8 +99,7 @@ $('#loginAdmin').click(function(){
                   localStorage.setItem("a_token",mytoken.replace(/['"]+/g, ''));
                   localStorage.setItem("admin_id",admin_id.replace(/['"]+/g, ''));
                   localStorage.setItem("username",username.replace(/['"]+/g, ''));
-                  window.location.replace('/admin/index');
-                  window.location.reload();
+                  	window.location.replace('/admin/index');
                 },
                 error: function(data){
                   console.log(data);

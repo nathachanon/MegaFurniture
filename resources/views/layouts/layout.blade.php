@@ -6,22 +6,22 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="description" content="OneTech shop project">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="layout/styles/bootstrap4/bootstrap.min.css">
-	<link href="layout/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-	<link href="css/style.css" rel="stylesheet">
-	<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="layout/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-	<link rel="stylesheet" type="text/css" href="layout/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-	<link rel="stylesheet" type="text/css" href="layout/plugins/OwlCarousel2-2.2.1/animate.css">
-	<link rel="stylesheet" type="text/css" href="layout/plugins/slick-1.8.0/slick.css">
-	<link rel="stylesheet" type="text/css" href="layout/styles/main_styles.css">
-	<link rel="stylesheet" type="text/css" href="layout/styles/responsive.css">
+	<link rel="stylesheet" type="text/css" href="../layout/styles/bootstrap4/bootstrap.min.css">
+	<link href="../layout/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+	<link href="../css/style.css" rel="stylesheet">
+	<link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../layout/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="../layout/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="../layout/plugins/OwlCarousel2-2.2.1/animate.css">
+	<link rel="stylesheet" type="text/css" href="../layout/plugins/slick-1.8.0/slick.css">
+	<link rel="stylesheet" type="text/css" href="../layout/styles/main_styles.css">
+	<link rel="stylesheet" type="text/css" href="../layout/styles/responsive.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css">
 
-	<link rel="stylesheet" type="text/css" href="layout/styles/shop_styles.css">
-	<link rel="stylesheet" type="text/css" href="layout/styles/shop_responsive.css">
-	<link rel="stylesheet" type="text/css" href="layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-	<link rel="stylesheet" type="text/css" href="css/radio.css">
+	<link rel="stylesheet" type="text/css" href="../layout/styles/shop_styles.css">
+	<link rel="stylesheet" type="text/css" href="../layout/styles/shop_responsive.css">
+	<link rel="stylesheet" type="text/css" href="../layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="../css/radio.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 </head>
@@ -51,7 +51,7 @@
 								</div>
 								<div class="top_bar_user" id="top_bar_user">
 
-									<div class="user_icon"><img src="layout/images/user.svg" alt=""></div>
+									<div class="user_icon"><img src="../layout/images/user.svg" alt=""></div>
 									<div><a data-toggle="modal" data-target="#modalRegisterForm">สมัครสมาชิก</a></div>
 									<div><a  data-toggle="modal" data-target="#modalLoginForm">ลงชื่อเข้าใช้</a></div>
 
@@ -93,7 +93,7 @@
 												</ul>
 											</div>
 										</div>
-										<button onclick="submitSearch()" type="button" class="header_search_button trans_300" value="Submit"><img src="layout/images/search.png" alt=""></button>
+										<button onclick="submitSearch()" type="button" class="header_search_button trans_300" value="Submit"><img src="../layout/images/search.png" alt=""></button>
 
 									</div>
 								</div>
@@ -119,7 +119,7 @@
 											</li>
 										</ul>
 										<div class="cart_icon" id="icon_cart">
-											<img src="layout/images/cart.png" alt="">
+											<img src="../layout/images/cart.png" alt="">
 											<div class="cart_count"><span id="cart"></span></div>
 										</div>
 										<div class="cart_content">
@@ -144,7 +144,7 @@
 											</li>
 										</ul>
 										<div class="cart_icon" id="icon_compare">
-											<img style="width:32px;height:32px;" src="layout/images/arrow.png" alt="">
+											<img style="width:32px;height:32px;" src="../layout/images/arrow.png" alt="">
 											<div class="cart_count"><span id="compare"></span></div>
 										</div>
 										<div class="cart_content">
@@ -262,7 +262,7 @@
 
 			<!-- Menu -->
 
-		
+
 		</header>
 
 
@@ -318,7 +318,7 @@
 		</div>
 		<div class="modal-body mx-3">
 
-			<div class="md-form mb-3"> 
+			<div class="md-form mb-3">
 				<i class="fas fa-user prefix or"></i>
 				<input type="text"   name="regis_name" id="regis_name" class="form-control validate" placeholder="ชื่อ" required>
 			</div>
@@ -335,7 +335,7 @@
 					<label style="padding-left: 30px;" class="lb label-regis" for="sex_f">หญิง</label>
 				</div>
 			</div>
-			<div class="md-form mb-3"> 
+			<div class="md-form mb-3">
 				<i class="fas fa-birthday-cake prefix or"></i>
 				<input type="date"  name="birthday"  id="birthday" class="form-control validate" placeholder="วันเกิด" required>
 			</div>
@@ -372,45 +372,48 @@
 
 
 </body>
-
-<script src="layout/js/jquery-3.3.1.min.js"></script>
-<script src="layout/styles/bootstrap4/popper.js"></script>
-<script src="layout/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="layout/plugins/greensock/TweenMax.min.js"></script>
-<script src="layout/plugins/greensock/TimelineMax.min.js"></script>
-<script src="layout/plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="layout/plugins/greensock/animation.gsap.min.js"></script>
-<script src="layout/plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="layout/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="layout/plugins/slick-1.8.0/slick.js"></script>
-<script src="layout/plugins/easing/easing.js"></script>
-<script src="layout/js/custom.js"></script>
-
-
-<script src="layout/plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="layout/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="../js/jquery-2.1.1.js"></script>
+<!--
+<script src="../layout/js/jquery-3.3.1.min.js"></script>
+-->
+<script src="../layout/styles/bootstrap4/popper.js"></script>
+<script src="../layout/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="../layout/plugins/greensock/TweenMax.min.js"></script>
+<script src="../layout/plugins/greensock/TimelineMax.min.js"></script>
+<script src="../layout/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="../layout/plugins/greensock/animation.gsap.min.js"></script>
+<script src="../layout/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="../layout/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="../layout/plugins/slick-1.8.0/slick.js"></script>
+<script src="../layout/plugins/easing/easing.js"></script>
+<script src="../layout/js/custom.js"></script>
 
 
+<script src="../layout/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="../layout/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="../layout/plugins/parallax-js-master/parallax.min.js"></script>
 
 
-<script src="js/bootstrap.min.js"></script>
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="js/inspinia.js"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
+<script src="../js/inspinia.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
 
 <!-- iCheck -->
-<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script src="../js/plugins/iCheck/icheck.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 <script>
 	var b_token = localStorage.getItem("b_token");
 	var buyer_id = localStorage.getItem("buyer_id");
-
+  $("#cart").val(0);
+	  $("#compare").val(0);
 
 	check_user();
 
@@ -418,7 +421,7 @@
 
 		if(b_token != null && buyer_id != null){
 			$("#top_bar_user").empty();
-			$("#top_bar_user").html('<div class="user_icon"><img src="layout/images/user.svg" alt=""></div><div><div class="btn-group">'+
+			$("#top_bar_user").html('<div class="user_icon"><img src="../layout/images/user.svg" alt=""></div><div><div class="btn-group">'+
 				'<a data-toggle="dropdown" class="btn-xs dropdown-toggle" aria-expanded="false">'+localStorage.getItem("name")+'<span class="caret"></span></a>'+
 				'<ul class="dropdown-menu">'+
 				'<li><a href="/purchase">การสั่งซื้อของฉัน</a></li>'+
@@ -496,7 +499,7 @@
 					showConfirmButton: false,
 					timer: 900
 				});
-				
+
 			}else{
 				console.clear();
 				console.log(data);
@@ -528,14 +531,14 @@
 								showConfirmButton: false,
 								timer: 900
 							});
-							
+
 							$('#modalRegisterForm').hide();
 							$('.modal-backdrop').hide();
 
 							setTimeout(function () {
 								$('#modalLoginForm').modal();
 							}, 1100);
-																	
+
 						}
 					},
 					failure: function(errMsg) {
@@ -598,11 +601,11 @@
 						localStorage.setItem("b_token",mytoken.replace(/['"]+/g, ''));
 						localStorage.setItem("buyer_id",buyer_id.replace(/['"]+/g, ''));
 						localStorage.setItem("name",name.replace(/['"]+/g, ''));
-						
+
 						setTimeout(function () {
-							window.location.replace('/'); 
+							window.location.replace('/');
 						}, 1000);
-						
+
 					},
 					error: function(data){
 						console.log(data);
@@ -657,7 +660,7 @@
 				localStorage.removeItem("name");
 				localStorage.removeItem("buyer_id");
 				setTimeout(function () {
-					window.location.replace('/'); 
+					window.location.replace('/');
 				}, 1000);
 			}
 		});
@@ -756,6 +759,6 @@
 	});
 
 
-	
+
 </script>
 </html>
