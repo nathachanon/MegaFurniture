@@ -95,6 +95,7 @@ Route::get('com2','API\ProductController@com2');
 Route::get('getProductMain','API\ProductController@getProductMain');
 Route::post('getProductType','API\ProductController@getProductType');
 Route::post('getProductPrice','API\ProductController@getProductPrice');
+Route::post('getProductFunc','API\ProductController@getProductFunc');
 Route::post('searchResult','API\ProductController@searchResult');
 
 
