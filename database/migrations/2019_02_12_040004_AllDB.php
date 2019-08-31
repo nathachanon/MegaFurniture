@@ -35,8 +35,8 @@ class AllDB extends Migration
         $table->timestamps();
     });
 
-    Schema::create('Banks', function (Blueprint $table) {
-     $table->increments('Bank_id');
+    Schema::create('banks', function (Blueprint $table) {
+     $table->increments('bank_id');
      $table->string('Bank_name',100);
  });
 

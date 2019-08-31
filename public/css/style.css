@@ -72,6 +72,12 @@
 .prim{
   color: #1ab394;
 }
+.prim:hover{
+  color: white;
+}
+.b-hov:hover{
+  color: white; 
+}
 .wh{
   color: white;
 }
