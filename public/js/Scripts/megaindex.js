@@ -144,7 +144,7 @@ function getAllProduct() {
           '</div>' +
           '<div class="m-t  inline2">' +
           '<a onclick="addCompare(\'' + name + '\',' + data['product'][i]['prod_id'] + ',' + price + ',\'' + pic + '\');"' +
-          ' class="btn btn-xs btn-outline btn-primary"><i class="fa fa-plus-square prim"></i> </a>' +
+          ' class="btn btn-xs btn-outline btn-primary b-hov"><i class="fa fa-plus-square prim"></i> </a>' +
           '</div></div>' +
           '</div>' +
           '</div>' +
