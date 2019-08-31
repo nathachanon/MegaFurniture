@@ -101,7 +101,9 @@ Route::get('/compareProduct', function () {
 Route::get('/compare', function () {
     return view('buyer.compare');
 });
-
+Route::get('/promotion', function () {
+    return view('buyer.promotion_buyer');
+});
 
 Route::get('/productDetail', function () {
     return view('buyer.productDetail');
@@ -113,8 +115,14 @@ Route::get('/admin', function () {
 Route::get('/admin/index', function () {
     return view('admin.index');
 });
+Route::get('/admin/promotion', function () {
+    return view('admin.promotion_admin');
+});
+Route::get('/admin/addPromotion', function () {
+    return view('admin.addPromotion');
+});
 
-
+Route::get('/promotion/{id}','API\AdminController@promotionDetail');
 Route::get('/login/facebook', 'API\SellerController@facebookAuthRedirect');
 Route::get('/login/facebook/callback', 'API\SellerController@facebookSuccess');
 
