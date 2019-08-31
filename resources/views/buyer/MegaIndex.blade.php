@@ -43,12 +43,9 @@
 
             </ul><br>
             <p>
-          <label for="amount">ราคา:</label>
-          <input type="text" id="amount"  readonly style="border:0; color:#f6931f; font-weight:bold;">
+          <label for="amount">ช่วงราคาราคา:</label>
+          <input type="number" id="min_price" placeholder="MIN"><input type="number" id="max_price" placeholder="MAX"><button type="button" onclick="search_price()">ตกลง</button>
         </p>
-        
-        <div id="slider-range"></div>
- 
           </div>
        
       
@@ -108,6 +105,7 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
+  document.cookie = "searchCat=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   $( function() {
     $( "#slider-range" ).slider({
       range: true,
