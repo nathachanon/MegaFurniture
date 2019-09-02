@@ -88,7 +88,7 @@ Route::apiResource('/{products}/reviews','API\ReviewsController');
 
 });
 
-
+//ทดสอบcommit
 //Buyer
 Route::get('com2','API\ProductController@com2');
 
