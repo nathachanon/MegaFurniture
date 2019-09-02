@@ -51,35 +51,35 @@
 
                         <div class="group_color">
                             <label id="black">
-                                <input id="black" value="ดำ" type="checkbox" class="option-input checkbox" />
+                                <input id="black_c" value="ดำ" type="checkbox" class="option-input checkbox" onclick="color_select(this)"/>
                                 ดำ
                             </label>
                             <label id="red">
-                                <input id="red" type="checkbox" value="แดง" class="option-input checkbox" />
+                                <input id="red_c" type="checkbox" value="แดง" class="option-input checkbox" onclick="color_select(this)"/>
                                 แดง
                             </label>
                             <label id="brown">
-                                <input id="brown" value="น้ำตาล" type="checkbox" class="option-input checkbox" />
+                                <input id="brown_c" value="น้ำตาล" type="checkbox" class="option-input checkbox" onclick="color_select(this)"/>
                                 น้ำตาล
                             </label>
                             <label id="grey">
-                                <input id="grey" type="checkbox" value="เทา" class="option-input checkbox" />
+                                <input id="grey_c" type="checkbox" value="เทา" class="option-input checkbox" onclick="color_select(this)"/>
                                 เทา
                             </label>
                             <label id="blue">
-                                <input id="blue" value="ฟ้า" type="checkbox" class="option-input checkbox" />
+                                <input id="blue_c" value="ฟ้า" type="checkbox" class="option-input checkbox" onclick="color_select(this)"/>
                                 ฟ้า
                             </label>
                             <label id="green">
-                                <input id="green" type="checkbox" value="เขียว" class="option-input checkbox" />
+                                <input id="green_c" type="checkbox" value="เขียว" class="option-input checkbox" onclick="color_select(this)"/>
                                 เขียว
                             </label>
                             <label id="orange">
-                                <input id="orange" value="ส้ม" type="checkbox" class="option-input checkbox" />
+                                <input id="orange_c" value="ส้ม" type="checkbox" class="option-input checkbox" onclick="color_select(this)"/>
                                 ส้ม
                             </label>
                             <label id="violet">
-                                <input id="violet" value="ม่วง" type="checkbox" class="option-input checkbox" />
+                                <input id="violet_c" value="ม่วง" type="checkbox" class="option-input checkbox" onclick="color_select(this)"/>
                                 ม่วง
                             </label>
                         </div>
