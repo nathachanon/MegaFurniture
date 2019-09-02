@@ -255,8 +255,8 @@
 										</div>
 									</div>
 								</div>
-								<a href="/promotion"
-								<div class="cat_menu_text" style="color: black;margin-top:11px;">โปรโมชัน</div>	</a>
+								<a href="/promotion">
+								<div class="cat_menu_text" style="color: black;margin-top:11px;"> โปรโมชัน</div>	</a>
 							</div>
 						</div>
 					</div>
