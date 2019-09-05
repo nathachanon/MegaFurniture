@@ -1404,12 +1404,12 @@ class ProductController extends Controller
             'somevariable4' => $input['color'],
           ));
 
-          $getProduct = DB::select(DB::raw("SELECT products.prod_id , products.prod_name as Name , catagoiesrooms.CatRoom_name as Room , products.prod_desc as Description , products.prod_price as Price , products.pic_url1 as Pic from products
+          $getProduct = DB::select(DB::raw("SELECT products.prod_id , products.prod_name as Name , catagoiesrooms.CatRoom_name as Room , products.prod_desc as Description , products.prod_price as Price , products.pic_url1 as Pic , ROUND(AVG(reviews.rating),1) as Rating from products
           join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
           join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
           join colorproducts on products.ColorProd_id = colorproducts.ColorProd_id
           left join reviews on products.Prod_id = reviews.prod_id
-          where products.status = 0 and products.show = 0 and products.prod_price >= :somevariable2 AND products.prod_price <= :somevariable3 and colorproducts.ColorProd_value REGEXP :somevariable4"), array(
+          where products.status = 0 and products.show = 0 and products.prod_price >= :somevariable2 AND products.prod_price <= :somevariable3 and colorproducts.ColorProd_value REGEXP :somevariable4 group by products.prod_id ORDER BY rating desc"), array(
             'somevariable2' => $input['price_min'],
             'somevariable3' => $input['price_max'],
             'somevariable4' => $input['color'],
