@@ -269,32 +269,6 @@ class ProductController extends Controller
       $success['img5'] = 'null';
     } //img5 end
 
-    //editKeywords
-    $Keywords_remove = DB::table('keywords')->where('Prod_id', $input['Prod_id'])->delete();
-    for ($x = 0; $x < count($input["tags"]); $x++) {
-
-      $Keywords_count = DB::table('Keyword_values')->where('keyword_value', $input['tags'][$x])->count();
-
-      if ($Keywords_count == 0 && $input['tags'][$x] != null) {
-        $keyword_value = Keyword_values::create([
-          'keyword_value' => $input["tags"][$x]
-        ]);
-
-        $value_id = $keyword_value->keyword_value_id;
-        $keyword_value = Keyword::create([
-          'keyword_value_id' => $value_id,
-          'Prod_id' => $input['Prod_id']
-        ]);
-      } else if ($Keywords_count != 0 && $input['tags'][$x] != null) {
-        $Keyword_value_id = DB::table('Keyword_values')->where('keyword_value', $input['tags'][$x])->first();
-        $value_id = $Keyword_value_id->keyword_value_id;
-        $keyword_value = Keyword::create([
-          'keyword_value_id' => $value_id,
-          'Prod_id' => $input['Prod_id']
-        ]);
-      }
-    }
-
     return response()->json(['success' => $success], $this->successStatus);
   }
 
