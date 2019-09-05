@@ -25,7 +25,7 @@ class CreateAdminTable extends Migration
          $table->increments('promotion_id');
          $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
          $table->string('promotion_name',200);
-         $table->string('promotion_des',5000);
+         $table->text('promotion_des');
          $table->string('promotion_pic',50)->nullable();
          $table->integer('promotion_status');
          $table->timestamps();

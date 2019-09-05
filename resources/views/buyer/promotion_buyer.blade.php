@@ -25,11 +25,11 @@
 
 </div>
   <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
+  <a class="carousel-control-prev"  href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon" style="background-color: black;"></span>
   </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
+  <a class="carousel-control-next"  href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon" style="background-color: black;"></span>
   </a>
 </div>
 
