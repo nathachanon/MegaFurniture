@@ -33,15 +33,7 @@
                     <div class="wrapper wrapper-content animated fadeInRight">
                       <div id='listcontent'>
                       </div>
-                        <div class="vote-item">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <a href="#" class="vote-title">
-                                        It is a long established fact that a reader will be distracted
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        
 
 
                     </div>
