@@ -949,7 +949,7 @@ class ProductController extends Controller
   join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
   join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id where products.status = 0 and products.show = 0 and products.qty > 1 order by products.prod_id"));
 
-    $getRating = DB::select(DB::raw("select products.prod_id , ROUND(AVG(reviews.rating),1) as Rating from products
+    $getRating = DB::select(DB::raw("select products.prod_id , IFNULL(ROUND(AVG(reviews.rating),1),0) as Rating from products
   join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
   join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
   left join reviews on products.Prod_id = reviews.prod_id where products.status = 0 and products.show = 0 and products.qty > 1
