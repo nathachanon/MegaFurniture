@@ -25,11 +25,22 @@ class CreateAdminTable extends Migration
          $table->increments('promotion_id');
          $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
          $table->string('promotion_name',200);
-         $table->string('promotion_des',20000);
+         $table->text('promotion_des');
          $table->string('promotion_pic',50)->nullable();
          $table->integer('promotion_status');
          $table->timestamps();
      });
+
+        Schema::create('contents', function (Blueprint $table) {
+         $table->unsignedInteger('admin_id');
+         $table->increments('content_id');
+         $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
+         $table->string('content_name',200);
+         $table->longtext('content_des');
+         $table->string('content_pic',50)->nullable();
+         $table->integer('content_status');
+         $table->timestamps();
+    });
     }
 
     /**

@@ -16,12 +16,14 @@ use Illuminate\Http\Request;
 Route::post('registerAdmin','API\AdminController@registerAdmin');
 Route::post('loginAdmin','API\AdminController@loginAdmin');
 Route::get('getPromotion','API\AdminController@getPromotion');
+Route::get('getContent','API\AdminController@getContent');
 
 Route::group(['middleware' => 'multiauth:admin_api'],function(){
-Route::get('logoutAdmin','API\AdminController@logoutAdmin');
 Route::post('addPromotion','API\AdminController@addPromotion');
+Route::post('addContent','API\AdminController@addContent');
 
 });
+Route::get('logoutAdmin','API\AdminController@logoutAdmin');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
