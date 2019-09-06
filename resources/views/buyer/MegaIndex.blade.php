@@ -108,7 +108,7 @@
                             <span>ค้นหาโดย:</span>
                             <ul>
                                 <li>
-                                    <span class="sorting_text">ตัวเลือก<i class="fas fa-chevron-down"></span></i>
+                                    <span class="sorting_text" id="select_fillter">ตัวเลือก<i class="fas fa-chevron-down"></span></i>
                                     <ul>
                                         <li class="shop_sorting_button" id="ratingMin">คะแนนสินค้า ต่ำ - สูง
                                         </li>
