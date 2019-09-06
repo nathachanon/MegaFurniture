@@ -1,0 +1,140 @@
+@extends('admin.layout_admin')
+
+@section('content')
+
+
+  <div class="row border-bottom2">
+    <nav class="navbar navbar-static-top2" role="navigation" style="margin-bottom: 0">
+      <ul class="nav navbar-top-links navbar-left">
+        <li>
+          <a class="mt-sbrand" href="#"><h3 id="product_counts"></h3> </a>
+
+      </ul>
+      <ul class="nav navbar-top-links navbar-right">
+        <li>
+         <a href="addContent"><button  class="btn btn-primary  " type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">เพิ่มคอนเทนต์</span></button></a>
+       </li>
+     </ul>
+
+   </nav>
+ </div>
+ <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <h2>จัดการคอนเทนต์</h2><br>
+
+       </nav>
+
+
+       <div class="form-group">
+
+
+          </div>
+          <br><br><br><hr>
+      <div id="table">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+<!-- Mainly scripts -->
+
+<script src="../js/jquery-2.1.1.js"></script>
+<script src="../js/inspinia.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
+<script src="../js/plugins/toastr/toastr.min.js"></script>
+
+<script src="../js/plugins/dataTables/datatables.min.js"></script>
+
+<script src="../js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+
+<script>
+var token = localStorage.getItem("a_token");
+function getcontent(){
+  $.ajax({
+    type: "GET",
+    url: "/api/getContent",
+    headers: {
+      'Authorization':'Bearer '+token,
+      'content-Type':'application/json'
+    },
+    success: function(data){
+      console.log(data);
+      document.title = 'Admin : content';
+      var p_count = data['content_count'];
+      if(p_count == null)
+      {
+        p_count = 0;
+      }
+      document.getElementById("product_counts").innerHTML = "พบโปรโมชั่น "+p_count+" รายการ";
+      $('#table').empty();
+      $("#table").append('<table id="tblEntAttributes" class="table table-striped dataTables-example" data-page-size="10" data-filter=#filter>'+
+        '<thead>'+
+        '<tr>'+
+        '<th class="text-left" data-sort-ignore="true" id="selectall"><div class="checkbox checkbox-success"><input name="select-all" id="select-all" type="checkbox" onchange="selectalls(this)"><label for="checkAll" id="all">(0)</label></div></th>'+
+        '<th data-toggle="true">ชื่อคอนเทนต์</th>'+
+        '<th data-toggle="true">ผู้บันทึก</th>'+
+        '<th data-hide="phone">วันที่บันทึก</th>'+
+        '<th class="text-right" data-sort-ignore="true">Action</th>'+
+        '</tr>'+
+        '</thead>'+
+        '<tbody id="t_body">'+
+        '</tbody>'
+        );
+      $("#select-all").prop('checked',false);
+      for(var i=0 ;i<p_count ;i++){
+
+        $('#tblEntAttributes tbody').append(
+          '<tr id="tr_'+data['content'][i]['content_id']+'">'+
+          '<td>'+
+          '<div class="checkbox checkbox-success">'+
+          '<input id="checkbox_'+data['content'][i]['content_id']+'" type="checkbox" value="'+data['content'][i]['content_id']+'" onchange="editGroupADD(this,'+data['content'][i]['content_id']+');"><label for="checkbox_'+data['content'][i]['Prod_id']+'"></label>'+
+          '</div>'+
+          '</td>'+
+          '<td style="width:290px;"><a href="../../content/'+ data['content'][i]['content_id'] +'">'+data['content'][i]['content_name']+'</a></td>'+
+          '<td>'+data['content'][i]['username']+'</td>'+
+          '<td>'+data['content'][i]['created_at']+'</td>'+
+          '<td class="text-right">'+
+          '<div class="tooltip-demo">'+
+          '<a  data-toggle="tooltip" data-placement="top" title="แก้ไข" onclick="editcontent ('+data['content'][i]['content_id']+')"><i class="fas fa-pen i-prod"></i></a>'+
+          '<a  data-toggle="tooltip" data-placement="top" title="คัดลอก" onclick="copycontent ('+data['content'][i]['content_id']+')"><i class="far fa-copy i-prod"></i></a>'+
+          '<a  data-toggle="tooltip" data-placement="top" title="ลบ" onclick="DeleteProd ('+data['content'][i]['content_id']+')"><i class="far fa-trash-alt i-prod"></i></a>'+
+          '</div>'+
+          '</td>'+
+          '</tr>'
+          );
+      }
+      $("#table").append('</table>');
+      $('.dataTables-example').DataTable({
+        "searching": false,
+        "buttons": false
+      });
+      $('.footable').footable();
+    }
+    ,
+    failure: function(errMsg) {
+      alert(errMsg);
+    }
+  });
+}
+
+
+  function load()
+  {
+    console.log("load");
+    getcontent();
+  }
+window.onload = load();
+
+
+</script>
+
+
+@endsection

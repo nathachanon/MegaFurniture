@@ -257,7 +257,11 @@
 								</div>
 								<a href="/promotion">
 								<div class="cat_menu_text" style="color: black;margin-top:11px;"> โปรโมชัน</div>	</a>
+								<a href="/content">
+								<div class="cat_menu_text" style="color: black;margin-top:11px;"> บทความ</div>	</a>
 							</div>
+
+						</div>
 						</div>
 					</div>
 				</div>

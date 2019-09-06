@@ -6,6 +6,7 @@ use App\Http\Controllers\API\AuthenticationException;
 use App\Http\Controllers\Controller;
 use App\Admin;
 use App\Promotion;
+use App\Content;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Redirect;
@@ -90,7 +91,7 @@ class AdminController extends Controller
 
    function AddPromotion(Request $request)
    {
-  
+
     $image = $request->file('promotion_pic');
     $imageName =date('mdYHis').uniqid().'.'.$image->getClientOriginalExtension();
     $image->move(public_path("images_promotion"),$imageName);
@@ -137,6 +138,51 @@ class AdminController extends Controller
     $promotionDetail = Promotion::where('promotion_id',$id)->first();
     return view('buyer.promotionDetail')->with(compact('promotionDetail'));
  }
+
+  function addContent(Request $request)
+   {
+
+    $image = $request->file('content_pic');
+    $imageName =date('mdYHis').uniqid().'.'.$image->getClientOriginalExtension();
+    $image->move(public_path("images_content"),$imageName);
+    $validator = Validator::make($request->all(), [
+     'admin_id' => 'required',
+     'content_name' => 'required',
+     'content_des' => 'required',
+     'content_status' => 'required',
+   ]);
+
+    if ($validator->fails()) {
+      return response()->json(['error'=>$validator->errors()], 401);
+    }
+
+    $input = $request->all();
+     $input['content_pic'] = $imageName;
+     $content = Content::create($input);
+
+     //$success['content_name'] =  $content->content_name;
+     //return Redirect::back()->withErrors(['msg', 'The Message']);
+
+     return response()->json(['success'=>'1'], $this-> successStatus);
+   }
+   function getContent(Request $request){
+   $countContent = DB::table('contents')->where('content_status', 1)->count();
+   $getContent = DB::table('contents')
+   ->join('admins', 'contents.admin_id', '=', 'admins.id')
+   ->select('admins.username','content_id','content_name','content_des','content_pic','contents.created_at')->where('content_status', 1)->get();
+
+   if($countContent == 0){
+     return response()->json(['content_count'=>$countContent], $this-> successStatus);
+   }else{
+    return response()->json(['content_count'=>$countContent,'content'=>$getContent], $this-> successStatus);
+   }
+ }
+
+  function contentDetail($id = null){
+    $contentDetail = Content::where('content_id',$id)->first();
+    return view('buyer.contentDetail')->with(compact('contentDetail'));
+ }
+
 
  function logoutAdmin() {
   $accessToken = Auth::user()->token();
