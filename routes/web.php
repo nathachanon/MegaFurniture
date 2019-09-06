@@ -86,8 +86,13 @@ Route::get('/orderPurchase', function () {
 });
 
 
-Route::get('/', function () {
+Route::get('/Index', function () {
     return view('buyer.MegaIndex');
+});
+
+
+Route::get('/', function () {
+    return view('buyer.Home');
 });
 
 Route::get('/searchResult', function () {

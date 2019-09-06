@@ -68,7 +68,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="js/Scripts/megaindex.js"></script>
+<script src="js/Scripts/filter.js"></script>
 <script>
 
 	if(getCookie() != null)
@@ -616,13 +616,14 @@ function getProduct(){
 	});
 }
 
+
+
 function getRecommend(){
 	var prod_id = getCookie();
 	(async () => {
 		const rawResponse = await fetch('/api/recommend-product', {
 			method: 'POST',
 			headers: {
-				'Authorization':'Bearer '+b_token,
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
@@ -630,9 +631,8 @@ function getRecommend(){
 		});
 		const content = await rawResponse.json();
 		if(content['recommend'] != ''){
-			console.log(content['recommend']);
 			for(i=0;i<content['recommend'].length;i++){
-				$('#recommend-list').append('<div class="col-md-2">'+
+				$('#recommend-list').append('<div class="col-md-4 col-lg-2">'+
 					'<div class="ibox">'+
 					'<div class="ibox-content product-box" >'+
 					'<div class="product-imitation-prod" onclick="productDetail('+content['recommend'][i]['prod_id']+')">'+

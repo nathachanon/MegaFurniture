@@ -269,32 +269,6 @@ class ProductController extends Controller
       $success['img5'] = 'null';
     } //img5 end
 
-    //editKeywords
-    $Keywords_remove = DB::table('keywords')->where('Prod_id', $input['Prod_id'])->delete();
-    for ($x = 0; $x < count($input["tags"]); $x++) {
-
-      $Keywords_count = DB::table('Keyword_values')->where('keyword_value', $input['tags'][$x])->count();
-
-      if ($Keywords_count == 0 && $input['tags'][$x] != null) {
-        $keyword_value = Keyword_values::create([
-          'keyword_value' => $input["tags"][$x]
-        ]);
-
-        $value_id = $keyword_value->keyword_value_id;
-        $keyword_value = Keyword::create([
-          'keyword_value_id' => $value_id,
-          'Prod_id' => $input['Prod_id']
-        ]);
-      } else if ($Keywords_count != 0 && $input['tags'][$x] != null) {
-        $Keyword_value_id = DB::table('Keyword_values')->where('keyword_value', $input['tags'][$x])->first();
-        $value_id = $Keyword_value_id->keyword_value_id;
-        $keyword_value = Keyword::create([
-          'keyword_value_id' => $value_id,
-          'Prod_id' => $input['Prod_id']
-        ]);
-      }
-    }
-
     return response()->json(['success' => $success], $this->successStatus);
   }
 
@@ -975,7 +949,7 @@ class ProductController extends Controller
   join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
   join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id where products.status = 0 and products.show = 0 and products.qty > 1 order by products.prod_id"));
 
-    $getRating = DB::select(DB::raw("select products.prod_id , IFNULL(ROUND(AVG(reviews.rating),1),0) as Rating from products
+    $getRating = DB::select(DB::raw("select products.prod_id , ROUND(AVG(reviews.rating),1) as Rating from products
   join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
   join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
   left join reviews on products.Prod_id = reviews.prod_id where products.status = 0 and products.show = 0 and products.qty > 1
@@ -1345,14 +1319,14 @@ class ProductController extends Controller
           join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
           join colorproducts on products.ColorProd_id = colorproducts.ColorProd_id
           left join reviews on products.Prod_id = reviews.prod_id where products.status = 0 and products.show = 0
-          and products.prod_price >= 1 AND products.prod_price <= 100000 and colorproducts.ColorProd_value REGEXP '|' ");
+          and products.prod_price >= 1 AND products.prod_price <= 1000000 and colorproducts.ColorProd_value REGEXP '|' ");
 
           $getProduct = DB::select("SELECT products.prod_id , products.prod_name as Name , catagoiesrooms.CatRoom_name as Room , products.prod_desc as Description , products.prod_price as Price , products.pic_url1 as Pic , ROUND(AVG(reviews.rating),1) as rating from products
           join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
           join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
           join colorproducts on products.ColorProd_id = colorproducts.ColorProd_id
           left join reviews on products.Prod_id = reviews.prod_id
-          where products.status = 0 and products.show = 0 and products.prod_price >= 1 AND products.prod_price <= 100000 and colorproducts.ColorProd_value REGEXP '|' group by products.prod_id ORDER BY rating asc");
+          where products.status = 0 and products.show = 0 and products.prod_price >= 1 AND products.prod_price <= 1000000 and colorproducts.ColorProd_value REGEXP '|' group by products.prod_id ORDER BY rating asc");
 
           $getRating = DB::select(DB::raw("SELECT products.prod_id , ROUND(AVG(reviews.rating),1) as Rating from products
       join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
@@ -1430,12 +1404,12 @@ class ProductController extends Controller
             'somevariable4' => $input['color'],
           ));
 
-          $getProduct = DB::select(DB::raw("SELECT products.prod_id , products.prod_name as Name , catagoiesrooms.CatRoom_name as Room , products.prod_desc as Description , products.prod_price as Price , products.pic_url1 as Pic from products
+          $getProduct = DB::select(DB::raw("SELECT products.prod_id , products.prod_name as Name , catagoiesrooms.CatRoom_name as Room , products.prod_desc as Description , products.prod_price as Price , products.pic_url1 as Pic , ROUND(AVG(reviews.rating),1) as Rating from products
           join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
           join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
           join colorproducts on products.ColorProd_id = colorproducts.ColorProd_id
           left join reviews on products.Prod_id = reviews.prod_id
-          where products.status = 0 and products.show = 0 and products.prod_price >= :somevariable2 AND products.prod_price <= :somevariable3 and colorproducts.ColorProd_value REGEXP :somevariable4"), array(
+          where products.status = 0 and products.show = 0 and products.prod_price >= :somevariable2 AND products.prod_price <= :somevariable3 and colorproducts.ColorProd_value REGEXP :somevariable4 group by products.prod_id ORDER BY rating desc"), array(
             'somevariable2' => $input['price_min'],
             'somevariable3' => $input['price_max'],
             'somevariable4' => $input['color'],
