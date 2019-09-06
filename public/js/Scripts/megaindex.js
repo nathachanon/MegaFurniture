@@ -397,6 +397,7 @@ $("#priceMin").click(function(){
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function (data) {
+        $("#select_fillter").html('ราคา ต่ำ - สูง');
         $('#product_list').empty();
         $('#p_counts').empty();
         var product_count = data['product_count'][0]['count'];
@@ -565,6 +566,7 @@ $("#priceMax").click(function(){
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function (data) {
+        $("#select_fillter").html('ราคา สูง - ต่ำ');
         $('#product_list').empty();
         $('#p_counts').empty();
         var product_count = data['product_count'][0]['count'];
@@ -733,6 +735,7 @@ $("#ratingMin").click(function(){
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function (data) {
+        $("#select_fillter").html('คะแนนสินค้า ต่ำ - สูง');
         $('#product_list').empty();
         $('#p_counts').empty();
         var product_count = data['product_count'][0]['count'];
@@ -901,6 +904,7 @@ $("#ratingMax").click(function(){
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function (data) {
+        $("#select_fillter").html('คะแนนสินค้า สูง - ต่ำ');
         $('#product_list').empty();
         $('#p_counts').empty();
         var product_count = data['product_count'][0]['count'];
