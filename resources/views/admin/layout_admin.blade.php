@@ -55,9 +55,9 @@
 
             </div>
           </span>
-          <a  href="#">
+          <a  href="/admin/index">
             <span class="clear"> <span class="block m-t-xs"><strong id='nn'class="font-bold"></strong>
-            </span> <span class="text-muted text-xs block ">Admin</span> </span> </a>
+            </span> <span class="text-muted text-xs block ">ผู้ดูแลระบบ</span> </span> </a>
 
           </div>
           <div class="logo-element">
@@ -69,7 +69,7 @@
           <a href="promotion"><i class="fa fa-users"></i> <span class="nav-label"> โปรโมชัน</span></a>
         </li>
          <li id="brand-nav" >
-          <a href="event"><i class="fa fa-users"></i> <span class="nav-label">กิจกรรม</span></a>
+          <a href="content"><i class="fa fa-users"></i> <span class="nav-label">คอนเทนต์</span></a>
         </li>
       </ul>
 
@@ -133,9 +133,9 @@
 <script src="../js/plugins/footable/footable.all.min.js"></script>
 <script src="../js/plugins/slick/slick.min.js"></script>
 
-
 <!-- SUMMERNOTE -->
 <script src="../js/plugins/summernote/summernote_edit.min.js"></script>
+
 <script>
   $(document).ready(function () {
     $('.i-checks').iCheck({

@@ -949,7 +949,7 @@ class ProductController extends Controller
   join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
   join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id where products.status = 0 and products.show = 0 and products.qty > 1 order by products.prod_id"));
 
-    $getRating = DB::select(DB::raw("select products.prod_id , IFNULL(ROUND(AVG(reviews.rating),1),0) as Rating from products
+    $getRating = DB::select(DB::raw("select products.prod_id , ROUND(AVG(reviews.rating),1) as Rating from products
   join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
   join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
   left join reviews on products.Prod_id = reviews.prod_id where products.status = 0 and products.show = 0 and products.qty > 1
@@ -1319,14 +1319,14 @@ class ProductController extends Controller
           join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
           join colorproducts on products.ColorProd_id = colorproducts.ColorProd_id
           left join reviews on products.Prod_id = reviews.prod_id where products.status = 0 and products.show = 0
-          and products.prod_price >= 1 AND products.prod_price <= 100000 and colorproducts.ColorProd_value REGEXP '|' ");
+          and products.prod_price >= 1 AND products.prod_price <= 1000000 and colorproducts.ColorProd_value REGEXP '|' ");
 
           $getProduct = DB::select("SELECT products.prod_id , products.prod_name as Name , catagoiesrooms.CatRoom_name as Room , products.prod_desc as Description , products.prod_price as Price , products.pic_url1 as Pic , ROUND(AVG(reviews.rating),1) as rating from products
           join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
           join catagoiesrooms on catagoiesproducts.CatRoom_id = catagoiesrooms.CatRoom_id
           join colorproducts on products.ColorProd_id = colorproducts.ColorProd_id
           left join reviews on products.Prod_id = reviews.prod_id
-          where products.status = 0 and products.show = 0 and products.prod_price >= 1 AND products.prod_price <= 100000 and colorproducts.ColorProd_value REGEXP '|' group by products.prod_id ORDER BY rating asc");
+          where products.status = 0 and products.show = 0 and products.prod_price >= 1 AND products.prod_price <= 1000000 and colorproducts.ColorProd_value REGEXP '|' group by products.prod_id ORDER BY rating asc");
 
           $getRating = DB::select(DB::raw("SELECT products.prod_id , ROUND(AVG(reviews.rating),1) as Rating from products
       join catagoiesproducts on products.CatProd_id = catagoiesproducts.CatProd_id
