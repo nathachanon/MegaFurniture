@@ -31,13 +31,13 @@ function color_select(element) {
   if (color == '') {
     color = '|';
   }
-  searchPrice(1, 100000, color);
+  searchPrice(1, 1000000, color);
 }
 
 function search_price() {
   var min = $("#min_price").val();
   var max = $("#max_price").val();
-  if (min <= max && min > 0 && max <= 100000) {
+  if (min <= max && min > 0 && max <= 1000000) {
     if (color == '') {
       searchPrice(min, max, '|');
     } else if (color == '|') {
@@ -58,7 +58,6 @@ function getAllProduct() {
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function (data) {
-
       var product_count = data['product_count'];
       if (product_count == 'NULL' || product_count == 0) {
         $('#p_counts').append('ไม่พบสินค้าที่ต้องการ')
@@ -377,14 +376,14 @@ $("#priceMin").click(function(){
   }
 
   if(max == ''){
-    max = 100000;
+    max = 1000000;
   }
 
   if (color == '') {
     color = '|'
   }
 
-  if (min <= max && min > 0 && max <= 100000) {
+  if (min <= max && min > 0 && max <= 1000000) {
     $.ajax({
       type: "POST",
       url: "/api/getProductFunc",
@@ -545,14 +544,14 @@ $("#priceMax").click(function(){
   }
 
   if(max == ''){
-    max = 100000;
+    max = 1000000;
   }
 
   if (color == '') {
     color = '|'
   }
 
-  if (min <= max && min > 0 && max <= 100000) {
+  if (min <= max && min > 0 && max <= 1000000) {
     $.ajax({
       type: "POST",
       url: "/api/getProductFunc",
@@ -713,14 +712,14 @@ $("#ratingMin").click(function(){
   }
 
   if(max == ''){
-    max = 100000;
+    max = 1000000;
   }
 
   if (color == '') {
     color = '|'
   }
 
-  if (min <= max && min > 0 && max <= 100000) {
+  if (min <= max && min > 0 && max <= 1000000) {
     $.ajax({
       type: "POST",
       url: "/api/getProductFunc",
@@ -881,14 +880,14 @@ $("#ratingMax").click(function(){
   }
 
   if(max == ''){
-    max = 100000;
+    max = 1000000;
   }
 
   if (color == '') {
     color = '|'
   }
 
-  if (min <= max && min > 0 && max <= 100000) {
+  if (min <= max && min > 0 && max <= 1000000) {
     $.ajax({
       type: "POST",
       url: "/api/getProductFunc",
@@ -1043,7 +1042,7 @@ function searchPrice(min, max, color) {
     CatProd_name = '0';
   }
 
-  if (min <= max && min > 0 && max <= 100000) {
+  if (min <= max && min > 0 && max <= 1000000) {
     $.ajax({
       type: "POST",
       url: "/api/getProductPrice",
