@@ -327,8 +327,27 @@ function getProduct(){
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
 		success: function(data){
-			console.log(data['data']);
 			if(data['data'] != ''){
+				var r_t1 = 0;
+				if(data['data']['RatingAVG2'][0]['RatingAVG'] > 0 && data['data']['RatingAVG2'][0]['RatingAVG'] <= 1){
+					r_t1 = 1;
+				}
+				
+				if(data['data']['RatingAVG2'][0]['RatingAVG'] > 1 && data['data']['RatingAVG2'][0]['RatingAVG'] <= 2){
+					r_t1 = 2;
+				}
+				
+				if(data['data']['RatingAVG2'][0]['RatingAVG'] > 2 && data['data']['RatingAVG2'][0]['RatingAVG'] <= 3){
+					r_t1 = 3;
+				}
+				
+				if(data['data']['RatingAVG2'][0]['RatingAVG'] > 3 && data['data']['RatingAVG2'][0]['RatingAVG'] <= 4){
+					r_t1 = 4;
+				}
+				
+				if(data['data']['RatingAVG2'][0]['RatingAVG'] > 4 && data['data']['RatingAVG2'][0]['RatingAVG'] <= 5){
+					r_t1 = 5;
+				}
 				$('#show').append('<div class="col-lg-2 order-lg-1 order-2">'+
 					'<ul class="image_list">'+
 					(data['data']['Picture']['pic_url1'] != null ? '<li data-image="'+data['data']['Picture']['pic_url1']+'"><img src="'+data['data']['Picture']['pic_url1']+'" alt=""></li>':'')+
@@ -345,7 +364,7 @@ function getProduct(){
 					'<div class="product_description">'+
 					'<div class="product_category"><a href="#">#'+data['data']['CatRoom_name']+'</a> <a href="#">#'+data['data']['CatProd_name']+'</a></div>'+
 					'<div class="product_name">'+data['data']['name']+'</div>'+
-					'<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>'+
+					'<div class="rating_r rating_r_'+r_t1+' product_rating"><i></i><i></i><i></i><i></i><i></i></div>'+
 					'<div class="product_price">'+data['data']['price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+' บาท</div>'+
 					'<div class="product_text"><p>'+data['data']['description']+'</p></div><br>'+
 					'<div class=" d-flex flex-row">'+

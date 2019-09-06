@@ -8540,7 +8540,7 @@ body.md-skin {
     min-height: 1200px;
   }
   .navbar-static-side {
-    z-index: 20;
+    z-index: 2001;
     position: absolute;
     width: 220px;
   }

@@ -7,9 +7,9 @@
     <div class="ibox-content ">
       <div class="animated bounceIn">
         <a href="promotion" ><button class="btn btn-info dim2 btn-large-dim  ani b-shadow " type="button"><i class="fa fa-strikethrough"></i><div class="text-title">โปรโมชัน</div></button></a>
-      <!--  <a href="order"><button class="btn btn-danger dim2 ani btn-large-dim ani b-shadow " type="button"><i class="fa fa-th-large"></i><div class="text-title">กิจกรรม</div></button></a>-->
+        <a href="content"><button class="btn btn-danger dim2 ani btn-large-dim ani b-shadow " type="button"><i class="fa fa-align-left"></i><div class="text-title">คอนเทนต์</div></button></a>
       </div>
     </div>
   </div>
-  
+
 @endsection
