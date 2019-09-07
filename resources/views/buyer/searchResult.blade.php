@@ -162,7 +162,6 @@
             </div>
         </div>
         <script src="js/jquery-2.1.1.js"></script>
-
         <script src="js/Scripts/searchResult.js"></script>
         <script src="js/Scripts/filter.js"></script>
        
