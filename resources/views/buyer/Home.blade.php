@@ -89,57 +89,55 @@
 			<div class="carousel-inner">
 				<div class="item carousel-item active">
 					<div class="row">
-						<div class="col-sm-3">
+						<div class="col-sm-3" onclick="go_Catprod('โซฟา')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://www.ikea.com/PIAimages/0479958_PE619110_S5.JPG?f=s" class="img-responsive img-fluid" alt="">									
 								</div>
 								<div class="thumb-content">
-									<h4>โซฟา</h4>									
-								
+									<h4>โซฟา</h4>																	
 								</div>						
 							</div>
 						</div>
 							
-						<div class="col-sm-3">
+						<div class="col-sm-3" onclick="go_Catprod('เตียง')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://www.baanandbeyond.com/media/catalog/product/cache/image/800x/beff4985b56e3afdbeabfc89641a4582/6/0/60270199.jpg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>เตียงนอน</h4>									
-									
+									<h4>เตียงนอน</h4>																		
 								</div>						
 							</div>
-						</div>								
-						<div class="col-sm-3">
+                        </div>
+                        								
+						<div class="col-sm-3" onclick="go_Catprod('ชั้นวางทีวี')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://www.chicrepublicthai.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/C/T/CTV094-WOGL-NA5CL1-2_1.jpg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>ชั้นวางทีวี</h4>									
-								
+									<h4>ชั้นวางทีวี</h4>																	
 								</div>						
 							</div>
                         </div>
-                        <div class="col-sm-3">
+
+                        <div class="col-sm-3" onclick="go_Catprod('โต๊ะทำงาน')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://www.goodchoiz.com/content/images/thumbs/0038612_550.jpeg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>โต๊ะทำงาน</h4>
-									
-									
+									<h4>โต๊ะทำงาน</h4>																	
 								</div>						
 							</div>
 						</div>
 					</div>
-				</div>
+                </div>
+                
 				<div class="item carousel-item">
 					<div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" onclick="go_Catprod('โต๊ะข้างเตียง')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://www.chicrepublicthai.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/C/N/CNT076-WOWO-NA2WH1-1_1.jpg" class="img-responsive img-fluid" alt="">
@@ -148,40 +146,37 @@
 									<h4>โต๊ะข้างเตียง</h4>
 								</div>						
 							</div>
-						</div>
-						<div class="col-sm-3">
+                        </div>
+                        
+						<div class="col-sm-3" onclick="go_Catprod('ตู้หนังสือ')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://www.chicrepublicthai.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/C/B/CBS051-WOWO-NA2NA2-2_2.jpg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>ตู้หนังสือ</h4>
-									
-									
+									<h4>ตู้หนังสือ</h4>																		
 								</div>						
 							</div>
-						</div>
-						<div class="col-sm-3">
+                        </div>
+                        
+						<div class="col-sm-3" onclick="go_Catprod('เก้าอี้')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://aumento.officemate.co.th/media/catalog/product/O/F/OFMA010213.jpg?imwidth=320" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>เก้าอี้</h4>
-									
-									
+									<h4>เก้าอี้</h4>																	
 								</div>						
 							</div>
-						</div>
-						<div class="col-sm-3">
+                        </div>
+                        
+						<div class="col-sm-3" onclick="go_Catprod('ตู้เสื้อผ้า')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://www.chicrepublicthai.com/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/C/W/CWD016-WOWO-WH1WH1-1_1.jpg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>ตู้เสื้อผ้า </h4>
-									
-									
+									<h4>ตู้เสื้อผ้า </h4>																	
 								</div>						
 							</div>
 						</div>						
@@ -189,14 +184,13 @@
 				</div>
 				<div class="item carousel-item">
 					<div class="row">
-						<div class="col-sm-3">
+						<div class="col-sm-3" onclick="go_Catprod('ชั้นวางของ')">
 							<div class="thumb-wrapper">
 								<div class="img-box">
 									<img src="https://www.ikea.com/PIAimages/0675716_PE718484_S5.JPG?f=s" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>ชั้นวางของ</h4>
-							
+									<h4>ชั้นวางของ</h4>							
 								</div>						
 							</div>
 						</div>
@@ -532,5 +526,24 @@
     
 
 </style>
+<script>
+document.cookie = "home_Catprod=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+document.cookie = "searchProduct=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
+function go_Catprod(name){
+    createCookie('home_Catprod',name,60000);
+    window.location.replace('/searchResult');
+}
+
+function createCookie(name, value, second) {
+    if (second) {
+        var date = new Date();
+        date.setTime(date.getTime() + (second * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    } else {
+        var expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+</script>
 @endsection
