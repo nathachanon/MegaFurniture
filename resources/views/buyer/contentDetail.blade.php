@@ -31,7 +31,7 @@ h3,p.{
                     <div class="caption">
 
                         <div class="row">
-                              <p >{!! $contentDetail->content_des !!}</p>
+                              <p >{!! $contentDetail->content_all !!}</p>
                           </div>
                       </div>
                     </div>
