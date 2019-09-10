@@ -135,7 +135,7 @@
         <script src="js/jquery.min.js"></script>
         <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 
-        <!-- Script -->
+        <!-- Script ทดสอบ-->
         <script src="js/Scripts/megaindex.js"></script>
         <script src="js/Scripts/filter.js"></script>
 
