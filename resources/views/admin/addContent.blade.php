@@ -43,7 +43,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>เลือกรูปภาพคอนเทนต์</h5><br>
-                        <div>  <img id='content_pic_show' src="#" class="preview" hidden="true"  ></img>
+                        <div>  <img id='content_pic_show' src="#" class="preview" hidden="true"  >
                          <div>
                           <input id="content_pic" type="file" name="content_pic" class="form-control" onchange="logoSelect(this)">
                         </div>
@@ -51,6 +51,10 @@
                       <input id="content_name" maxlength="200" type="text" name="content_name" class="form-control" >
 
                         <h5>รายละเอียดคอนเทนต์</h5>
+                        <textarea id="content_des" maxlength="1000" type="text" name="content_des" class="form-control" ></textarea>
+                        <br>
+                        <h5>เนื้อหาคอนเทนต์</h5>
+                        
 
 
                     </div>
@@ -128,12 +132,14 @@
           var token = localStorage.getItem("a_token");
           var id = localStorage.getItem("admin_id");
           var content_name = $("#content_name").val();
-          var content_des = $(".note-editable").html();
+          var content_des = $("#content_des").val(); 
+          var content_all = $(".note-editable").html();
           var content_pic = $('#content_pic').prop('files')[0];
             var formData = new FormData();
             formData.append("content_pic",$('#content_pic').prop('files')[0]);
             formData.append("content_name",content_name);
             formData.append("content_des",content_des);
+            formData.append("content_all",content_all);
             formData.append("content_status",1);
             formData.append("admin_id",id);
            if(content_name != '' && content_des != '' && $('#content_pic').prop('files')[0] != undefined){
