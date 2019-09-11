@@ -51,7 +51,9 @@
                       <input id="content_name" maxlength="200" type="text" name="content_name" class="form-control" >
 
                         <h5>รายละเอียดคอนเทนต์</h5>
-                        <textarea id="content_name" maxlength="1000" type="text" name="content_des" class="form-control" ></textarea>
+
+                        <textarea id="content_des" maxlength="1000" type="text" name="content_des" class="form-control" ></textarea>
+
                         <br>
                         <h5>เนื้อหาคอนเทนต์</h5>
                         
