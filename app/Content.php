@@ -8,7 +8,7 @@ class Content extends Model
 {
 
   protected $fillable = [
-      'admin_id','content_name','content_des','content_pic','content_status'
+      'admin_id','content_name','content_des','content_all','content_pic','content_status'
   ];
   protected $primaryKey = 'content_id';
   public $incrementing = true;

@@ -149,6 +149,7 @@ class AdminController extends Controller
      'admin_id' => 'required',
      'content_name' => 'required',
      'content_des' => 'required',
+     'content_all' => 'required',
      'content_status' => 'required',
    ]);
 
