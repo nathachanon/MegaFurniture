@@ -12,32 +12,14 @@
                 <div class="card">
 
                     <div id="slot1" class="card-body">
-                        <div style=" width:100%; height: 355px !important;" id="carouselExampleControls"
-                            class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100"
-                                        src="https://sbmedia3.sbdesignsquare.com/output/images/content/98087/6e80858c35f52bcb3a99de4897bc9c67.jpg"
-                                        alt="First slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100"
-                                        src="https://sbmedia3.sbdesignsquare.com/output/images/content/98040/fb5990e830252df82bca4f46c2fbda65.jpg"
-                                        alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100"
-                                        src="https://sbmedia3.sbdesignsquare.com/output/images/banner/fd5022efc34e1d233a691e1080ebad0aresized_1920.jpg"
-                                        alt="Third slide">
-                                </div>
+                        <div style=" width:100%; height: 355px !important;" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div id="slide_slot" class="carousel-inner" >
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                                data-slide="prev">
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                                data-slide="next">
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
