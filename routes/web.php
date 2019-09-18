@@ -113,9 +113,7 @@ Route::get('/content', function () {
     return view('buyer.content_buyer');
 });
 
-Route::get('/productDetail', function () {
-    return view('buyer.productDetail');
-});
+Route::get('productDetail/{id}', 'UserController@show');
 
 Route::get('/admin', function () {
     return view('admin.login');
