@@ -323,6 +323,7 @@
 			dataType: "json",
 			success: function(data) {
 				if (data['data'] != '') {
+					$('meta[name=description]').attr('content', 'Changed Meta Content Here');
 					var r_t1 = 0;
 					if (data['data']['RatingAVG2'][0]['RatingAVG'] > 0 && data['data']['RatingAVG2'][0]['RatingAVG'] <= 1) {
 						r_t1 = 1;
