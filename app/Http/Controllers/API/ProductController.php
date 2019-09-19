@@ -200,7 +200,7 @@ class ProductController extends Controller
       $image = $request->file('pic1');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg1 = "image_product/$imageName";
+      $pathImg1 = "../image_product/$imageName";
       $success['img1'] = $pathImg1;
 
       DB::table('products')
@@ -215,7 +215,7 @@ class ProductController extends Controller
       $image = Input::file('pic2');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg2 = "image_product/$imageName";
+      $pathImg2 = "../image_product/$imageName";
       $success['img2'] = $pathImg2;
 
       DB::table('products')
@@ -230,7 +230,7 @@ class ProductController extends Controller
       $image = Input::file('pic3');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg3 = "image_product/$imageName";
+      $pathImg3 = "../image_product/$imageName";
       $success['img3'] = $pathImg3;
 
       DB::table('products')
@@ -244,7 +244,7 @@ class ProductController extends Controller
       $image = Input::file('pic4');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg4 = "image_product/$imageName";
+      $pathImg4 = "../image_product/$imageName";
       $success['img4'] = $pathImg4;
 
       DB::table('products')
@@ -259,7 +259,7 @@ class ProductController extends Controller
       $image = Input::file('pic5');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg5 = "image_product/$imageName";
+      $pathImg5 = "../image_product/$imageName";
       $success['img5'] = $pathImg5;
 
       DB::table('products')
@@ -496,7 +496,7 @@ class ProductController extends Controller
       $image = $request->file('pic1');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg1 = "image_product/$imageName";
+      $pathImg1 = "../image_product/$imageName";
       $success['img1'] = $pathImg1;
 
       DB::table('products')
@@ -508,7 +508,7 @@ class ProductController extends Controller
         $image = Input::file('pic2');
         $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('image_product'), $imageName);
-        $pathImg2 = "image_product/$imageName";
+        $pathImg2 = "../image_product/$imageName";
         $success['img2'] = $pathImg2;
 
         DB::table('products')
@@ -519,7 +519,7 @@ class ProductController extends Controller
           $image = Input::file('pic3');
           $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
           $image->move(public_path('image_product'), $imageName);
-          $pathImg3 = "image_product/$imageName";
+          $pathImg3 = "../image_product/$imageName";
           $success['img3'] = $pathImg3;
 
           DB::table('products')
@@ -530,7 +530,7 @@ class ProductController extends Controller
             $image = Input::file('pic4');
             $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('image_product'), $imageName);
-            $pathImg4 = "image_product/$imageName";
+            $pathImg4 = "../image_product/$imageName";
             $success['img4'] = $pathImg4;
 
             DB::table('products')
@@ -541,7 +541,7 @@ class ProductController extends Controller
               $image = Input::file('pic5');
               $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
               $image->move(public_path('image_product'), $imageName);
-              $pathImg5 = "image_product/$imageName";
+              $pathImg5 = "../image_product/$imageName";
               $success['img5'] = $pathImg5;
 
               DB::table('products')
