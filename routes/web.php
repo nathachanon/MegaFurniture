@@ -128,7 +128,7 @@ Route::get('/admin/addPromotion', function () {
     return view('admin.addPromotion');
 });
 Route::get('/admin/content', function () {
-    return view('admin.content');
+    return view('admin.content_admin');
 });
 
 Route::get('/admin/addContent', function () {
@@ -136,7 +136,9 @@ Route::get('/admin/addContent', function () {
 });
 
 Route::get('/promotion/{id}','API\AdminController@promotionDetail');
+Route::get('/admin/editPromotion/{id}','API\AdminController@geteditPromotion');
 Route::get('/content/{id}','API\AdminController@contentDetail');
+Route::get('/admin/editContent/{id}','API\AdminController@geteditContent');
 Route::get('/login/facebook', 'API\SellerController@facebookAuthRedirect');
 Route::get('/login/facebook/callback', 'API\SellerController@facebookSuccess');
 

@@ -8,7 +8,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin : AddPromotion</title>
+    <title>Admin : Add Promotion</title>
 
     <style>
     .preview{
@@ -57,7 +57,7 @@
                     <div class="ibox-content no-padding">
                         <div class="summernote">
                         </div>
-                      <button id='addPro'>Add</button>
+                      <button id='addPro'>บันทึก</button>
                     </div>
                 </div>
             </div>
@@ -79,9 +79,7 @@
 
 <script src="../js/jquery-2.1.1.js"></script>
     <script>
-    $("#test").click(function(){
-    console.log($(".note-editable").html());
-    });
+   
         $(document).ready(function(){
 
             $('.summernote').summernote();
@@ -154,6 +152,7 @@
                 failure: function(errMsg) {
                   alert(errMsg);
                 },error: function(result) {
+                     localStorage.removeItem("a_token");
                      window.location.replace('/admin');
                 }
               });
@@ -166,7 +165,7 @@
             }
           }
           else{
-              alert('กรุณากรอกข้อมูลและเลือกูปภาพโปรโมชัน์');
+              alert('กรุณากรอกข้อมูลและเลือกูปภาพโปรโมชัน');
             }
 
 

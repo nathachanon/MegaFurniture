@@ -103,9 +103,8 @@ function getcontent(){
           '<td>'+data['content'][i]['created_at']+'</td>'+
           '<td class="text-right">'+
           '<div class="tooltip-demo">'+
-          '<a  data-toggle="tooltip" data-placement="top" title="แก้ไข" onclick="editcontent ('+data['content'][i]['content_id']+')"><i class="fas fa-pen i-prod"></i></a>'+
-          '<a  data-toggle="tooltip" data-placement="top" title="คัดลอก" onclick="copycontent ('+data['content'][i]['content_id']+')"><i class="far fa-copy i-prod"></i></a>'+
-          '<a  data-toggle="tooltip" data-placement="top" title="ลบ" onclick="DeleteProd ('+data['content'][i]['content_id']+')"><i class="far fa-trash-alt i-prod"></i></a>'+
+          '<a  data-toggle="tooltip" data-placement="top" title="แก้ไข" href="editContent/'+data['content'][i]['content_id']+'"><i class="fas fa-pen i-prod"></i></a>'+
+          '<a  data-toggle="tooltip" data-placement="top" title="ลบ" onclick="deleteCon ('+data['content'][i]['content_id']+')"><i class="far fa-trash-alt i-prod"></i></a>'+
           '</div>'+
           '</td>'+
           '</tr>'
@@ -125,6 +124,57 @@ function getcontent(){
   });
 }
 
+function deleteCon($id) {
+
+Swal.fire({
+  title: 'คุณต้องการลบคอนเทนต์หรือไม่?',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  cancelButtonText: 'ยกเลิก',
+  confirmButtonText: 'ใช่, ฉันต้องการลบคอนเทนต์'
+}).then((result) => {
+  if (result.value) {
+
+    $.ajax({
+      type: "POST",
+      url: "/api/delContent",
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify({
+        "content_id": $id
+      }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function(data) {
+        var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
+        if (s == "1") {
+          swal(
+            "ลบคอนเทนต์!",
+            "ลบคอนเทนต์สำเร็จ!",
+            "success"
+          )
+          window.setTimeout(function() {
+            location.reload();
+          }, 2500);
+        } else {
+          Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'มีบางอย่างผิดพลาด!',
+            footer: '<a href>กรุณาติดต่อผู้ดูแลระบบ</a>'
+          })
+          location.reload();
+        }
+      }
+    });
+  }
+})
+
+}
 
   function load()
   {
