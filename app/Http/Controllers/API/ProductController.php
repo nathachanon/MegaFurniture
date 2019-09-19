@@ -200,7 +200,7 @@ class ProductController extends Controller
       $image = $request->file('pic1');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg1 = "../image_product/$imageName";
+      $pathImg1 = "image_product/$imageName";
       $success['img1'] = $pathImg1;
 
       DB::table('products')
@@ -215,7 +215,7 @@ class ProductController extends Controller
       $image = Input::file('pic2');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg2 = "../image_product/$imageName";
+      $pathImg2 = "image_product/$imageName";
       $success['img2'] = $pathImg2;
 
       DB::table('products')
@@ -230,7 +230,7 @@ class ProductController extends Controller
       $image = Input::file('pic3');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg3 = "../image_product/$imageName";
+      $pathImg3 = "image_product/$imageName";
       $success['img3'] = $pathImg3;
 
       DB::table('products')
@@ -244,7 +244,7 @@ class ProductController extends Controller
       $image = Input::file('pic4');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg4 = "../image_product/$imageName";
+      $pathImg4 = "image_product/$imageName";
       $success['img4'] = $pathImg4;
 
       DB::table('products')
@@ -259,7 +259,7 @@ class ProductController extends Controller
       $image = Input::file('pic5');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg5 = "../image_product/$imageName";
+      $pathImg5 = "image_product/$imageName";
       $success['img5'] = $pathImg5;
 
       DB::table('products')
@@ -268,6 +268,37 @@ class ProductController extends Controller
     } else {
       $success['img5'] = 'null';
     } //img5 end
+
+    
+    //editKeywords
+  $Keywords_remove = DB::table('keywords')->where('Prod_id',$input['Prod_id'])->delete();
+
+  for($x = 0;$x<count($input["tags"]);$x++){
+
+    $Keywords_count = DB::table('Keyword_values')->where('keyword_value', $input['tags'][$x])->count();
+
+    if($Keywords_count == 0 && $input['tags'][$x] !=null){
+      $keyword_value = Keyword_values::create([
+        'keyword_value' => $input["tags"][$x]
+      ]);
+
+      $value_id = $keyword_value->keyword_value_id;
+      $keyword_value = Keyword::create([
+        'keyword_value_id' => $value_id,
+        'Prod_id' => $input['Prod_id']
+      ]);
+
+    }else if($Keywords_count != 0 && $input['tags'][$x] !=null){
+      $Keyword_value_id = DB::table('Keyword_values')->where('keyword_value', $input['tags'][$x])->first();
+      $value_id = $Keyword_value_id->keyword_value_id;
+      $keyword_value = Keyword::create([
+        'keyword_value_id' => $value_id,
+        'Prod_id' => $input['Prod_id']
+      ]);
+
+    }
+    }
+    
 
     return response()->json(['success' => $success], $this->successStatus);
   }
@@ -465,7 +496,7 @@ class ProductController extends Controller
       $image = $request->file('pic1');
       $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
       $image->move(public_path('image_product'), $imageName);
-      $pathImg1 = "../image_product/$imageName";
+      $pathImg1 = "image_product/$imageName";
       $success['img1'] = $pathImg1;
 
       DB::table('products')
@@ -477,7 +508,7 @@ class ProductController extends Controller
         $image = Input::file('pic2');
         $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('image_product'), $imageName);
-        $pathImg2 = "../image_product/$imageName";
+        $pathImg2 = "image_product/$imageName";
         $success['img2'] = $pathImg2;
 
         DB::table('products')
@@ -488,7 +519,7 @@ class ProductController extends Controller
           $image = Input::file('pic3');
           $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
           $image->move(public_path('image_product'), $imageName);
-          $pathImg3 = "../image_product/$imageName";
+          $pathImg3 = "image_product/$imageName";
           $success['img3'] = $pathImg3;
 
           DB::table('products')
@@ -499,7 +530,7 @@ class ProductController extends Controller
             $image = Input::file('pic4');
             $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('image_product'), $imageName);
-            $pathImg4 = "../image_product/$imageName";
+            $pathImg4 = "image_product/$imageName";
             $success['img4'] = $pathImg4;
 
             DB::table('products')
@@ -510,7 +541,7 @@ class ProductController extends Controller
               $image = Input::file('pic5');
               $imageName = date('mdYHis') . uniqid() . '.' . $image->getClientOriginalExtension();
               $image->move(public_path('image_product'), $imageName);
-              $pathImg5 = "../image_product/$imageName";
+              $pathImg5 = "image_product/$imageName";
               $success['img5'] = $pathImg5;
 
               DB::table('products')
@@ -651,12 +682,12 @@ class ProductController extends Controller
 
     $getKeywords_count = DB::table('keywords')->where('Prod_id', $input['Prod_id'])->count();
     $getKeywords = DB::table('keywords')
-      ->join('keyword_values', 'keywords.keyword_id', '=', 'keyword_values.keyword_value_id')
-      ->select('keyword_values.*')
+      ->join('keyword_values', 'keywords.keyword_value_id', '=', 'keyword_values.keyword_value_id')
+      ->select('keyword_value')
       ->where('Prod_id', $input['Prod_id'])
       ->get();
 
-    if (count($getKeywords)  == 0) {
+    if ($getKeywords_count  == 0) {
       return response()->json(['catagoies' => $getCat, 'product' => $getProduct, 'product_size' => $getProductSize, 'product_color' => $getProductColor, 'product_rm' => $getProductRM, 'product_pic' => $getPicProduct, 'product_dv' => $getProductDV, 'delivery_count' => $getProductDV_count], $this->successStatus);
     } else {
       return response()->json(['catagoies' => $getCat, 'product' => $getProduct, 'product_size' => $getProductSize, 'product_color' => $getProductColor, 'product_rm' => $getProductRM, 'product_pic' => $getPicProduct, 'product_dv' => $getProductDV, 'delivery_count' => $getProductDV_count, 'keywords' => $getKeywords], $this->successStatus);

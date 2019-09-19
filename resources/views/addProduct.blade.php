@@ -237,16 +237,25 @@
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
-              <div class="form-group"><label class="col-sm-2 control-label">เลือกห้องที่สามารถจัดวางสินค้าได้เพิ่มเติม</label>
+              <div class="form-group">  
                 <div class="col-sm-10">
-                    <button  type="button" class="btn btn-primary btn-rounded" id="optionroom_1" >ห้องนอน</button>
-                    <button type="button" class="btn btn-primary btn-rounded" id="optionroom_2" href="#">ห้องนั่งเล่น</button>
-                    <button type="button" class="btn btn-primary btn-rounded" id="optionroom_3" href="#">ห้องทำงาน</button>
                 </div>
-              </div>
-              <div class="form-group"><label class="col-sm-2 control-label">Keyword</label>
-                <div class="col-sm-10">
-                      <input name='tags' class="form-control input-lg" placeholder='กรุณาใส่ keyword ที่ต้องการ ตามด้วย , หรือ enter' value=''  data-blacklist='' id="tags">
+                <div class="modal inmodal" id="EMS_d" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                  <div class="modal-dialog">
+                    <div class="modal-content animated bounceInRight">
+                      <div class="modal-header">
+                        <h4 class="modal-title">ตัวเลือกค่าจัดส่ง: EMS</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group"><label>ค่าจัดส่ง</label> <input id="EMS_input" type="number" placeholder="Enter your price" class="form-control" ></div>
+                        <label class=""> <div class="icheckbox_square-green" style="position: relative;"><input id="EMS_checkbox" type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> ฉันครอบคลุมค่าใช้จ่ายในการจัดส่ง </label>
+                      </div>
+                      <div class="modal-footer">
+                        <button id="cancel" type="button" class="btn btn-white" data-dismiss="modal">ยกเลิก</button>
+                        <button id="confirmEMS" type="button" class="btn btn-danger">ตกลงและเปิดใช้งาน</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="modal inmodal" id="KERRY_d" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                   <div class="modal-dialog">
@@ -329,17 +338,11 @@
 
           </body>
           <script src="layout/js/jquery-3.3.1.min.js"></script>
-          <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
+          <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/Scripts/addproduct.js"></script>
             <script src="js/plugins/toastr/toastr.min.js"></script>
 
-            <script>
-              function tags(value){
-                var obj = JSON.parse(value);
-
-                console.log(obj);
-              }
-            </script>
+          
 
             @endsection
