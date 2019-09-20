@@ -8,9 +8,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin : Add Content</title>
-
-
+    <title>Admin : Edit Promotion</title>
 
     <style>
     .preview{
@@ -26,12 +24,15 @@
   @if($errors->any())
 <h4>{{$errors->first()}}</h4>
 @endif
-
+<!--
+{!! $promotionDetail->promotion_name !!}
+ {!! $promotionDetail->promotion_des !!}
+-->
     <div id="wrapper">
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>เพิ่มคอนเทนต์</h2>
+                    <h2>แก้ไขโปรโมชัน</h2>
                 </div>
                 <div class="col-lg-2">
                 </div>
@@ -42,21 +43,15 @@
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>เลือกรูปภาพคอนเทนต์</h5><br>
-                        <div>  <img id='content_pic_show' src="#" class="preview" hidden="true"  >
+                        <h5>เลือกรูปภาพโปรโมชัน</h5><br>
+                        <div>  <img id='promotion_pic_show' src="#" class="preview" hidden="true"  ></img>
                          <div>
-                          <input id="content_pic" type="file" name="content_pic" class="form-control" onchange="logoSelect(this)">
+                          <input id="promotion_pic" type="file" name="promotion_pic" class="form-control" onchange="logoSelect(this)">
                         </div>
-                        <h5>ชื่อคอนเทนต์</h5>
-                      <input id="content_name" maxlength="200" type="text" name="content_name" class="form-control" >
+                        <h5>ชื่อโปรโมชัน</h5>
+                      <input id="promotion_name" maxlength="200" type="text" name="promotion_name" class="form-control" value="{!! $promotionDetail->promotion_name !!}"  >
 
-                        <h5>รายละเอียดคอนเทนต์</h5>
-
-                        <textarea id="content_des" maxlength="1000" type="text" name="content_des" class="form-control" ></textarea>
-
-                        <br>
-                        <h5>เนื้อหาคอนเทนต์</h5>
-                        
+                        <h5>รายละเอียดโปรโมชัน</h5>
 
 
                     </div>
@@ -64,8 +59,9 @@
 
                     <div class="ibox-content no-padding">
                         <div class="summernote">
+                        {!!$promotionDetail->promotion_des!!}
                         </div>
-                      <button id='addCon'>บันทึก</button>
+                      <button id='editPro'>บันทึก</button>
                     </div>
                 </div>
             </div>
@@ -84,22 +80,17 @@
         </div>
 
 
-        <!-- Mainly scripts -->
-        <script src="../js/jquery-2.1.1.js"></script>
 
+<script src="../../js/jquery-2.1.1.js"></script>
     <script>
     $("#test").click(function(){
     console.log($(".note-editable").html());
     });
         $(document).ready(function(){
 
-            $('.summernote').summernote({
-              disableDragAndDrop: false
-
-            });
-
-
-
+            function load(){       
+      
+            $('.summernote').summernote();
         var edit = function() {
             $('.click2edit').summernote({focus: true});
         };
@@ -107,21 +98,24 @@
             var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
             $('.click2edit').destroy();
         };
+        
+            }
+    window.load = load();
 
        });
         function logoSelect(input) {
           if (!input.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
 
-              $('#Content_pic').val('');
+              $('#promotion_pic').val('');
               alert('โปรดเลือกไฟล์รูปภาพ');
           }else{
 
-         $('#content_pic_show').attr('hidden',false);
+         $('#promotion_pic_show').attr('hidden',false);
          if (input.files && input.files[0]) {
            var reader = new FileReader();
 
            reader.onload = function (e) {
-             $('#content_pic_show')
+             $('#promotion_pic_show')
              .attr('src', e.target.result);
                  };
            reader.readAsDataURL(input.files[0]);
@@ -130,23 +124,21 @@
        }
 
 
-       $("#addCon").click(function(){
+       $("#editPro").click(function(){
           var token = localStorage.getItem("a_token");
-          var id = localStorage.getItem("admin_id");
-          var content_name = $("#content_name").val();
-          var content_des = $("#content_des").val(); 
-          var content_all = $(".note-editable").html();
-          var content_pic = $('#content_pic').prop('files')[0];
+          var promotion_id = '{{$promotionDetail->promotion_id}}';
+          var promotion_name = $("#promotion_name").val();
+          var promotion_des = $(".note-editable").html();
+          var promotion_pic = $('#promotion_pic').prop('files')[0];
             var formData = new FormData();
-            formData.append("content_pic",$('#content_pic').prop('files')[0]);
-            formData.append("content_name",content_name);
-            formData.append("content_des",content_des);
-            formData.append("content_all",content_all);
-            formData.append("content_status",1);
-            formData.append("admin_id",id);
-           if(content_name != '' && content_des != '' && $('#content_pic').prop('files')[0] != undefined){
+            formData.append("promotion_pic",$('#promotion_pic').prop('files')[0]);
+            formData.append("promotion_name",promotion_name);
+            formData.append("promotion_des",promotion_des);
+            formData.append("promotion_status",1);
+            formData.append("promotion_id",promotion_id);
+           if(promotion_name != '' && promotion_des != '' ){
               $.ajax({
-                 url: '/api/addContent',
+                 url: '/api/editPromotion',
                  headers: {
                    'Authorization':'Bearer '+token,
                  },
@@ -156,12 +148,11 @@
                  processData: false,
                  dataType: 'json',
                  success: function(data){
-                   console.log(data);
                   var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
                   if(s == "1")
                   {
-                    alert("เพิ่มคอนเทนต์สำเร็จ !");
-                    window.location.replace('content');
+                    alert("แก้ไขโปรโมชันสำเร็จ !");
+                    window.location.replace('/admin/promotion');
                   }else{
                     alert(s);
                   }
@@ -170,19 +161,17 @@
                   alert(errMsg);
                 },error: function(result) {
                   localStorage.removeItem("a_token");
-                   window.location.replace('/admin');
+                     window.location.replace('/admin');
                 }
               });
-            }else if(content_name != '' && content_des != ''){
+            }else if(promotion_name != '' && promotion_des != ''){
 
-              if($('#content_pic').prop('files')[0] == undefined ){
-                alert('กรุณาเลือกรูปภาพคอนเทนต์');
-              }else{
-              alert('กรุณากรอกข้อมูลคอนเทนต์');
-            }
+              
+              alert('กรุณากรอกข้อมูลให้ครบ');
+            
           }
           else{
-              alert('กรุณากรอกข้อมูลและเลือกูปภาพคอนเทนต์');
+              alert('กรุณากรอกข้อมูลให้ครบ');
             }
 
 
@@ -197,4 +186,4 @@
 
 
 
-@endsection
+ @endsection

@@ -8,7 +8,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin : Add Content</title>
+    <title>Admin : Edit Content</title>
 
 
 
@@ -31,7 +31,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>เพิ่มคอนเทนต์</h2>
+                    <h2>แก้ไขคอนเทนต์</h2>
                 </div>
                 <div class="col-lg-2">
                 </div>
@@ -48,11 +48,13 @@
                           <input id="content_pic" type="file" name="content_pic" class="form-control" onchange="logoSelect(this)">
                         </div>
                         <h5>ชื่อคอนเทนต์</h5>
-                      <input id="content_name" maxlength="200" type="text" name="content_name" class="form-control" >
+                      <input id="content_name" maxlength="200" type="text" name="content_name" class="form-control" value="{{ $contentDetail->content_name }}"  >
 
                         <h5>รายละเอียดคอนเทนต์</h5>
 
-                        <textarea id="content_des" maxlength="1000" type="text" name="content_des" class="form-control" ></textarea>
+                        <textarea id="content_des" maxlength="1000" type="text" name="content_des" class="form-control" >
+                        {!! $contentDetail->content_des !!}
+                        </textarea>
 
                         <br>
                         <h5>เนื้อหาคอนเทนต์</h5>
@@ -64,8 +66,9 @@
 
                     <div class="ibox-content no-padding">
                         <div class="summernote">
+                        {!!$contentDetail->content_all!!}
                         </div>
-                      <button id='addCon'>บันทึก</button>
+                      <button id='editCon'>บันทึก</button>
                     </div>
                 </div>
             </div>
@@ -85,14 +88,12 @@
 
 
         <!-- Mainly scripts -->
-        <script src="../js/jquery-2.1.1.js"></script>
+        <script src="../../js/jquery-2.1.1.js"></script>
 
     <script>
-    $("#test").click(function(){
-    console.log($(".note-editable").html());
-    });
+   
         $(document).ready(function(){
-
+            
             $('.summernote').summernote({
               disableDragAndDrop: false
 
@@ -130,9 +131,9 @@
        }
 
 
-       $("#addCon").click(function(){
+       $("#editCon").click(function(){
           var token = localStorage.getItem("a_token");
-          var id = localStorage.getItem("admin_id");
+          var content_id = '{{$contentDetail->content_id}}';
           var content_name = $("#content_name").val();
           var content_des = $("#content_des").val(); 
           var content_all = $(".note-editable").html();
@@ -143,10 +144,10 @@
             formData.append("content_des",content_des);
             formData.append("content_all",content_all);
             formData.append("content_status",1);
-            formData.append("admin_id",id);
-           if(content_name != '' && content_des != '' && $('#content_pic').prop('files')[0] != undefined){
+            formData.append("content_id",content_id);
+           if(content_name != '' && content_des != '' ){
               $.ajax({
-                 url: '/api/addContent',
+                 url: '/api/editContent',
                  headers: {
                    'Authorization':'Bearer '+token,
                  },
@@ -160,8 +161,8 @@
                   var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
                   if(s == "1")
                   {
-                    alert("เพิ่มคอนเทนต์สำเร็จ !");
-                    window.location.replace('content');
+                    alert("แก้ไขคอนเทนต์สำเร็จ !");
+                    window.location.replace('/admin/content');
                   }else{
                     alert(s);
                   }
@@ -170,19 +171,17 @@
                   alert(errMsg);
                 },error: function(result) {
                   localStorage.removeItem("a_token");
-                   window.location.replace('/admin');
+                  window.location.replace('/admin');
                 }
               });
             }else if(content_name != '' && content_des != ''){
 
-              if($('#content_pic').prop('files')[0] == undefined ){
-                alert('กรุณาเลือกรูปภาพคอนเทนต์');
-              }else{
-              alert('กรุณากรอกข้อมูลคอนเทนต์');
-            }
+              
+              alert('กรุณากรอกข้อมูลคอนเทนต์ให้ครบ');
+            
           }
           else{
-              alert('กรุณากรอกข้อมูลและเลือกูปภาพคอนเทนต์');
+              alert('กรุณากรอกข้อมูลคอนเทนต์ให้ครบ');
             }
 
 

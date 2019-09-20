@@ -6,27 +6,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Brand : MEGA Furniture</title>
-  <link href="../css/plugins/slick/slick.css" rel="stylesheet">
-  <link href="../css/plugins/slick/slick-theme.css" rel="stylesheet">
-  <link href="../css/plugins/footable/footable.core.css" rel="stylesheet">
-  <link href="../css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-  <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
-  <link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
-  <link href="../css/plugins/dropzone/basic.css" rel="stylesheet">
-  <link href="../css/plugins/dropzone/dropzone.css" rel="stylesheet">
-  <link href="../css/plugins/switchery/switchery.css" rel="stylesheet">
-  <link href="../css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-  <link href="../css/animate.css" rel="stylesheet">
-  <link href="../css/style.css" rel="stylesheet">
+ 
+  <link href="../../css/plugins/slick/slick.css" rel="stylesheet">
+  <link href="../../css/plugins/slick/slick-theme.css" rel="stylesheet">
+  <link href="../../css/plugins/footable/footable.core.css" rel="stylesheet">
+  <link href="../../css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+  <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../../css/plugins/iCheck/custom.css" rel="stylesheet">
+  <link href="../../css/plugins/dropzone/basic.css" rel="stylesheet">
+  <link href="../../css/plugins/dropzone/dropzone.css" rel="stylesheet">
+  <link href="../../css/plugins/switchery/switchery.css" rel="stylesheet">
+  <link href="../../css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+  <link href="../../css/animate.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css">
-  <link href="../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+  <link href="../../css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
- <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
- <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+ <link href="../../css/plugins/summernote/summernote.css" rel="stylesheet">
+ <link href="../../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
   <style>
 
   input[type=number]::-webkit-inner-spin-button,
@@ -66,10 +66,10 @@
 
         </li>
         <li>
-          <a href="promotion"><i class="fa fa-users"></i> <span class="nav-label"> โปรโมชัน</span></a>
+          <a href="/admin/promotion"><i class="fa fa-users"></i> <span class="nav-label"> โปรโมชัน</span></a>
         </li>
          <li id="brand-nav" >
-          <a href="content"><i class="fa fa-users"></i> <span class="nav-label">คอนเทนต์</span></a>
+          <a href="/admin/content"><i class="fa fa-users"></i> <span class="nav-label">คอนเทนต์</span></a>
         </li>
       </ul>
 
@@ -105,36 +105,36 @@
 
 </body>
 <!-- Mainly scripts -->
-<script src="../js/jquery-2.1.1.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../js/jquery-2.1.1.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FooTable -->
-<script src="../js/plugins/footable/footable.all.min.js"></script>
-<script src="../js/plugins/dataTables/datatables.min.js"></script>
+<script src="../../js/plugins/footable/footable.all.min.js"></script>
+<script src="../../js/plugins/dataTables/datatables.min.js"></script>
 <!-- Custom and plugin javascript -->
-<script src="../js/inspinia.js"></script>
-<script src="../js/plugins/pace/pace.min.js"></script>
+<script src="../../js/inspinia.js"></script>
+<script src="../../js/plugins/pace/pace.min.js"></script>
 
 <!-- iCheck -->
-<script src="../js/plugins/iCheck/icheck.min.js"></script>
+<script src="../../js/plugins/iCheck/icheck.min.js"></script>
 
 <!-- Data picker -->
-<script src="../js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="../../js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 <!-- DROPZONE -->
-<script src="../js/plugins/dropzone/dropzone.js"></script>
+<script src="../../js/plugins/dropzone/dropzone.js"></script>
 
 <!-- iCheck -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 
-<script src="../js/plugins/iCheck/icheck.min.js"></script>
-<script src="../js/plugins/footable/footable.all.min.js"></script>
-<script src="../js/plugins/slick/slick.min.js"></script>
+<script src="../../js/plugins/iCheck/icheck.min.js"></script>
+<script src="../../js/plugins/footable/footable.all.min.js"></script>
+<script src="../../js/plugins/slick/slick.min.js"></script>
 
 <!-- SUMMERNOTE -->
-<script src="../js/plugins/summernote/summernote_edit.min.js"></script>
+<script src="../../js/plugins/summernote/summernote_edit.min.js"></script>
 
 <script>
   $(document).ready(function () {
