@@ -53,7 +53,7 @@ function search_price() {
 
 function productDetail(prod_id) {
     createCookie('viewProduct', prod_id, 60);
-    window.location.href = '/productDetail';
+    window.location.href = '/productDetail/'+prod_id;
 }
 
 function getCookie(cname) {

@@ -20,7 +20,11 @@ Route::get('getContent','API\AdminController@getContent');
 
 Route::group(['middleware' => 'multiauth:admin_api'],function(){
 Route::post('addPromotion','API\AdminController@addPromotion');
+Route::post('editPromotion','API\AdminController@editPromotion');
+Route::post('delPromotion','API\AdminController@delPromotion');
 Route::post('addContent','API\AdminController@addContent');
+Route::post('editContent','API\AdminController@editContent');
+Route::post('delContent','API\AdminController@delContent');
 Route::get('logoutAdmin','API\AdminController@logoutAdmin');
 });
 
