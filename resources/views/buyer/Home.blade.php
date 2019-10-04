@@ -32,23 +32,8 @@
 
 
             <div class="col-lg-4 m-b-sm " id='show_pro2'>
-                <div class="row">
-                    <div class="col-lg-12 col-xs-12 col-md-12" >
-                        <div class="card h-promo">
-                            <img src="https://sbmedia3.sbdesignsquare.com/output/images/content/97546/d1844d4421adcdd8f3637778ec06a53f.jpg" href="http://google.com" class="card-img-top" alt="...">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12 col-xs-12 col-md-12" >
-
-                        <div class="card h-promo">
-                            <img src="https://sbmedia3.sbdesignsquare.com/output/images/content/96445/daf05693b98833a2b7e0614f38a6cdf3.jpg" class="card-img-top" alt="...">
-                        </div>
-
-                    </div>
-
-                </div>
+            
+               
 
 
 
@@ -190,7 +175,7 @@
         </div>
 
         <div class="row m-t-lg" id='show_con'>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 m-b-xs">
+          <!--  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 m-b-xs">
                 <h3>ไอเดียสำหรับคุณ</h3>
             </div>
             <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -259,7 +244,7 @@
 
 
 
-            </div>
+            </div>-->
 
         </div>
     </div>
@@ -297,7 +282,9 @@
         .card {
             border: 0;
         }
-
+        #card {
+            min-height: 400px;
+        }
         .c-left {
             float: left;
             width: 50%;
@@ -307,18 +294,25 @@
             float: right;
             width: 50%;
         }
-
+        #btn-card{
+            position: absolute;
+            left: 20px;
+            bottom: 25px;
+        }
         #slot1 {
             flex: 1 1 auto;
             padding: 0;
         }
-
-        .h-promo {
+        .h-promo  {
+            margin-bottom:5px;           
+        }
+        .h-promo a >.w-100  {
             height: 175px;
-            margin-bottom: 5px;
+            object-fit:cover;
+           
         }
 
-        .carousel-item>.w-100 {
+         .carousel-item> a >.w-100 {
             height: 355px;
             width: 100% !important;
             object-fit: cover;
@@ -624,12 +618,12 @@
                     for (var i = 1; i < 4; i++) {
                       $('#show_con').append(
                         '<div class="col-lg-4 m-b-sm">'+
-                            '<div class="card">'+
+                            '<div id="card" class="card">'+
                               '<img src="images_content/'+data.content[i].content_pic+'" class="card-img-top" alt="...">'+
                                 '<div class="card-body">'+
                                     '<h4 class="card-title content-title">'+data.content[i].content_name+'</h4>'+
                                     '<p class="card-text content-over">'+data.content[i].content_des+'</p>'+
-                                    '<a href="content/'+data.content[i].content_id+'" class="btn btn-warning">อ่านต่อ..</a>'+
+                                    '<a id="btn-card" href="content/'+data.content[i].content_id+'" class="btn btn-warning">อ่านต่อ..</a>'+
                                 '</div>'+
                         '</div>');
 

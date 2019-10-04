@@ -138,5 +138,7 @@
         <!-- Script-->
         <script src="js/Scripts/megaindex.js"></script>
         <script src="js/Scripts/filter.js"></script>
-
+<script>
+    document.cookie = "searchCat=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+</script>
         @endsection
