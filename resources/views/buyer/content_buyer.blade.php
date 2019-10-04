@@ -34,6 +34,14 @@
     .card{
         border:0;
     }
+    #btn-card{
+            position: absolute;
+            left: 20px;
+            bottom: 25px;
+        }
+    #card{
+        min-height:400px;
+    }
 
     .c-left {
         float:left;
@@ -300,12 +308,12 @@
             for (var i = 0; i < c_count; i++) {
               $('#listcontent').append(
                 '<div class="col-lg-4 m-b-sm">'+
-                '<div class="card">'+
+                '<div id="card" class="card">'+
                 '<img src="images_content/'+data["content"][i]["content_pic"]+'" class="card-img-top" alt="...">'+
                 ' <div class="card-body">'+
                 '  <h4 class="card-title content-title">'+data["content"][i]["content_name"]+'</h4>'+
                 '   <p class="card-text content-over">'+data["content"][i]["content_des"]+'</p>'+
-                '  <a href="/content/' + data["content"][i]["content_id"] + '" class="btn btn-warning">อ่านต่อ..</a>'+
+                '  <a id="btn-card" href="/content/' + data["content"][i]["content_id"] + '" class="btn btn-warning">อ่านต่อ..</a>'+
                 '   </div>'+
                 ' </div>'+
                 '</div>'
