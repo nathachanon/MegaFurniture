@@ -135,6 +135,10 @@ Route::get('/admin/addContent', function () {
     return view('admin.addContent');
 });
 
+Route::get('/admin/register', function () {
+    return view('admin.registerAdmin');
+});
+
 Route::get('/promotion/{id}','API\AdminController@promotionDetail');
 Route::get('/admin/editPromotion/{id}','API\AdminController@geteditPromotion');
 Route::get('/content/{id}','API\AdminController@contentDetail');

@@ -56,7 +56,7 @@
 
                         <br>
                         <h5>เนื้อหาคอนเทนต์</h5>
-                        
+
 
 
                     </div>
@@ -134,7 +134,7 @@
           var token = localStorage.getItem("a_token");
           var id = localStorage.getItem("admin_id");
           var content_name = $("#content_name").val();
-          var content_des = $("#content_des").val(); 
+          var content_des = $("#content_des").val();
           var content_all = $(".note-editable").html();
           var content_pic = $('#content_pic').prop('files')[0];
             var formData = new FormData();
@@ -144,7 +144,7 @@
             formData.append("content_all",content_all);
             formData.append("content_status",1);
             formData.append("admin_id",id);
-           if(content_name != '' && content_des != '' && $('#content_pic').prop('files')[0] != undefined){
+           if(content_name != '' && content_des != '' && $('#content_pic').prop('files')[0] != undefined && content_all.length > 25){
               $.ajax({
                  url: '/api/addContent',
                  headers: {
@@ -170,7 +170,7 @@
                   alert(errMsg);
                 },error: function(result) {
                   localStorage.removeItem("a_token");
-                   window.location.replace('/admin');
+                  window.location.replace('/admin');
                 }
               });
             }else if(content_name != '' && content_des != ''){
@@ -182,7 +182,7 @@
             }
           }
           else{
-              alert('กรุณากรอกข้อมูลและเลือกูปภาพคอนเทนต์');
+              alert('กรุณากรอกข้อมูลให้ครบ');
             }
 
 

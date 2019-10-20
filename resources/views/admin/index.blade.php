@@ -1,7 +1,7 @@
 @extends('admin.layout_admin')
 
 @section('content')
-
+<title>Admin : Admin Centre</title>
 <div class="text-head">
     <h1 class="animated fadeInRight">ยินดีต้อนรับเข้าสู่ Admin Centre</h1>
     <div class="ibox-content ">

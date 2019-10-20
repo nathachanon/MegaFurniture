@@ -44,7 +44,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>เลือกรูปภาพโปรโมชัน</h5><br>
-                        <div>  <img id='promotion_pic_show' src="#" class="preview" hidden="true"  ></img>
+                        <div>  <img id='promotion_pic_show' src="/images_promotion/{{ $promotionDetail->promotion_pic }}" class="preview"   ></img>
                          <div>
                           <input id="promotion_pic" type="file" name="promotion_pic" class="form-control" onchange="logoSelect(this)">
                         </div>

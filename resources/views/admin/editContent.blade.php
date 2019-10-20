@@ -43,7 +43,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>เลือกรูปภาพคอนเทนต์</h5><br>
-                        <div>  <img id='content_pic_show' src="#" class="preview" hidden="true"  >
+                        <div>  <img id='content_pic_show' src="/images_content/{{ $contentDetail->content_pic }}" class="preview"   >
                          <div>
                           <input id="content_pic" type="file" name="content_pic" class="form-control" onchange="logoSelect(this)">
                         </div>
