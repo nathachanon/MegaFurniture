@@ -178,10 +178,10 @@ function getProduct(){
           '</div>'+
           '</td>'+
           '<td>'+sku+'</td>'+
-          '<td style="width:290px;">'+data['product'][i]['prod_name']+'</td>'+
+          '<td style="width:260px;">'+data['product'][i]['prod_name']+'</td>'+
           '<td>'+data['product'][i]['ColorProd_value']+'</td>'+
-          '<td>'+data['product'][i]['qty']+'</td>'+
-          '<td id="sellcount_'+data['product'][i]['Prod_id']+'">0</td>'+
+          '<td style="width:70px;">'+data['product'][i]['qty']+'</td>'+
+          '<td style="width:60px;" id="sellcount_'+data['product'][i]['Prod_id']+'">0</td>'+
           '<td>'+data['product'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</td>'+
           '<td>'+
           status
@@ -734,10 +734,10 @@ function getProduct_FILLTER(status_show){
             '</div>'+
             '</td>'+
             '<td>'+sku+'</td>'+
-            '<td style="width:290px;">'+data['product'][i]['prod_name']+'</td>'+
+            '<td style="width:260px;">'+data['product'][i]['prod_name']+'</td>'+
             '<td>'+data['product'][i]['ColorProd_value']+'</td>'+
-            '<td>'+data['product'][i]['qty']+'</td>'+
-            '<td>'+
+            '<td style="width:70px;">'+data['product'][i]['qty']+'</td>'+
+            '<td style="width:60px;">'+
             '0'+
             '</td>'+
             '<td>'+data['product'][i]['prod_price'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'</td>'+

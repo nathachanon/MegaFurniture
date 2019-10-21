@@ -324,7 +324,6 @@
             '<td class="text-right">'+
             '<div class="btn-group">'+
             '<button class="btn-white btn btn-xs" onclick="show_details('+data['success'][i]['order_id']+')" >ดูรายละเอียด</button>'+
-            '<button class="btn-white btn btn-xs">แก้ไข</button>'+
             '<button class="btn-white btn btn-xs">ลบ</button>'+
             '</div>'+
             '</td>'+

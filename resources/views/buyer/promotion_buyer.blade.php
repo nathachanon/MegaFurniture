@@ -6,8 +6,9 @@
   /* Make the image fully responsive */
   .carousel-inner img {
 
-      width: 80%;
-      height: 500px;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
   }
   </style>
 
