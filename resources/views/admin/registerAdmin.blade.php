@@ -8,11 +8,11 @@
 
     <title>Admin : Login</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css">
 
 </head>
@@ -29,16 +29,16 @@
 
 
             </div>
-            <h3>ผู้ดูแลระบบ</h3>
+            <h3>เพิ่มผู้ดูแลระบบ</h3>
 
 
                 <div class="form-group">
-                    <input type="text" id="username" class="form-control" placeholder="ชื่อยูสเยอร์" required="">
+                    <input type="text" id="username" class="form-control" placeholder="ชื่อยูสเซอร์" required="">
                 </div>
                 <div class="form-group">
                     <input type="password" id="password" class="form-control" placeholder="รหัสผ่าน" required="">
                 </div>
-                <button type="submit" id="loginAdmin" class="btn btn-primary block full-width m-b" style="background-color: #F59121;border: 1px solid gray;">เข้าสู่ระบบ</button>
+                <button type="submit" id="registerAdmin" class="btn btn-primary block full-width m-b" style="background-color: #F59121;border: 1px solid gray;">บันทึก</button>
 
 
 
@@ -47,8 +47,8 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/jquery-2.1.1.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
 
 </body>
@@ -75,14 +75,14 @@ check_user();
 
 
 
-$('#loginAdmin').click(function(){
+$('#registerAdmin').click(function(){
   var username = $("#username").val();
   var password = $("#password").val();
     if(username != '' && password != ''){
 
             $.ajax({
                 type: "POST",
-                url: "/api/loginAdmin",
+                url: "/api/registerAdmin",
                 data: JSON.stringify({
                 "username": username,
                 "password": password,
@@ -92,20 +92,14 @@ $('#loginAdmin').click(function(){
                 dataType: "json",
                 success: function(data){
                     console.log(data);
-                  alert("เข้าสู่ระบบสำเร็จ !");
-                  var mytoken = JSON.stringify(data['access_token']);
-                  var admin_id = JSON.stringify(data['admin_id']);
-                  var username = JSON.stringify(data['username']);
-                  localStorage.setItem("a_token",mytoken.replace(/['"]+/g, ''));
-                  localStorage.setItem("admin_id",admin_id.replace(/['"]+/g, ''));
-                  localStorage.setItem("username",username.replace(/['"]+/g, ''));
-                  	window.location.replace('/admin/index');
+                  alert("เพิ่มผู้ดูแลระบบสำเร็จ !");
+                  //window.location.replace('/admin');
                 },
                 error: function(data){
                   console.log(data);
                   Swal.fire({
                     type: 'error',
-                    title: 'username หรือ Password ผิดพลาด กรุณาลองใหม่ !',
+                    title: 'มียูสเซอร์เนมนี้ในระบบแล้ว',
                     showConfirmButton: false,
                     timer: 1500
                   });

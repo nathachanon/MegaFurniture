@@ -42,7 +42,7 @@ class AdminController extends Controller
     $username = DB::table('admins')->where('username', $input['username'])->count();
     if ($username != 0) {
       $error = 'username is already';
-      return response()->json(['error' => $error], $this->successStatus);
+      return response()->json(['error' => $error], 500);
     } else {
       $user = Admin::create($input);
 
@@ -137,12 +137,20 @@ class AdminController extends Controller
   function promotionDetail($id = null)
   {
     $promotionDetail = Promotion::where('promotion_id', $id)->first();
+    if($promotionDetail != null ){
     return view('buyer.promotionDetail')->with(compact('promotionDetail'));
+  }else{
+        abort(404);
+    }
   }
   function geteditPromotion($id = null)
   {
     $promotionDetail = Promotion::where('promotion_id', $id)->first();
+    if($promotionDetail != null ){
     return view('admin.editPromotion')->with(compact('promotionDetail'));
+  }else{
+    abort(404);
+}
   }
   function editPromotion(Request $request)
   {
@@ -224,12 +232,21 @@ class AdminController extends Controller
   function contentDetail($id = null)
   {
     $contentDetail = Content::where('content_id', $id)->first();
+    if($contentDetail != null){
     return view('buyer.contentDetail')->with(compact('contentDetail'));
+    }else{
+      abort(404);
+    }
   }
   function geteditContent($id = null)
   {
     $contentDetail = Content::where('content_id', $id)->first();
+    if($contentDetail != null){
+    $contentDetail = Content::where('content_id', $id)->first();
     return view('admin.editContent')->with(compact('contentDetail'));
+  }else{
+    abort(404);
+  }
   }
   function editContent(Request $request)
   {

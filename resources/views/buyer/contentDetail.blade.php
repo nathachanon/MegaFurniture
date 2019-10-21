@@ -39,5 +39,11 @@ h3,p.{
                 </div>
               </div>
 <div class="col-md-12">
-
+  <script src="../js/jquery-2.1.1.js"></script>
+<script>
+    $(document).ready(function(){
+$("img").addClass("img-responsive");
+$("img").css("max-width", "100%");
+});
+</script>
 @endsection
