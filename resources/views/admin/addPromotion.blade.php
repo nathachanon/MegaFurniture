@@ -15,6 +15,7 @@
       margin-left: 0px;
       max-height: 500px;
       width: 100%;
+      object-fit: contain;
     }
   </style>
 

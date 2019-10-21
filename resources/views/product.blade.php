@@ -26,9 +26,7 @@
        <li>
          <a href="addProducts"><button  class="btn btn-warning  " type="button"><i class="fa fa-table"></i>&nbsp;&nbsp;<span class="bold">เพิ่มสินค้า Excel</span></button></a>
        </li>
-       <li>
-         <a href="addDetail"><button  class="btn btn-danger  " type="button"><i class="fa fa-sliders"></i>&nbsp;&nbsp;<span class="bold">สินค้าที่รอการตั้งค่า</span></button></a>
-       </li>
+      
 
 
      </ul>

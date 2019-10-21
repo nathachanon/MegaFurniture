@@ -10,8 +10,9 @@
 }
 .brand_logo
 {
-  width:100%;
-  height:100%;
+  width: 100%;
+    height: 250px;
+    object-fit: cover;
 }
 .modal-backdrop {
   z-index: 2040 !important;
