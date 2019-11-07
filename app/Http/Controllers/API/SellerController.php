@@ -180,7 +180,8 @@ public function changeStatusBank(Request $request){
   $validator = Validator::make($request->all(), [
    'bank_id' => 'required',
    'status' => 'required',
-   'BankAccount_id' => 'required'
+   'BankAccount_id' => 'required',
+   'seller_id' => 'required'
   ]);
 
 
@@ -193,6 +194,7 @@ public function changeStatusBank(Request $request){
   if($input['status'] == 0){
     DB::table('bank_accounts')
     ->where('bank_id', $input['bank_id'])
+    ->where('seller_id', $input['seller_id'])
     ->where('status', 1)
     ->update([
                 'status' => 0,
@@ -201,6 +203,7 @@ public function changeStatusBank(Request $request){
 
               DB::table('bank_accounts')
               ->where('BankAccount_id', $input['BankAccount_id'])
+              ->where('seller_id', $input['seller_id'])
               ->update([
                           'status' => 1,
                           'updated_at' => date('Y-m-d H:i:s')
@@ -209,6 +212,7 @@ public function changeStatusBank(Request $request){
 
     DB::table('bank_accounts')
     ->where('bank_id', $input['bank_id'])
+    ->where('seller_id', $input['seller_id'])
     ->where('status', 1)
     ->update([
                 'status' => 0,
@@ -217,6 +221,7 @@ public function changeStatusBank(Request $request){
 
               DB::table('bank_accounts')
               ->where('BankAccount_id', $input['BankAccount_id'])
+              ->where('seller_id', $input['seller_id'])
               ->update([
                           'status' => 0,
                           'updated_at' => date('Y-m-d H:i:s')

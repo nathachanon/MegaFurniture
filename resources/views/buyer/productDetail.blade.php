@@ -209,7 +209,7 @@
 						$('#comment').append('<div class="product-rating animated fadeIn">' +
 							'<div class="product-rating-avatar">' +
 							'<div class="avatar">' +
-							'<img src="img/a8.jpg">' +
+							'<img src="../img/a8.jpg">' +
 							'</div>' +
 							'</div>' +
 							'<div class="product-rating-main">' +
@@ -503,7 +503,7 @@
 						$('#comment').append('<div class="product-rating">' +
 							'<div class="product-rating-avatar">' +
 							'<div class="avatar">' +
-							'<img src="img/a8.jpg">' +
+							'<img src="../img/a8.jpg">' +
 							'</div>' +
 							'</div>' +
 							'<div class="product-rating-main">' +

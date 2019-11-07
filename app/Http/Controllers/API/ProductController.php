@@ -1652,6 +1652,7 @@ class ProductController extends Controller
       ->select('prod_id', 'prod_name', 'prod_price', 'pic_url1', 'prod_desc')
       ->where('CatProd_id', $getCatProd_id)
       ->where('prod_id', "!=", $input['prod_id'])
+      ->where('status', 0)
       ->limit(6)
       ->get();
 
