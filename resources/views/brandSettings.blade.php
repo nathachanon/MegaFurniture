@@ -74,7 +74,7 @@
                           <option value="0">เลือกธนาคารที่ต้องการ</option>
                     </select>
                   <label class="col-sm-2 control-label">เลขบัญชี</label>
-                    <input type="text" placeholder="กรุณาใส่เลขบัญชี" class="form-control" maxlength="20" minlength="10" id="account_number">
+                    <input type="number" placeholder="กรุณาใส่เลขบัญชี" class="form-control" maxlength="20" minlength="10" id="account_number">
                   <label class="col-sm-2 control-label">ชื่อบัญชี</label>
                     <input type="text" placeholder="กรุณาใส่ชื่อบัญชี" class="form-control" maxlength="50" minlength="10" id="account_name">
                  </div>
@@ -289,7 +289,7 @@ function changeStatus(bank_id,status,BankAccount_id){
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"bank_id": bank_id,"status": status,"BankAccount_id": BankAccount_id})
+            body: JSON.stringify({"bank_id": bank_id,"status": status,"BankAccount_id": BankAccount_id,"seller_id":sid})
           });
           const content = await rawResponse.json();
           console.log(content);
