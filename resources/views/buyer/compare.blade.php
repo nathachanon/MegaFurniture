@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+﻿@extends('layouts.layout')
 
 
 @section('content')
@@ -117,7 +117,7 @@
 				var product_3_width = data['product3'][0]['SizeProd_width'];
 				var product_3_length = data['product3'][0]['SizeProd_length']
 				var product_3_height = data['product3'][0]['SizeProd_height'];
-				var product_3_foot = data['product3'][0]['SizeProd_foot'];
+								var product_3_foot = (data['product3'][0]['SizeProd_foot']!=null)?data['product3'][0]['SizeProd_foot']:"-";
 				var product_3_rm = data['product3'][0]['RM_value'];
 				var product_3_color = data['product3'][0]['ColorProd_value'];
 				var product_3_price = data['product3'][0]['prod_price'];
@@ -142,7 +142,7 @@
 
 
 
-			$('#product_list').append(
+var pro1_foot = (data['product1'][0]['SizeProd_foot']!=null)?data['product1'][0]['SizeProd_foot']:"-";var pro2_foot =(data['product2'][0]['SizeProd_foot']!=null)?data['product2'][0]['SizeProd_foot']:"-";		$('#product_list').append(
 				' <div class="ibox-content product-box" style="display: block; overflow-x:auto;margin: 0 auto;" align="center">'+
 
 				' <table class="table">'+
@@ -179,8 +179,8 @@
 				'</tr>'+
 				'<tr>'+
 				'<td><h4>ขนาด(ฟุต)</h4></th>'+
-				'<td ><h5>'+data['product1'][0]['SizeProd_foot']+'</h5></td>'+
-				'<td ><h5>'+data['product2'][0]['SizeProd_foot']+'</h5></td>'+
+				'<td ><h5>'+pro1_foot+'</h5></td>'+
+				'<td ><h5>'+pro2_foot+'</h5></td>'+
 				'<td class="compare_P_3"><h5>'+product_3_foot+'</h5></td>'+
 				'</tr>'+
 				'<tr>'+

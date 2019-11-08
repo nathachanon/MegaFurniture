@@ -34,10 +34,9 @@ return [
     'connections' => [
 
         
-      'mongodb' => [
+       'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => env('DB_HOST'),
-            'dsn'     => 'mongodb+srv://sbdb:kz5BBCzSDXtPlSyZ@cluster0-vk2tq.mongodb.net/test?retryWrites=true',
+            'host'     => env('MONGO_DB_HOST', '10.9.11.215'),
             'port'     => env('MONGO_DB_PORT', 27017),
             'database' => env('MONGO_DB_DATABASE'),
             'username' => env('MONGO_DB_USERNAME'),
