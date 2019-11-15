@@ -113,11 +113,11 @@
 			{
 				var product_3_pic = data['product3'][0]['pic_url1'];
 				var product_3_name = data['product3'][0]['prod_name'];
-				var prod_3_desc = data['product3'][0]['prod_desc'];
+				var prod_3_desc = (data['product3'][0]['prod_3_desc']!=null)?data['product3'][0]['prod_3_desc']:"-";
 				var product_3_width = data['product3'][0]['SizeProd_width'];
 				var product_3_length = data['product3'][0]['SizeProd_length']
 				var product_3_height = data['product3'][0]['SizeProd_height'];
-								var product_3_foot = (data['product3'][0]['SizeProd_foot']!=null)?data['product3'][0]['SizeProd_foot']:"-";
+				var product_3_foot = (data['product3'][0]['SizeProd_foot']!=null)?data['product3'][0]['SizeProd_foot']:"-";
 				var product_3_rm = data['product3'][0]['RM_value'];
 				var product_3_color = data['product3'][0]['ColorProd_value'];
 				var product_3_price = data['product3'][0]['prod_price'];
@@ -142,7 +142,11 @@
 
 
 
-var pro1_foot = (data['product1'][0]['SizeProd_foot']!=null)?data['product1'][0]['SizeProd_foot']:"-";var pro2_foot =(data['product2'][0]['SizeProd_foot']!=null)?data['product2'][0]['SizeProd_foot']:"-";		$('#product_list').append(
+				var pro1_foot = (data['product1'][0]['SizeProd_foot']!=null)?data['product1'][0]['SizeProd_foot']:"-";
+				var pro2_foot =(data['product2'][0]['SizeProd_foot']!=null)?data['product2'][0]['SizeProd_foot']:"-";		
+				var pro1_des = (data['product1'][0]['prod_desc']!='')?data['product1'][0]['prod_desc']:"-";
+				var pro2_des =(data['product2'][0]['prod_desc']!='')?data['product2'][0]['prod_desc']:"-";		
+				$('#product_list').append(
 				' <div class="ibox-content product-box" style="display: block; overflow-x:auto;margin: 0 auto;" align="center">'+
 
 				' <table class="table">'+
@@ -167,8 +171,8 @@ var pro1_foot = (data['product1'][0]['SizeProd_foot']!=null)?data['product1'][0]
 				'<td class="compare_P_3"><h5>'+product_3_name+'</h5></td>'+
 				'</tr>'+
 				'<td><h4>รายละเอียดสินค้า</h4></th>'+
-				'<td >'+data['product1'][0]['prod_desc']+'</td>'+
-				'<td >'+data['product2'][0]['prod_desc']+'</td>'+
+				'<td >'+pro1_des+'</td>'+
+				'<td >'+pro2_des+'</td>'+
 				'<td class="compare_P_3">'+prod_3_desc+'</td>'+
 				'</tr>'+
 				'<tr>'+
@@ -184,7 +188,7 @@ var pro1_foot = (data['product1'][0]['SizeProd_foot']!=null)?data['product1'][0]
 				'<td class="compare_P_3"><h5>'+product_3_foot+'</h5></td>'+
 				'</tr>'+
 				'<tr>'+
-				'<td><h4>วัสด</h4>ุ</th>'+
+				'<td><h4>วัสดุ</h4></th>'+
 				'<td ><h5>'+data['product1'][0]['RM_value']+'</h5></td>'+
 				'<td ><h5>'+data['product2'][0]['RM_value']+'</h5></td>'+
 				'<td class="compare_P_3"><h5>'+product_3_rm+'</h5></td>'+

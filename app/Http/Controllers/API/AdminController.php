@@ -183,7 +183,7 @@ class AdminController extends Controller
   {
     DB::table('promotions')
       ->where('promotion_id', $request['promotion_id'])
-      ->delete();
+      ->update(['promotion_status' => 0]);
     return response()->json(['success' => '1'], $this->successStatus);
   }
 
@@ -280,7 +280,7 @@ class AdminController extends Controller
   {
     DB::table('contents')
       ->where('content_id', $request['content_id'])
-      ->delete();
+      ->update(['content_status' => 0]);
     return response()->json(['success' => '1'], $this->successStatus);
   }
   function logoutAdmin()

@@ -20,6 +20,32 @@
 .modal {
   z-index: 2050 !important;
 }
+.ibox{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+.product-imitation .tooltiptext {
+  visibility: hidden;
+  width: 100%;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0 0 0;
+  border-radius: 6px;
+  top: 74%;
+  opacity: 0.6;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.product-imitation:hover .tooltiptext {
+  visibility: visible;
+  cursor: pointer;
+}
 </style>
 
 <body >
@@ -71,8 +97,8 @@
       <div class="modal-body">
         <input id="seller_id" name="seller_id" hidden="true">
         <input id="brand_status" name="brand_status" value="0" hidden="true">
-        <div class="form-group"><label>ชื่อแบรนด์</label> <input id="brand_name" name="brand_name" type="text" placeholder="กรุณากรอกชื่อแบรนด์" class="form-control" require="true"></div>
-        <div class="form-group"><label>รายละเอียดของแบรนด์</label> <input id="brand_des" name="brand_des" type="text" placeholder="กรุณากรอกรายละเอียดของแบรนด์" class="form-control"></div>
+        <div class="form-group"><label>ชื่อแบรนด์</label> <input  maxlength="50" id="brand_name" name="brand_name" type="text" placeholder="กรุณากรอกชื่อแบรนด์" class="form-control" require="true"></div>
+        <div class="form-group"><label>รายละเอียดของแบรนด์</label> <input maxlength="100" id="brand_des" name="brand_des" type="text" placeholder="กรุณากรอกรายละเอียดของแบรนด์" class="form-control"></div>
         <div class="form-group">
           <label>โลโก้แบรนด์</label>
           <div>  <img id='b_logo_show' src="#" class="preview" hidden="true"  ></img> <div>
@@ -93,6 +119,25 @@
 </div>
 </div>
 </div>
+<div class="modal inmodal" id="editModal" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog">
+         <div class="modal-content animated bounceInRight">
+      <div class="modal-header">
+        <button type="button" id="btn_close" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <i class="fa fa-edit modal-icon"></i>
+        <h4 class="modal-title">แก้ไขแบรนด์สินค้า</h4>
+      </div>
+      <div class="modal-body">
+      <div id="modal">
+</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-white" data-dismiss="modal">ปิด</button>
+    <button id="Edit" type="button" class="btn btn-primary">แก้ไขแบรนด์</button>
+  </div>
+  
+</div>
+         </div>
+     </div>
 
 </body>
 <script src="js/jquery-2.1.1.js"></script>
@@ -101,13 +146,13 @@
 <script>
   var token = localStorage.getItem("user_token");
   var id= localStorage.getItem("sid");
+  var data_sbrand = [];
    $("#brand-nav").addClass("active");
   $("#seller_id").val(id);
   function sbrand(b_id){
     if(b_id !=0)
     {
       document.cookie = "b_id="+b_id;
-
       localStorage.setItem("b_id",b_id);
       window.location.replace('/sbrand');
     }
@@ -117,22 +162,44 @@
    $('#b_logo_show').attr('hidden',false);
    if (input.files && input.files[0]) {
      var reader = new FileReader();
-
      reader.onload = function (e) {
        $('#b_logo_show')
        .attr('src', e.target.result);
-
      };
-
      reader.readAsDataURL(input.files[0]);
-
-
-
    }
-
-
-
  }
+ function editlogoSelect(input) {
+  
+   if (input.files && input.files[0]) {
+     var reader = new FileReader();
+     reader.onload = function (e) {
+       $('#edit_b_logo_show')
+       .attr('src', e.target.result);
+     };
+     reader.readAsDataURL(input.files[0]);
+   }
+ }
+ function editModel(i){
+    $('#modal').empty();
+    $('#modal').append(
+      '<div class="modal-body">'+
+        '<input id="seller_id" name="seller_id" hidden="true">'+
+        '<input id="brand_id" value="'+data_sbrand.brand[i].brand_id+'"  hidden="true">'+
+        '<div class="form-group"><label>ชื่อแบรนด์</label> <input maxlength="50" value='+data_sbrand.brand[i].brand_name+' id="edit_brand_name" name="brand_name" type="text" placeholder="กรุณากรอกชื่อแบรนด์" class="form-control" require="true"disabled></div>'+
+        '<div class="form-group"><label>รายละเอียดของแบรนด์</label> <input maxlength="100" value='+data_sbrand.brand[i].brand_des+' id="edit_brand_des" name="brand_des" type="text" placeholder="กรุณากรอกรายละเอียดของแบรนด์" class="form-control"></div>'+
+        '<div class="form-group">'+
+          '<label>โลโก้แบรนด์</label>'+
+          '<div>  <img id="edit_b_logo_show" src="/images_brand/'+data_sbrand.brand[i].brand_logo+'" class="preview"   ></img> <div>'+
+          '<input id="edit_file_brand_logo" type="file"  class="form-control" onchange="editlogoSelect(this)">'+
+          '</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>'
+    );
+    $('#editModal').modal('show');
+  
+  }
 
  $(document).ready(function(){
   function getBrand(token,id){
@@ -176,6 +243,7 @@
       }
     });
   }
+  
   function getDetails(){
     $.ajax({
       url: '/api/getDetailsSell',
@@ -204,7 +272,7 @@
     var brand_name = $("#brand_name").val();
     var brand_des = $("#brand_des").val();
     var brand_logo = $('#file_brand_logo').prop('files')[0];
-
+    var brand_id = $("#brand_id").val();
       console.log("addBrand");
       var formData = new FormData();
       console.log($('#file_brand_logo').prop('files')[0]);
@@ -246,6 +314,56 @@
         }else{
         alert('กรุณากรอกข้อมูลให้ครบ');
       }
+    }
+    else{
+        alert('กรุณากรอกข้อมูลและเลือกโลโก้แบรนด์');
+      }
+
+
+  });
+  
+ $("#Edit").click(function(){
+    var token = localStorage.getItem("user_token");
+    var brand_des = $("#edit_brand_des").val();
+    var brand_logo = $('#edit_file_brand_logo').prop('files')[0];
+    var brand_id = $("#brand_id").val();
+      console.log(brand_logo);
+      var formData = new FormData();
+      formData.append("brand_logo",brand_logo);
+      formData.append("brand_des",brand_des);
+      formData.append("brand_id",brand_id);
+      formData.append("seller_id",id);
+     if(brand_name != '' && brand_des != '' ){
+        $.ajax({
+           url: '/api/editBrand',
+           headers: {
+             'Authorization':'Bearer '+token,
+           },
+           method: 'POST',
+           data: formData,
+           contentType: false,
+           processData: false,
+           dataType: 'json',
+           success: function(data){
+            var s = JSON.stringify(data['success']).replace(/['"]+/g, '');
+            if(s == "1")
+            {
+              alert("แก้ไข Brand สำเร็จ !");
+              window.location.replace('/brand');
+            }else{
+              alert(s);
+              $("#b_name").val('');
+            }
+          },
+          failure: function(errMsg) {
+            alert(errMsg);
+          }
+        });
+      }else if(brand_name != '' && brand_des != ''){
+
+        
+        alert('กรุณากรอกข้อมูลให้ครบ');
+      
     }
     else{
         alert('กรุณากรอกข้อมูลและเลือกโลโก้แบรนด์');

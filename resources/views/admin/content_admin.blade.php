@@ -78,7 +78,6 @@ function getcontent(){
       $("#table").append('<table id="tblEntAttributes" class="table table-striped dataTables-example" data-page-size="10" data-filter=#filter>'+
         '<thead>'+
         '<tr>'+
-        '<th class="text-left" data-sort-ignore="true" id="selectall"><div class="checkbox checkbox-success"><input name="select-all" id="select-all" type="checkbox" onchange="selectalls(this)"><label for="checkAll" id="all">(0)</label></div></th>'+
         '<th data-toggle="true">ชื่อคอนเทนต์</th>'+
         '<th data-toggle="true">ผู้บันทึก</th>'+
         '<th data-hide="phone">วันที่บันทึก</th>'+
@@ -93,11 +92,6 @@ function getcontent(){
 
         $('#tblEntAttributes tbody').append(
           '<tr id="tr_'+data['content'][i]['content_id']+'">'+
-          '<td>'+
-          '<div class="checkbox checkbox-success">'+
-          '<input id="checkbox_'+data['content'][i]['content_id']+'" type="checkbox" value="'+data['content'][i]['content_id']+'" onchange="editGroupADD(this,'+data['content'][i]['content_id']+');"><label for="checkbox_'+data['content'][i]['Prod_id']+'"></label>'+
-          '</div>'+
-          '</td>'+
           '<td style="width:290px;"><a href="../../content/'+ data['content'][i]['content_id'] +'">'+data['content'][i]['content_name']+'</a></td>'+
           '<td>'+data['content'][i]['username']+'</td>'+
           '<td>'+data['content'][i]['created_at']+'</td>'+

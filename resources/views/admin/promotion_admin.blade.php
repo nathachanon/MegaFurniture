@@ -81,7 +81,6 @@
         $("#table").append('<table id="tblEntAttributes" class="table table-striped dataTables-example" data-page-size="10" data-filter=#filter>' +
           '<thead>' +
           '<tr>' +
-          '<th class="text-left" data-sort-ignore="true" id="selectall"><div class="checkbox checkbox-success"><input name="select-all" id="select-all" type="checkbox" onchange="selectalls(this)"><label for="checkAll" id="all">(0)</label></div></th>' +
           '<th data-toggle="true">ชื่อโปรโมชัน</th>' +
           '<th data-toggle="true">ผู้บันทึก</th>' +
           '<th data-hide="phone">วันที่บันทึก</th>' +
@@ -96,11 +95,6 @@
 
           $('#tblEntAttributes tbody').append(
             '<tr id="tr_' + data['promotion'][i]['promotion_id'] + '">' +
-            '<td>' +
-            '<div class="checkbox checkbox-success">' +
-            '<input id="checkbox_' + data['promotion'][i]['promotion_id'] + '" type="checkbox" value="' + data['promotion'][i]['promotion_id'] + '" onchange="editGroupADD(this,' + data['promotion'][i]['promotion_id'] + ');"><label for="checkbox_' + data['promotion'][i]['Prod_id'] + '"></label>' +
-            '</div>' +
-            '</td>' +
             '<td style="width:290px;"><a href="../../promotion/' + data['promotion'][i]['promotion_id'] + '">' + data['promotion'][i]['promotion_name'] + '</a></td>' +
             '<td>' + data['promotion'][i]['username'] + '</td>' +
             '<td>' + data['promotion'][i]['created_at'] + '</td>' +

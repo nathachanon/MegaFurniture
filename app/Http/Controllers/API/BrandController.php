@@ -55,6 +55,51 @@ class BrandController extends Controller
   }
 }
 
+function editBrand(Request $request)
+{
+ 
+ $validator = Validator::make($request->all(), [
+  'seller_id' => 'required',
+  'brand_des' => 'required',
+
+]);
+
+ if ($validator->fails()) {
+   return response()->json(['error'=>$validator->errors()], 401);
+ }
+
+ $input = $request->all();
+
+ $seller_id = DB::table('sellers')->where('id', $input['seller_id'])->count();
+
+ 
+ if($seller_id != 1)
+ {
+  $error = 'ไม่พบ ID ผู้ขายนี้';
+  return response()->json(['success'=>$error], $this-> successStatus);
+}else{
+
+
+  
+ if($request->hasfile('brand_logo')){
+  $image = $request->file('brand_logo');
+  $imageName =date('mdYHis').uniqid().'.'.$image->getClientOriginalExtension();
+  $image->move(public_path("images_brand"),$imageName);
+  $input['brand_logo'] = $imageName;
+  DB::table('brands')
+  ->where('brand_id', $input["brand_id"])
+  ->update(  ['brand_des' =>  $input["brand_des"] , 'brand_logo'=> $input["brand_logo"]  ]);
+ }else{ 
+  DB::table('brands')
+  ->where('brand_id', $input["brand_id"])
+  ->update( ['brand_des' =>  $input["brand_des"]  ]);
+ }
+  //return Redirect::back()->withErrors(['msg', 'The Message']);
+
+  return response()->json(['success'=>'1'], $this-> successStatus);
+}
+}
+
 function getBrand(Request $request)
 {
   $validator = Validator::make($request->all(), [

@@ -39,6 +39,7 @@ Route::post('registerSell','API\SellerController@registerSell');
 Route::post('loginSell','API\SellerController@loginSell');
 Route::post('excelUpload','API\ProductController@excelUpload');
 Route::post('AddBrand','API\BrandController@AddBrand');
+Route::post('editBrand','API\BrandController@editBrand');
 Route::post('editupload','API\ProductController@picedit');
 Route::post('upload','API\ProductController@picedit');
 //public
