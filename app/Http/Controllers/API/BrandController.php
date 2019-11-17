@@ -89,7 +89,6 @@ function editBrand(Request $request)
   $getimage_path =DB::table('brands')
   ->where('brand_id', $input["brand_id"])->get();
   $image_path = "images_brand/".$getimage_path[0]->brand_logo;
-  echo $image_path ;
   if(File::exists($image_path)) {
     File::delete($image_path);
 }
