@@ -5,7 +5,8 @@
 .preview
 {
   margin-left: 27%;
-  max-width:250px;
+  width: 60%;
+  height: 60%;
 
 }
 .brand_logo
@@ -138,7 +139,7 @@
 </div>
          </div>
      </div>
-
+     </div>
 </body>
 <script src="js/jquery-2.1.1.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -158,7 +159,23 @@
     }
   }
 
+ 
+  function validateImage(input) {
+  
+ 
+    var file = document.getElementById(input).files[0];
+
+    var t = file.type.split('/').pop().toLowerCase();
+    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+      
+        document.getElementById(input).value = '';
+        return false;
+    }
+    
+    return true;
+}
   function logoSelect(input) {
+    if(validateImage(input.id)){
    $('#b_logo_show').attr('hidden',false);
    if (input.files && input.files[0]) {
      var reader = new FileReader();
@@ -168,9 +185,12 @@
      };
      reader.readAsDataURL(input.files[0]);
    }
+    }else{
+      alert("กรุณาเลือกไฟล์รูปภาพ");
+    }
  }
  function editlogoSelect(input) {
-  
+  if(validateImage(input.id)){
    if (input.files && input.files[0]) {
      var reader = new FileReader();
      reader.onload = function (e) {
@@ -179,8 +199,12 @@
      };
      reader.readAsDataURL(input.files[0]);
    }
+  }else{
+      alert("กรุณาเลือกไฟล์รูปภาพ");
+    }
  }
  function editModel(i){
+   console.log("edit");
     $('#modal').empty();
     $('#modal').append(
       '<div class="modal-body">'+
@@ -215,6 +239,7 @@
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(data){
+        data_sbrand = data;
         var b_count = data['brand_count'];
         for(var i=0 ;i<b_count ;i++){
           $('#brand').append('<div class="col-md-3">'+
@@ -222,6 +247,9 @@
             '<div class="ibox-content product-box animated fadeInLeft">'+
             '<div class="product-imitation">'+
             '<img src="images_brand/'+data['brand'][i]['brand_logo']+'" class ="brand_logo"></img>'+
+            '<div onclick="editModel('+i+')" class="tooltiptext">'+
+            '<i class="fa fa-edit">แก้ไข</i>'+
+            '</div>'+
             '</div>'+
             '<div class="product-desc">'+
             '<a onclick="sbrand ('+data['brand'][i]['brand_id']+');" href="product" class="product-name">'+data['brand'][i]['brand_name']+'</a>'+

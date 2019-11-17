@@ -86,6 +86,13 @@ function editBrand(Request $request)
   $imageName =date('mdYHis').uniqid().'.'.$image->getClientOriginalExtension();
   $image->move(public_path("images_brand"),$imageName);
   $input['brand_logo'] = $imageName;
+  $getimage_path =DB::table('brands')
+  ->where('brand_id', $input["brand_id"])->get();
+  $image_path = "images_brand/".$getimage_path[0]->brand_logo;
+  echo $image_path ;
+  if(File::exists($image_path)) {
+    File::delete($image_path);
+}
   DB::table('brands')
   ->where('brand_id', $input["brand_id"])
   ->update(  ['brand_des' =>  $input["brand_des"] , 'brand_logo'=> $input["brand_logo"]  ]);
